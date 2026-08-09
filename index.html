@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arkivet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Archivo:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="glass.png" type="image/x-icon">
+<script src="script.js"></script>
+
+
+</head>
+<body>
+
+<header>
+  <h1>Dalgards Drinkar Arkivet</h1>
+  <p id="subtitle">Laddar arkivet …</p>
+</header>
+
+<div class="controls">
+  <input id="search" type="text" placeholder="Sök på drink, tema eller beskrivning …">
+  <select id="theme-filter"><option value="">Alla teman</option></select>
+</div>
+<p class="count" id="count"></p>
+<div class="grid" id="grid"></div>
+<p class="empty" id="empty" style="display:none;">Inga videos matchar sökningen.</p>
+<div class="pagination" id="pagination"></div>
+
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal">
+    <video id="modal-video" controls playsinline></video>
+    <div class="modal-info">
+      <h2 id="modal-drink"></h2>
+      <div class="tag-row">
+        <span class="theme-tag" id="modal-theme"></span>
+        <span class="date" id="modal-date"></span>
+      </div>
+      <p class="note" id="modal-note"></p>
+      <div class="recipe-block" id="recipe-block" style="display:none;">
+        <p class="recipe-heading">Ingredienser</p>
+        <ul class="recipe-ingredients" id="modal-ingredients"></ul>
+        <p class="recipe-heading">Gör såhär</p>
+        <p class="recipe-steps" id="modal-steps"></p>
+      </div>      
+      <div class="modal-actions">
+        <button class="recipe-toggle" id="recipe-toggle" style="display:none;">Visa recept</button>
+        <button class="modal-close" id="modal-close">Stäng</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
