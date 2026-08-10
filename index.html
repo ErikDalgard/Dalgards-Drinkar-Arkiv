@@ -6,8 +6,7 @@
 <title>Arkivet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Archivo:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Archivo:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
 <link rel="icon" href="glass.png" type="image/x-icon">
 <script src="script.js"></script>
 
@@ -22,8 +21,29 @@
 
 <div class="controls">
   <input id="search" type="text" placeholder="Sök på drink, tema eller beskrivning …">
-  <select id="theme-filter"><option value="">Alla teman</option></select>
+  <select class="sort-select" id="sort-order">
+    <option value="desc">Nyast först</option>
+    <option value="asc">Äldst först</option>
+  </select>
+  <button id="filter-toggle" class="filter-toggle">Filtrera</button>
 </div>
+<div class="filter-panel" id="filter-panel">
+  <div class="filter-group">
+    <label for="theme-filter">Tema</label>
+    <select id="theme-filter"><option value="">Alla teman</option></select>
+  </div>
+<div class="filter-group">
+  <label for="date-from">Från datum</label>
+  <input type="date" id="date-from">
+</div>
+<div class="filter-group">
+  <label for="date-to">Till datum</label>
+  <input type="date" id="date-to">
+</div>
+<button class="filter-clear" id="filter-clear">Rensa filter</button>
+</div>
+
+
 <p class="count" id="count"></p>
 <div class="grid" id="grid"></div>
 <p class="empty" id="empty" style="display:none;">Inga videos matchar sökningen.</p>
@@ -32,6 +52,8 @@
 
 <div class="modal-backdrop" id="modal-backdrop">
   <div class="modal">
+    <div class="modal-scroll">
+
     <video id="modal-video" controls playsinline></video>
     <div class="modal-info">
       <h2 id="modal-drink"></h2>
@@ -51,6 +73,8 @@
         <button class="modal-close" id="modal-close">Stäng</button>
       </div>
     </div>
+        </div>
+
   </div>
 </div>
 </body>

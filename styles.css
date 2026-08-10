@@ -8,13 +8,15 @@
   --text-muted: #8a6a48;
   --accent: #6e4423;
   --leaf: #6b7654;
+  --text-on-bg-muted: #f5f5f5;  
+
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 header {
@@ -32,9 +34,9 @@ header h1 {
   color: var(--text-on-bg);
 }
 header p {
-  color: var(--text-on-bg);
+  color: var(--text-on-bg-muted);
   opacity: 0.75;
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   margin: 0;
 }
 .controls {
@@ -46,7 +48,7 @@ header p {
   flex-wrap: wrap;
 }
 .controls input, .controls select {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', sans-serif;
   font-size: 0.95rem;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -64,8 +66,8 @@ header p {
   max-width: 1100px;
   margin: 0.9rem auto 0;
   padding: 0 1.5rem;
-  font-size: 0.85rem;
-  color: var(--text-on-bg);
+  font-size: 1.25em;
+  color: var(--text-on-bg-muted);
   opacity: 0.8;
 }
 .grid {
@@ -90,7 +92,7 @@ header p {
 }
 .card video {
   width: 100%;
-  aspect-ratio: 9/16;
+  aspect-ratio: 5/4;
   object-fit: cover;
   background: #2a1d12;
   display: block;
@@ -143,10 +145,22 @@ header p {
   border-radius: 12px;
   max-width: 420px;
   width: 100%;
+  max-height: 90vh;
   overflow: hidden;
   border: 1px solid var(--border);
 }
-.modal video { width: 100%; display: block; background: #000; }
+.modal video {
+  width: 100%;
+  max-height: 50vh;
+  display: block;
+  background: #000;
+  object-fit: contain;
+}
+.modal-scroll {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 .modal-info { padding: 1rem 1.2rem 1.3rem; }
 .modal-info h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -164,7 +178,7 @@ header p {
   border-radius: 8px;
   padding: 0.4rem 1rem;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 0.85rem;
 }
 .modal-close:hover { border-color: var(--accent); color: var(--text); }
@@ -180,7 +194,7 @@ justify-content: center;
 gap: 1rem;
 }
 .pagination button {
-font-family: 'Inter', sans-serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 0.9rem;
 background: var(--surface);
 border: 1px solid var(--border);
@@ -215,7 +229,7 @@ text-align: center;
   border-radius: 8px;
   padding: 0.4rem 1rem;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 0.85rem;
 }
 .recipe-toggle:hover { border-color: var(--accent); background: rgba(110,68,35,0.08); }
@@ -250,3 +264,85 @@ text-align: center;
   margin: 0;
   white-space: pre-line;
 }
+
+.filter-toggle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.65rem 1.1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.filter-toggle:hover, .filter-toggle.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.filter-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+}
+.filter-panel.open { 
+  max-height: 220px;
+  opacity: 1;
+  padding: 1rem 1.5rem;
+  pointer-events: auto;}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.filter-group label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-on-bg-muted);
+  opacity: 0.7;
+  font-weight: 600;
+}
+.filter-group select, .filter-group input {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+}
+.filter-clear {
+  font-family: 'Cormorant Garamond', serif;
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.filter-clear:hover { border-color: var(--accent); color: var(--accent); }
+
+.sort-select {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sort-select:focus { outline: none; border-color: var(--accent); }

@@ -23,6 +23,7 @@ async function init() {
 
   document.getElementById('search').addEventListener('input', render);
   sel.addEventListener('change', render);
+  document.getElementById('sort-order').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('recipe-toggle').addEventListener('click', toggleRecipe);
   document.getElementById('modal-backdrop').addEventListener('click', e => {
@@ -30,14 +31,32 @@ async function init() {
   });
 
   render();
+
+document.getElementById('filter-toggle').addEventListener('click', () => {
+document.getElementById('filter-panel').classList.toggle('open');
+document.getElementById('filter-toggle').classList.toggle('active');
+  });
+  document.getElementById('date-from').addEventListener('change', () => { currentPage = 1; render(); });
+  document.getElementById('date-to').addEventListener('change', () => { currentPage = 1; render(); });
+  document.getElementById('filter-clear').addEventListener('click', () => {
+    document.getElementById('theme-filter').value = '';
+    document.getElementById('date-from').value = '';
+    document.getElementById('date-to').value = '';
+    currentPage = 1;
+    render();
+  });
 }
 
 function render() {
   const q = document.getElementById('search').value.toLowerCase();
   const theme = document.getElementById('theme-filter').value;
+  const dateFrom = document.getElementById('date-from').value;
+  const dateTo = document.getElementById('date-to').value;
 
   const filtered = allVideos.filter(v =>
     (!theme || v.theme === theme) &&
+    (!dateFrom || v.date >= dateFrom) &&
+    (!dateTo || v.date <= dateTo) &&
     (!q || `${v.drink} ${v.note} ${v.theme} ${v.date}`.toLowerCase().includes(q))
   );
 
@@ -45,6 +64,12 @@ function render() {
   currentPage = Math.min(currentPage, totalPages);
   const start = (currentPage -1 ) * Page_Size;
   const end = start + Page_Size;
+  const sortOrder = document.getElementById('sort-order').value;
+  filtered.sort((a, b) => sortOrder === 'asc'
+    ? a.date.localeCompare(b.date)
+    : b.date.localeCompare(a.date)
+  );
+
   const pageItems = filtered.slice(start, end);  
 
 

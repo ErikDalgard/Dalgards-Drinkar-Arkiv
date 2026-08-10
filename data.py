@@ -11,11 +11,21 @@ import json
 import pandas as pd
 
 BASE_URL = "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev"
-SPREADSHEET = "fredagsdrinken_mall.csv"
+SPREADSHEET = "data.csv"
 OUTPUT = "data.json"
 
 df = pd.read_csv(SPREADSHEET)
 df = df.dropna(subset=["Filnamn"])
+def clean(value):
+    if pd.isna(value):
+        return ""
+
+    value = str(value).strip()
+
+    if value == '""':
+        return ""
+
+    return value
 
 videos = []
 for _, row in df.iterrows():
@@ -23,10 +33,10 @@ for _, row in df.iterrows():
         "date": str(row["Datum"]).split(" ")[0],
         "theme": str(row["Tema"]).strip(),
         "drink": str(row["Drink"]).strip(),
-        "note": str(row.get("Kommentar", "") or "").strip(),
+        "note": clean(row.get("Kommentar", "")),
         "url": f"{BASE_URL}/{row['Filnamn']}",
-        "ingredients": str(row.get("Ingridienser", "") or "").strip(),
-        "steps": str(row.get("Instruktioner", "") or "").strip(),    
+        "ingredients": clean(row.get("Ingridienser", "")),
+        "steps": clean(row.get("Instruktioner", "")),    
         })
 
 videos.sort(key=lambda v: v["date"], reverse=True)
