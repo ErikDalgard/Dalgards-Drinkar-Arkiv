@@ -32,7 +32,11 @@ header h1 {
   font-size: clamp(2.2rem, 5vw, 3.4rem);
   margin: 0 0 0.4rem;
   color: var(--text-on-bg);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
 }
+header h1:hover { opacity: 0.85; }
+
 header p {
   color: var(--text-on-bg-muted);
   opacity: 0.75;
@@ -106,18 +110,26 @@ header p {
   margin: 0 0 0.35rem;
   color: var(--text);
 }
-.tag-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+.tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
 .theme-tag {
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--leaf);
-  background: rgba(107,118,84,0.12);
   padding: 0.18rem 0.55rem;
   border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
+.theme-tag:hover { transform: scale(1.06); }
+
 .date { font-size: 0.78rem; color: var(--text-muted); }
 .note {
   font-size: 0.82rem;
@@ -194,15 +206,16 @@ justify-content: center;
 gap: 1rem;
 }
 .pagination button {
-font-family: 'Cormorant Garamond', serif;
-font-size: 0.9rem;
-background: var(--surface);
-border: 1px solid var(--border);
-color: var(--text);
-border-radius: 8px;
-padding: 0.5rem 1rem;
-cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
+
 .pagination button:hover:not(:disabled) { border-color: var(--accent); }
 .pagination button:disabled {
 opacity: 0.4;

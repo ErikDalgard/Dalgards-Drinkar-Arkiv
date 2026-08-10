@@ -1,11 +1,2369 @@
 [
   {
-    "date": "2026-08-07",
-    "theme": "Smaker",
-    "drink": "Bitter (Campari-baserad)",
-    "note": "Extra bitter, familjen delad",
-    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/1.mp4",
-    "ingredients": "2 cl Campari, 2 cl sockerlag, 2 cl vatten, 1 skvätt Angostura, 1 skvätt apelsinjuice, 1 skvätt citronjuice",
-    "steps": "Rör ihop och servera över is."
+    "date": "2026-06-19",
+    "theme": "Övrigt",
+    "drink": "Midsommardrink",
+    "note": "Årets midsommardrink - lätt att göra, lätt att dricka. Sötmogna jordgubbar som möter frisk citron och mjuk rom, toppat med ett silkeslent skum. Glad midsommar🍓🌸🇸🇪",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20260619.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2026-06-12",
+    "theme": "Övrigt",
+    "drink": "Gula Väggen",
+    "note": "Uppgradera VM-studion med en VM-drink. Välj Gula Väggen, med humlig IPA, eller Stolpe In, med en frisk veteöl🍊🍋⚽️🇸🇪",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20260612.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2026-05-13",
+    "theme": "Övrigt",
+    "drink": "Mi-To / To-Mi",
+    "note": "Idag är det internationella cocktaildagen. En dag för bra drinkar i gott sällskap, och lite extra inspiration i glaset. Vi firar med en Mi-To / To-Mi; från Torinos elegans till Milanos puls. Historien om två städer i ett glas🥃🇮🇹",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20260513.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-12-26",
+    "theme": "De sju dödssynderna",
+    "drink": "Laize Daisy",
+    "note": "Lättja är vår avslutande synd - Vi gör det med Lazie Daisy; rund, len och obekymrat stillsam. Med subtil hint av skumbanan🍌🥱",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251226.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-12-19",
+    "theme": "De sju dödssynderna",
+    "drink": "Angry Spell",
+    "note": "Vrede är kvällens synd - vi gör det med Angry Spell, en cocktail som inte ber om ursäkt. Den exploderar långsamt, stannar kvar och dämpar din ilska🫚🍋‍🟩😡😤",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251219.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-12-12",
+    "theme": "De sju dödssynderna",
+    "drink": "Grön Stinger",
+    "note": "Avund är kvällens synd – för den som alltid vill ha det någon annan har. Vi gör det med Grön Stinger; en cocktail som får alla att bli gröna av avund🤢👀 Och låter oss skippa tandborstningen🪥😁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251212.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-12-05",
+    "theme": "De sju dödssynderna",
+    "drink": "Elexir",
+    "note": "Frosseri är kvällens dekadenta synd och vi ger efter för den med en Elexir; en krämig bomb av rom, kola och nötter 🌰 🤤",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251205.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-11-28",
+    "theme": "De sju dödssynderna",
+    "drink": "C.C.C",
+    "note": "Högmod är kvällens självsäkra synd. Vi gör det med  C.C.C. – lyxig, upphöjd och omöjlig att ignorera😈👑💫",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251128.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-11-21",
+    "theme": "De sju dödssynderna",
+    "drink": "Greedy",
+    "note": "Girighet är kvällens synd - för den som aldrig får nog💰💎 Vi gör det med Greedy, en dessertcocktail med bas av kryddad rom och mörk kakaolikör. Lockande och överdådig. Man vill bara ha mer. Och varför nöja sig med en🍋‍🟩🍫🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251121.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-11-14",
+    "theme": "De sju dödssynderna",
+    "drink": "Sex in the Jungle",
+    "note": "Lust är kvällens synd 🔥 den otillåtna, överdrivna sexuella njutningen. Vi gör det med frestelsen Sex in the Jungle – en tropisk lockelse som är fullständigt oemotståndlig🍍🍊🌴✨",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251114.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-11-07",
+    "theme": "De sju dödssynderna",
+    "drink": "Seven Sins",
+    "note": "En förföriskt och sofistikerad synd där rye whisky och Applejack flirtar med citronens syra och grenadinens sötma🍸🔥",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251107.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-10-31",
+    "theme": "Övrigt",
+    "drink": "Blood Moon & Ghost Chai Espresso Martini",
+    "note": "Kusligt gott i glasen🩸🌖\nBlood Moon & Ghost Chai Espresso Martini; dimmig njutning för mörka nätter☕️🍸👻",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251031.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-10-24",
+    "theme": "Övrigt",
+    "drink": "Den Onde, Den Gode & Den Fule",
+    "note": "Vi förbereder inför Halloween och bjuder på Ögat; en trio av frestelser👁️👁️👁️\nDen Onde – med eldig Tequila\nDen Gode – med fruktigTriple Sec\nDen Fule – med rökig Mescal\nTre varianter, ruskigt goda🍸👻",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251024.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-10-17",
+    "theme": "Färg",
+    "drink": "Den svarta drinken",
+    "note": "SVART för tankarna till lyx och mystik – man förväntar sig kanske smak av lakrits eller kaffe. Men Den Svarta drinken överraskar med fläder, citrus och hållbar njutning 🍋‍🟩🍊⚫️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251017.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-10-10",
+    "theme": "Färg",
+    "drink": "Skrea Coffee",
+    "note": "BRUN kan signalera något kraftfullt och vuxet. Precis som drinken Skrea Coffe; gin med toner av havtorn och nypon tillsammans med kaffet och muscovadosockret ☕️🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251010.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-10-03",
+    "theme": "Färg",
+    "drink": "Kärleksdrink",
+    "note": "RÖD förknippas ofta med energi, passion och kärlek. Den sägs även stimulera uppmärksamheten och öka pulsen. En perfekt start på helgen👠♥️🌹",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20251003.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-09-26",
+    "theme": "Färg",
+    "drink": "Blue Lady",
+    "note": "BLÅ symboliserar harmoni, stabilitet och lugn. Den anses även stimulera det undermedvetna. Skaka ihop en Blue Lady och se hur den påverkar helgens intuition💙🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250926.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-09-19",
+    "theme": "Färg",
+    "drink": "Batida",
+    "note": "VIT förknippas ofta med fred och renhet. Den vita drinken Batida, betyder blandad eller “slagen”. Får se hur vi känner oss efter oss efter kvällens oskuldsfulla drink🥛🥥🕊️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250919.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-09-12",
+    "theme": "Färg",
+    "drink": "Purple Pleasure",
+    "note": "LILA har ofta kopplats till andlighet, men är även symbol för makt och status. Vi skakar ihop en lyxig Purple Pleasur, med bl.a. björnbär och salvia💜🌱",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250912.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-09-05",
+    "theme": "Färg",
+    "drink": "Rosa Panter",
+    "note": "ROSA kan ha en varm lugnande effekt och associeras ofta med omtanke och kärlek. Fyll glaset med en mjuk romantisk Rosa Panter💕🌸💗",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250905.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-08-29",
+    "theme": "Färg",
+    "drink": "Frozen Pineapple Mango Daiquiri",
+    "note": "GUL kan ge en känsla av fräschhet och energi. Den kan även främja kommunikationen mellan människor. Oavsett, så blir det kanske sista sommarkänslan med den här svalkande och fruktiga Frozen Pineapple Mango Daiquiri☀️🍍🥭",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250829.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-08-22",
+    "theme": "Färg",
+    "drink": "Dalgards Colada",
+    "note": "ORANGE är livfull och sägs vara energigivande. Släpp loss kreativiteten och skaka ihop en Dalgards Colada; byt ananas mot syrlig havtorn och balansera upp med fluffigt kokosskumt.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250822.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-08-15",
+    "theme": "Färg",
+    "drink": "Gin Sour med dill",
+    "note": "GRÖN kan uppfattas som den bidrar till friskhet, lugn men också ökad aptit. Kanske blir det en dubbel drink ikväll?! Vi blandar en Gin Sour med dill - kul drink i kräfttider; sötsyrlig med en rejäl fräschör av av dill🟢🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250815.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-06-13",
+    "theme": "SMAK",
+    "drink": "Aviation och Banana Pancakes",
+    "note": "Student och säsongs- avslutning av tema SMAK - idag med Dubbel Drink🥳\nAviation: En liten krispig drink med stora SMAKer; enbär, körsbär, citrus och inte minst blommig🍒🍋🪻\nBanana Panncakes: Syrliga fruktjuicer tillsammans med SMAKer från mandel och whiskey; här händer det grejer! Får fyra skumbananer av oss😁🍌🍌🍌🍌",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250613.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-06-06",
+    "theme": "SMAK",
+    "drink": "Rabarber Daiquiri",
+    "note": "Fira nationaldagen med smak av svensk försommar; Rabarber Daiquiri. Gör den helsvensk och ersätt lime med äppelsyra. Frisk, söt & syrlig🌸🇸🇪✨\nSMAK: Bas - Fruktig eller bärig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250606.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-05-30",
+    "theme": "SMAK",
+    "drink": "Exotisk drink",
+    "note": "En frisk, exotisk och krämig drink med spännande kombination av mynta tillsammans med marulafrukt, vanilj, smörkola, lime och kokos🌱🥥🍋‍🟩🥛\nSMAK: Bas-Krämig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250530.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-05-23",
+    "theme": "SMAK",
+    "drink": "Björnbär med Whisky",
+    "note": "Björnbär och whisky? Otippade kompisar som ger en fina SMAKer tillsammans😋\nSMAK: Bas - Bärig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250523.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-05-16",
+    "theme": "SMAK",
+    "drink": "En rackarrökare utan kitsch",
+    "note": "En rackarrökare utan kitsch. Röksmak från whiskyn och mezcal som lättas upp med lime och mandelsmak... och lite bitter på det. Lämnar ingen oberörd 🔥💦💨🍋‍🟩\nSMAK:Bas -Spritig😛",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250516.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-05-09",
+    "theme": "SMAK",
+    "drink": "Saltig Old Fashioned",
+    "note": "Ge din Old Fashioned en smakuppgradering med några droppar saltlösning⭐️💫🤸\nFörstärkandeSMAK: Salt🧂🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250509.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-04-30",
+    "theme": "SMAK",
+    "drink": "Rosemary Lillet Spritz",
+    "note": "En otrolig kombination av rosmarinsirap och Lillet Blanc. Glad valborg med Rosemary Lillet Spritz💫🇸🇪\nSMAK: Bas - Örtig🌱",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250430.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-04-25",
+    "theme": "SMAK",
+    "drink": "Cuba Libre 3.0",
+    "note": "Cuba Libre 3.0 - en supervariant på klassikern Rom & Cola 🇨🇺\nSMAK: Bas - citrus 🍋‍🟩",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250425.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-04-17",
+    "theme": "SMAK",
+    "drink": "Limencello Sour",
+    "note": "Påskhelg och DubbelDrink; \nLimoncello Sour - Söt och syrlig, här med extra sting från ingefära🍋🍋‍🟩\nEggnog - en krämig favorit som får påsken att smakar extra gott🐰🥚",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250417.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-04-11",
+    "theme": "SMAK",
+    "drink": "Halekulani",
+    "note": "Halekulani - Med framträdande smak av syrlig ananas i kombination med råg och bourbon. Lite som en tropisk Whisky Sour 🍍🍊🍋🍹\nSMAK: Bas - Fruktig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250411.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-04-04",
+    "theme": "SMAK",
+    "drink": "Spicy Margarita",
+    "note": "En klassisker i en kryddigare tappning; Spicy Margarita. Samma syrliga smak men en extra smakdimension av muddlad jalapeño och en kant av tajin. \nSMAK: Bas - Kryddig🔥",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250404.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-03-28",
+    "theme": "SMAK",
+    "drink": "Syren Gin & Tonic",
+    "note": "En försmak av våren och ett AW-sked med Syren GT🌸🇲🇩\nSMAK: Bas - Blommig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250328.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-03-21",
+    "theme": "SMAK",
+    "drink": "The Grand Old Lady",
+    "note": "Pantertanternas favorit; The Grand Old Lady - med inspiration från en av Cadierbarens gamla signaturdrinkar. Försiktigt lena smaker i en krämig servering🥛👵🏻\nSMAK: Bas - Krämig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250321.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-03-14",
+    "theme": "SMAK",
+    "drink": "Boozy sherry drink",
+    "note": "En rejält ”boozy” drink med en subtil SMAKtvist av sherryn. Och så kaprisen till👌🏻👌🏻 Surf & Turf, en komigångare😁\nSMAK: Bas - Spritig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250314.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-03-07",
+    "theme": "SMAK",
+    "drink": "Mexikansk iskaffe",
+    "note": "Vår och Mexikanskt Iskaffe; smakrik drink med flera spännande smaker. Något både för kaffe- och spritentusiaster☕️🍸☀️\nSMAK:  Bas - Bitter",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250307.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-02-28",
+    "theme": "SMAK",
+    "drink": "Tjejdrink",
+    "note": "TJÄJFREDAG - Med smak och färg som passar gästerna💃💃Syrlig rabarber, lime och ett mumsigt ingefärskum att dricka sig igenom☁️🍋‍🟩\nSMAK: Bas - Citrus",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250228.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-02-21",
+    "theme": "SMAK",
+    "drink": "Sidecar",
+    "note": "En nötig version av klassiskern Sidecar, där cognacen ersätts med Amaretto🌰\nSMAK: Bas - Nötig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250221.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-02-14",
+    "theme": "SMAK",
+    "drink": "Guava Rose",
+    "note": "Alla hjärtans dag💞 med en romantisk GUAVA ROSE; blommig, frisk och fruktig🌹🍋‍🟩 \nSMAK: Bas - Blommig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250214.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2025-02-07",
+    "theme": "Övrigt",
+    "drink": "Golden Penicilin",
+    "note": "I förkylningstider behövs drinkar som den här. Golden Penicillin; en rommig variant med ingefärsskum🫚🍎 SMAK: Bas - Citrus🍋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20250207.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-12-27",
+    "theme": "Övrigt",
+    "drink": "Slattedrink",
+    "note": "Slattefredag och Slattedrink; vi tömmer barskåpet på några slattar och avnjuter årets sista fredagsdrink🎉🧨💫",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241227.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-12-20",
+    "theme": "Övrigt",
+    "drink": "Egg Nog",
+    "note": "Juldrinkarnas juldrink - en krämig och fyllig Egg Nog, med massor med juliga kryddor. Gör en stor batch - den kommer gå åt🫚🍶🎄❄️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241220.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-12-13",
+    "theme": "1+1+1=🍸",
+    "drink": "Fizzy Limoncello",
+    "note": "Sötsyrligt, fräscht och bubbligt, istället för glögg☺️🍾🍋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241213.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-12-06",
+    "theme": "1+1+1=🍸",
+    "drink": "Antioxidant",
+    "note": "Granatäpplet renar kroppen från toxiner och gin vet ju alla är bra medicin mot både magbesvär och njurproblem. Och tonicen har kanske forfarande effekt på malaria….Oavsett, en riktig hälsodryck😇😉",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241206.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-11-29",
+    "theme": "1+1+1=🍸",
+    "drink": "Appeltini",
+    "note": "Fräsch och syrlig kultklassiker med kul färg. Som en piggelin i cocktailformat☺️🍏🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241129.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-11-22",
+    "theme": "1+1+1=🍸",
+    "drink": "Bombardino",
+    "note": "En varm och krämig drink med lite lättvispad grädde på toppen. Mums😋🥚💣❄️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241122.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-11-15",
+    "theme": "1+1+1=🍸",
+    "drink": "Pink Lady",
+    "note": "Söt, flirtig och rolig. \nFarligt lättdrucken😜🌸🎀",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241115.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-11-08",
+    "theme": "Presidenter",
+    "drink": "Trump",
+    "note": "En raffinerad men lättdrucken snurr. En riktig Donald Duck 🍹🍋🍋‍🟩🥒",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241108.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-11-01",
+    "theme": "Presidenter",
+    "drink": "Biden",
+    "note": "Ett lååångsamt syrefattigt blandande till en fruktig och läskande looongdrink👴🏻🍋‍🟩🍊🍹",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241101.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-10-25",
+    "theme": "Presidenter",
+    "drink": "Obama",
+    "note": "En dansant drink med toner från Hawaii (och Sverige)🎵🌴🥥🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241025.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-10-18",
+    "theme": "Presidenter",
+    "drink": "Clinton",
+    "note": "En förförisk cocktail som får dig att glömma allt🍹🌸💋💨",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241018.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-10-11",
+    "theme": "Presidenter",
+    "drink": "Reagan",
+    "note": "En drink som river alla murar🧱🥃🍊🍋‍🟩",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241011.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-10-04",
+    "theme": "Presidenter",
+    "drink": "Nixon",
+    "note": "En cocktail som bär på berättelser om korsade oceaner. Och historier ur Nixons hjärta🌎💌 En ny favorit🍹✨💫",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20241004.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-09-27",
+    "theme": "Presidenter",
+    "drink": "JFK",
+    "note": "En karismatisk och ungdomlig president ger en  karismatisk och ungdomlig cocktail🍹💫",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240927.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-09-20",
+    "theme": "Presidenter",
+    "drink": "Truman",
+    "note": "Bourbonpresidentens whisky drink, med toner av apelsin och söt vermouth🥃🍊",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240920.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-09-13",
+    "theme": "Presidenter",
+    "drink": "Franklin D Roosevelt",
+    "note": "En FDR drajja, med salt twist av olivspad - dirty🍸🫒",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240913.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-09-06",
+    "theme": "Presidenter",
+    "drink": "Theodore Roosevelt",
+    "note": "Han gav namnet till teddybjörnen och till den här lite knasiga drinken med Chartreuse-flottör🐻🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240906.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-08-30",
+    "theme": "Presidenter",
+    "drink": "Lincon",
+    "note": "En finjusterad Manhattan med lite festligt brus av mousserande🍸🍾",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240830.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-08-23",
+    "theme": "Presidenter",
+    "drink": "Washington",
+    "note": "En kul rackare med smaker av lime, choklad, mynta och banan.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240823.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-08-16",
+    "theme": "Presidenter",
+    "drink": "Starten",
+    "note": "Med det amerikanska valet i fokus presenterar vi tio presidenters favoritdrinkar. Häng med!🍸🥃🍹🇺🇸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240816.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-07-05",
+    "theme": "Övrigt",
+    "drink": "Gimlet",
+    "note": "Gimlet - en perfekt semesterdrink med friska & syrliga smaker😎⛱️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240705.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-06-21",
+    "theme": "Övrigt",
+    "drink": "Midsommar drink",
+    "note": "Midsommar drink - med smak av jordgubb, kokos och honung🍓🥥🇸🇪",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240621.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-06-07",
+    "theme": "Övrigt",
+    "drink": "EP Cocktail",
+    "note": "Lyxigt och läskande; en EP🇪🇺cocktail, till alla som besöker vallokalen🍹🗳️🇸🇪",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240607.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-05-17",
+    "theme": "Signaturdrinkar",
+    "drink": "Bourbon Blues",
+    "note": "Bourbon Blues avslutar vårens tema med SIGNATURDRINKAR. En Old Fashion som det svänger om 💃🕺🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240517.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-05-10",
+    "theme": "Signaturdrinkar",
+    "drink": "Hägg Sour",
+    "note": "Mellan hägg och syren bjuder vi på SIGNATURDRINK nummer 5. En drink med smaker som drar åt mandelkubb - HäggSour😋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240510.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-04-26",
+    "theme": "Signaturdrinkar",
+    "drink": "Vårviol",
+    "note": "VårViol är vår fjärde SIGNATURDRINK - en ginbaserad raring med smak av apelsin och viol🍸💜🍊",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240426.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-04-12",
+    "theme": "Signaturdrinkar",
+    "drink": "Dalgards Fröjd",
+    "note": "SIGNATURDRINK nr 3 har har smaker av citrus, bergamott, ros, lavendel och ingefära. Lägg till Baccus och den Vitruvianske mannen och ni får Dalgards Fröjd😁🫚🍋✨",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240412.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-04-05",
+    "theme": "Signaturdrinkar",
+    "drink": "HjortRom",
+    "note": "Våra SIGNATURDRINKAR fortsätter med en HjortRom. Myrens guld serverad tillsammans med rom, citron och Angostura😋🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240405.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-03-15",
+    "theme": "Signaturdrinkar",
+    "drink": "Kalaspuffen",
+    "note": "SIGNATURDRINKAR  startar med Kalaspuffen! Klassikern från 50-talet; rostade vetepuffar med honung - i kombination med bourbon, citron och karamelliserad sockerlag🐻🍯🍋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240315.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-02-16",
+    "theme": "Hot Stuff",
+    "drink": "Hot Buttered Rum",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240216.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-02-09",
+    "theme": "Hot Stuff",
+    "drink": "The Negroni Warmer & Spicy Winter Boulevardier",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240209.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-02-02",
+    "theme": "Hot Stuff",
+    "drink": "Den Gamle och Hjället & Den heta dansken",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240202.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-01-26",
+    "theme": "Hot Stuff",
+    "drink": "Rach Hot Toddy & Hot Apple Punch",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240126.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-01-19",
+    "theme": "Hot Stuff",
+    "drink": "Fläderbärs Toddy & Hot Toddy",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240119.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2024-01-12",
+    "theme": "Hot Stuff",
+    "drink": "Mezcal och Hibiscus Toddy & The Rom Hot Toddy",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20240112.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-12-31",
+    "theme": "Övrigt",
+    "drink": "Bloopers",
+    "note": "År 2023",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231231.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-12-29",
+    "theme": "DalgardsToppen",
+    "drink": "Vesper Martini",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231229.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-12-22",
+    "theme": "DalgardsToppen",
+    "drink": "Whisky sour med salvia",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231222.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-12-15",
+    "theme": "DalgardsToppen",
+    "drink": "Daiquiri",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231215.mp4",
+    "ingredients": "5 cl gin, 3 cl citronsaft, 2 cl sockerlag",
+    "steps": "Blanda och drick!"
+  },
+  {
+    "date": "2023-12-08",
+    "theme": "DalgardsToppen",
+    "drink": "Kott och Gott",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231208.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-12-01",
+    "theme": "DalgardsToppen",
+    "drink": "Negroni",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231201.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-11-24",
+    "theme": "DalgardsToppen",
+    "drink": "Dry Martini",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231124.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-11-17",
+    "theme": "DalgardsToppen",
+    "drink": "Caipirinha",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231117.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-11-10",
+    "theme": "DalgardsToppen",
+    "drink": "Rabarbermojito",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231110.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-11-03",
+    "theme": "DalgardsToppen",
+    "drink": "Eggnog",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231103.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-10-27",
+    "theme": "DalgardsToppen",
+    "drink": "Whisky flip",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231027.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-10-20",
+    "theme": "DalgardsToppen",
+    "drink": "Nissens favorit",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231020.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-10-13",
+    "theme": "DalgardsToppen",
+    "drink": "Sidecar",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231013.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-10-06",
+    "theme": "DalgardsToppen",
+    "drink": "Thai basil",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20231006.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-09-29",
+    "theme": "DalgardsToppen",
+    "drink": "Cosmopolitan",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230929.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-09-22",
+    "theme": "DalgardsToppen",
+    "drink": "French 75",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230922.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-09-15",
+    "theme": "DalgardsToppen",
+    "drink": "Long Island Iced Tea",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230915.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-09-08",
+    "theme": "DalgardsToppen",
+    "drink": "Art director",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230908.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-09-01",
+    "theme": "DalgardsToppen",
+    "drink": "Limoncellococktail med basilika",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230901.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-08-25",
+    "theme": "DalgardsToppen",
+    "drink": "Vieux Carre",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230825.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-08-18",
+    "theme": "DalgardsToppen",
+    "drink": "Niktia",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230818.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-06-22",
+    "theme": "KAPITEL TEQUILA",
+    "drink": "Margaritas: Frozen Strawberry & Viol- och Lavendel",
+    "note": "Våren avslutas med Margaritas; Frozen Strawberry och Viol- och Lavendel 🍓💜 Glad sommar🌸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230622.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-06-16",
+    "theme": "KAPITEL TEQUILA",
+    "drink": "The Wild Night Out",
+    "note": "Studentutspring i Linköping. Vi blandar The Wild Night Out💃🕺",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230616.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-06-09",
+    "theme": "KAPITEL TEQUILA",
+    "drink": "Paloma & Siesta",
+    "note": "Startar med en dubbeldrink; Paloma och Siesta - nu är det fiesta🌵🏜️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230609.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-06-02",
+    "theme": "KAPITEL WHISKY",
+    "drink": "Paper Plane",
+    "note": "Kul och gott med Paper Plane✈️😁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230602.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-05-26",
+    "theme": "KAPITEL WHISKY",
+    "drink": "Monkey Jam Sour & Godfather Cocktail",
+    "note": "Dubbel Drink; Monkey Jam Sour & Godfather Cocktail. Damn Delicious! 🥃🥃🐒",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230526.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-05-19",
+    "theme": "KAPITEL WHISKY",
+    "drink": "Whisky sour med salvia",
+    "note": "Vår favorit och snart din!? Whisky sour med salvia🌱😋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230519.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-05-12",
+    "theme": "KAPITEL WHISKY",
+    "drink": "Lousiane Cocktail",
+    "note": "Rivstart från New Orleans; Louisiane Cocktail. En riktig stänkare😜",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230512.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-05-05",
+    "theme": "KAPITEL ROM",
+    "drink": "Rum Punch",
+    "note": "Bygg på höjden eller i en tumbler; Rum Punch🥃🥊🥊",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230505.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-04-28",
+    "theme": "KAPITEL ROM",
+    "drink": "Rabarber Sour",
+    "note": "Carpe Skvalborg🥳 Fira in våren med en Rabarber Sour🌸🎊🙌🏻",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230428.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-04-21",
+    "theme": "KAPITEL ROM",
+    "drink": "Dark´n Stormy",
+    "note": "En svensk mörk rom blandad med lime och gingerbeer. Varför krångla till det? Dark’n Stormy 🌊🏴‍☠️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230421.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-04-14",
+    "theme": "KAPITEL ROM",
+    "drink": "Mary Pickford Cocktail",
+    "note": "En klassisk romdrink från Havanna med en av 20-talets filmstjärnor; Mary Pickford Cocktail 🍸🌺",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230414.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-04-07",
+    "theme": "Övrigt",
+    "drink": "Citronpaj Sour",
+    "note": "Årets påskdrink: En Citronpaj Sour med vaniljskum🍋🐣",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230407.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-03-31",
+    "theme": "KAPITEL VODKA",
+    "drink": "Rasberry Fudge",
+    "note": "Sötsyrligt fredagsgodis med smak av hallon, vanilj och kola😋😋😋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230331.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-03-24",
+    "theme": "KAPITEL VODKA",
+    "drink": "Juicy Fruit",
+    "note": "Med smak & stämning från 90-talets Lydmar❤️‍🔥🖼️🎶🥃👌🏻",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230324.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-03-17",
+    "theme": "KAPITEL VODKA",
+    "drink": "Tini Wini",
+    "note": "Med hjälp från Östgöta nation: Tini Wini - en riff på Vesper🍸🎸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230317.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-03-10",
+    "theme": "KAPITEL VODKA",
+    "drink": "Kamikaze cocktail",
+    "note": "En ”gudomlig mellovind” drar in till helgen🪩💨🇯🇵✨",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230310.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-03-03",
+    "theme": "KAPITEL VODKA",
+    "drink": "BlåbärsPutte",
+    "note": "Med en grund av blåbär och vaniljstång som gottat sig i vodka - BlåbärsPutte garnerad med lingonkrisp ❄️🫐🍃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230303.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-02-24",
+    "theme": "KAPITEL GIN",
+    "drink": "Last Word",
+    "note": "Avslutas med Last Word😶 Ge aldrig upp🇺🇦",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230224.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-02-21",
+    "theme": "KAPITEL GIN",
+    "drink": "Semla drink",
+    "note": "Fettisdag - vi dricker och äter semla på ÖG❤️💛 Görgött😁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230221.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-02-17",
+    "theme": "KAPITEL GIN",
+    "drink": "Chengdu Schnaza",
+    "note": "En fruktig drink med sting från ingefära🍋🥭🍃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230217.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-02-10",
+    "theme": "KAPITEL GIN",
+    "drink": "Angel Face",
+    "note": "Angel Face; @westervikgin Calvados och Apricot brandy👼👼",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230210.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-02-03",
+    "theme": "KAPITEL GIN",
+    "drink": "Earl greyish",
+    "note": "Earl greyish - @westervikgin, bergamott och te. Tesprit helt enkelt🫖🍋😁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230203.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-01-27",
+    "theme": "KAPITEL GIN",
+    "drink": "Al Capones Southside Cocktail",
+    "note": "🍋🍃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230127.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2023-01-20",
+    "theme": "KAPITEL GIN",
+    "drink": "Vesper & Marguerite Cocktail",
+    "note": "För oss som älskar en Draja🍸🤍",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20230120.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-12-18",
+    "theme": "Övrigt",
+    "drink": "Tomte Cocktail",
+    "note": "Ho-ho! Fjärde advent och en Tomte Cocktail; gjord på lingon, @westervikgin och skumtomtar🎅🎅",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221218.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-12-16",
+    "theme": "Övrigt",
+    "drink": "Old Fashion",
+    "note": "Old Fashion med iscider och lönnsirap ❄️🍎🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221216.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-12-11",
+    "theme": "Övrigt",
+    "drink": "Pepparkaka Sour",
+    "note": "🕯️🕯️🕯️🤎 Pepparkaka Sour sätter guldkant på tredje advent.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221211.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-12-09",
+    "theme": "Övrigt",
+    "drink": "Vinter Negroni",
+    "note": "V I N T E R  Negroni❄️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221209.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-12-04",
+    "theme": "Övrigt",
+    "drink": "Don Saffron",
+    "note": "Andra advent och vi bjuder på en Don Saffron🕯️🕯️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221204.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-12-02",
+    "theme": "Övrigt",
+    "drink": "Christmas kiss",
+    "note": "💋🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221202.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-11-27",
+    "theme": "Övrigt",
+    "drink": "Pepparkaksflip",
+    "note": "Första adventsdrinken skakad - Pepparkaksflip🤎🕯️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221127.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-11-25",
+    "theme": "Övrigt",
+    "drink": "Calvados Sour",
+    "note": "Höstens sista🍎🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221125.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-11-18",
+    "theme": "Övrigt",
+    "drink": "Kott och Gott",
+    "note": "En skogig Old Fashion🐿",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221118.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-11-11",
+    "theme": "Övrigt",
+    "drink": "Whisky Sour",
+    "note": "I Dalgards elände/biblioteksbar; Whisky Sour toppad med sherry🍁😅",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221111.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-11-04",
+    "theme": "Övrigt",
+    "drink": "Elderberry cocktail",
+    "note": "Allhelgona med fläderbär -  Elderberry cocktail 🥃🕯",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221104.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-10-28",
+    "theme": "Övrigt",
+    "drink": "Vampyrens kyss",
+    "note": "🧛‍♂️🍸💋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221028.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-10-21",
+    "theme": "Övrigt",
+    "drink": "Hot Gin old Fashioned",
+    "note": "🤧🔥🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221021.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-10-14",
+    "theme": "Övrigt",
+    "drink": "Höstbjörk",
+    "note": "🍂",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221014.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-10-07",
+    "theme": "Övrigt",
+    "drink": "Kanelbullen",
+    "note": "😋😋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20221007.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-30",
+    "theme": "Övrigt",
+    "drink": "Havtorns GT",
+    "note": "På ÖG🍹🍂💛♥️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220930.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-23",
+    "theme": "Övrigt",
+    "drink": "Jungfruns septemberäpple🍎",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220923.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-16",
+    "theme": "Övrigt",
+    "drink": "Negroni på smålänska",
+    "note": "Med Loftalingon och @westervikgin",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220916.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-11",
+    "theme": "VALSPURTEN",
+    "drink": "Landeryd 3🗳🍸",
+    "note": "Vi högtidlighåller valdagen och skakar ihop en Landeryd 3🗳🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220911.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-10",
+    "theme": "VALSPURTEN",
+    "drink": "The Wasted Vote",
+    "note": "The Final Countdown. Välj färg och rösta!👉🏻Din röst avgör Sveriges väg framåt!",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220910.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-09",
+    "theme": "VALSPURTEN",
+    "drink": "Veggie Red & Stuck in the Middle",
+    "note": "V A L S P U R T E N - upploppet med den borttappade rösten.\nMP - Veggie Red🌱\nL -  Stuck in the Middle🍀",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220909.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-09-02",
+    "theme": "VALSPURTEN",
+    "drink": "Swedish Mule & The Libertarian Cocktail",
+    "note": "SD & L",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220902.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-08-26",
+    "theme": "VALSPURTEN",
+    "drink": "Russian Punsch & Weeping Jesus",
+    "note": "V & KD",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220826.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-08-19",
+    "theme": "VALSPURTEN",
+    "drink": "Fidel Castro",
+    "note": "Ⓜ️ 🌹",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220819.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-06-23",
+    "theme": "Övrigt",
+    "drink": "Blood Orange Aperol Spritz",
+    "note": "Uppfriskande och bubblig",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220623.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-06-17",
+    "theme": "Övrigt",
+    "drink": "Bobby Burns Cocktail💣",
+    "note": "Anfäkta & anamma, vid Nelsons kanoner.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220617.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-06-10",
+    "theme": "Övrigt",
+    "drink": "Dalgards Bloom",
+    "note": "Fläderblom, basilika och lime. Okay, lite vodka oxå😎☀️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220610.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-06-03",
+    "theme": "Övrigt",
+    "drink": "Jungle bird cocktail🦩🦩",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220603.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-05-27",
+    "theme": "Övrigt",
+    "drink": "Syrencocktail 🌸🇸🇪",
+    "note": "Med doft och smak smak av svensk försommar.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220527.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-05-20",
+    "theme": "Övrigt",
+    "drink": "Tre brittiska drinkar",
+    "note": "Queen Elizabeth x 3\nGod Save the Queen👑🇬🇧",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220520.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-05-13",
+    "theme": "Övrigt",
+    "drink": "Rabarbermojito",
+    "note": "Kubanska och svenska smaker blandas.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220513.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-05-06",
+    "theme": "Övrigt",
+    "drink": "Depth Bomb Cocktail",
+    "note": "Ubåten möter sin överman, sjunkbomben.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220506.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-04-29",
+    "theme": "Övrigt",
+    "drink": "Gin Sour med guldkant",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220429.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-04-22",
+    "theme": "Övrigt",
+    "drink": "Gold Rush🔱🥃",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220422.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-04-14",
+    "theme": "Övrigt",
+    "drink": "Easter Rabbit Cocktail🐰🥕",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220414.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-04-08",
+    "theme": "Övrigt",
+    "drink": "Hemingway Special Daiquiri",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220408.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-04-01",
+    "theme": "Övrigt",
+    "drink": "Attaboy cocktail",
+    "note": "Nu kör vi 33 år till💞",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220401.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-03-25",
+    "theme": "Övrigt",
+    "drink": "Vieux Carré Cocktail",
+    "note": "Den perfekta drinken när du kommer in från kylan🧊🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220325.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-03-17",
+    "theme": "Övrigt",
+    "drink": "Alabama Fizz☘️🎩🇮🇪",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220317.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-03-11",
+    "theme": "Övrigt",
+    "drink": "Pegu Club Cocktail 🇲🇲🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220311.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-03-04",
+    "theme": "Övrigt",
+    "drink": "Hanky-Panky 💯🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220304.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-02-25",
+    "theme": "Övrigt",
+    "drink": "Champs Élysées Cocktail🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220225.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-02-18",
+    "theme": "Bortglömda klassiker",
+    "drink": "Mountain Cocktail & Norrländsk Screwdriver",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220218.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-02-11",
+    "theme": "Bortglömda klassiker",
+    "drink": "Tuxedo",
+    "note": "Hur en smoking blir en spännande variant av en Draja🤵‍♂️🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220211.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-02-04",
+    "theme": "Bortglömda klassiker",
+    "drink": "The Moonwalk Cocktail,",
+    "note": "Skapad för att fira den första månlandningen🌒🚀🎉",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220204.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-01-28",
+    "theme": "Bortglömda klassiker",
+    "drink": "Ward Eight",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220128.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-01-21",
+    "theme": "Bortglömda klassiker",
+    "drink": "Clover Club",
+    "note": "Drinken tar vi med oss liksom mottot - ”Så länge vi lever, lever vi lyckligt”🍀",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220121.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-01-14",
+    "theme": "Bortglömda klassiker",
+    "drink": "Charlie Chaplin Cocktail🤠🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220114.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2022-01-07",
+    "theme": "Övrigt",
+    "drink": "Pennywise",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20220107.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-24",
+    "theme": "Julklappskalender",
+    "drink": "Lingoncosmo",
+    "note": "LUCKA 24 ”Julbordet dukas”🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211224.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-23",
+    "theme": "Julklappskalender",
+    "drink": "Granskottsgimlet",
+    "note": "LUCKA 23 ”Julruskan reses på gårdsplanen”🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211223.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-22",
+    "theme": "Julklappskalender",
+    "drink": "Sloe sazerac",
+    "note": "LUCKA 22 ”Julbad för all gårdens folk”🧼",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211222.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-21",
+    "theme": "Julklappskalender",
+    "drink": "Julkaffe",
+    "note": "LUCKA 21 ”Tomasmäss, resa till staden”🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211221.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-20",
+    "theme": "Julklappskalender",
+    "drink": "Julig Sidecar",
+    "note": "LUCKA 20. ”Stora julrengöringen börjar”🧹",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211220.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-19",
+    "theme": "Julklappskalender",
+    "drink": "Nissens favorit🧑‍🎄",
+    "note": "LUCKA 19. ”Julveden ska huggas före Tomasmäss”🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211219.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-18",
+    "theme": "Julklappskalender",
+    "drink": "Rusty nail 🤎",
+    "note": "LUCKA 18. ”Alla ska avsmaka slaktmaten”🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211218.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-17",
+    "theme": "Julklappskalender",
+    "drink": "Bijou💎",
+    "note": "LUCKA 17 ”Julölet får provas”🍺",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211217.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-16",
+    "theme": "Julklappskalender",
+    "drink": "Christmas Godfather🎅",
+    "note": "LUCKA 16. ”Tid för stora julbaket”👩🏻‍🍳",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211216.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-15",
+    "theme": "Julklappskalender",
+    "drink": "Tomtebloss🔥",
+    "note": "LUCKA 15. ”Nu bindes julkärven”🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211215.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-14",
+    "theme": "Julklappskalender",
+    "drink": "Julmargerita🕺",
+    "note": "LUCKA 14. ”Putsning av koppar, tenn och mässing”✨",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211214.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-13",
+    "theme": "Julklappskalender",
+    "drink": "Saffran sour",
+    "note": "LUCKA 13. ”Lucia”🎄",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211213.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-12",
+    "theme": "Julklappskalender",
+    "drink": "Metropolitan moon🌙",
+    "note": "LUCKA 12. ”Julosten avsmakas🧀”",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211212.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-11",
+    "theme": "Julklappskalender",
+    "drink": "Kanelkyss💋",
+    "note": "LUCKA 11. ”All trösk är gjord”🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211211.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-10",
+    "theme": "Julklappskalender",
+    "drink": "Christmas Manhattan",
+    "note": "LUCKA 10. ”Julgrisen slaktas i svinottan🐖”",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211210.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-09",
+    "theme": "Julklappskalender",
+    "drink": "ulnog🥚",
+    "note": "LUCKA 9 ”Julölen är nu färdig”",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211209.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-08",
+    "theme": "Julklappskalender",
+    "drink": "Old Pal",
+    "note": "LUCKA 8. ”Förberedelse till Lusse”🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211208.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-07",
+    "theme": "Julklappskalender",
+    "drink": "Polkagris🐷",
+    "note": "LUCKA 7. ”Julbockar bindes”🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211207.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-06",
+    "theme": "Julklappskalender",
+    "drink": "Martinez",
+    "note": "LUCKA 6. ”Dags att göra julgåvor🎁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211206.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-05",
+    "theme": "Julklappskalender",
+    "drink": "Adventsdrink",
+    "note": "LUCKA 5. ”Jultvätten strykes🧺",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211205.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-04",
+    "theme": "Julklappskalender",
+    "drink": "Slow gin flip",
+    "note": "LUCKA 4. ”Ljusen till Lusse och jul stöpes🕯",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211204.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-03",
+    "theme": "Julklappskalender",
+    "drink": "Whisky sour med salvia",
+    "note": "LUCKA 3. ”Julbrev ska köpas💌”",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211203.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-02",
+    "theme": "Julklappskalender",
+    "drink": "Horse’s Neck",
+    "note": "LUCKA 2. ”Jultvätten sker tidigt”🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211202.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-12-01",
+    "theme": "Julklappskalender",
+    "drink": "Pisco sour",
+    "note": "LUCKA 1. ”Gammal svensk bondejul startar”🌲",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211201.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-11-28",
+    "theme": "Övrigt",
+    "drink": "Istapp",
+    "note": "I S T A P P - \nKaramelliserad äppledrink med glögg och bränd kanel🕯🍎",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20211128.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-06-18",
+    "theme": "Övrigt",
+    "drink": "Long Sangria",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210618.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-06-11",
+    "theme": "Övrigt",
+    "drink": "Vattenmelonmojito 🍉☀️",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210611.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-06-04",
+    "theme": "Övrigt",
+    "drink": "Beggar’s Banquet",
+    "note": "Sommarfavorit hos The Rolling Stones😎",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210604.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-05-28",
+    "theme": "Övrigt",
+    "drink": "Gin & Tonic med syren☀️😎",
+    "note": "Blommigt och somrigt",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210528.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-05-14",
+    "theme": "Övrigt",
+    "drink": "Amaretto Sour",
+    "note": "Perfekt kombo av sött och surt😋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210514.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-05-07",
+    "theme": "Övrigt",
+    "drink": "Mai Tai🌺🍍",
+    "note": "Härifrån till evigheten",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210507.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-04-30",
+    "theme": "Övrigt",
+    "drink": "Rude Barbra",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210430.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-04-23",
+    "theme": "Övrigt",
+    "drink": "Presbyterian",
+    "note": "Hallelujah - Presbyterian 👼🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210423.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-04-16",
+    "theme": "Övrigt",
+    "drink": "VANILLA CLUB👯‍♀️",
+    "note": "Från Stockholms syndiga krogar, \ntill Östergyllens bonniga logar,\nen goding vi tagit me,\noch idag ni ska få se,\nvanilj och lime sig sammanfogar.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210416.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-04-09",
+    "theme": "Övrigt",
+    "drink": "Sidecar",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210409.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-04-02",
+    "theme": "Övrigt",
+    "drink": "Old Fashion🥃",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210402.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-03-26",
+    "theme": "Övrigt",
+    "drink": "YuzuCocktail",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210326.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-03-19",
+    "theme": "Övrigt",
+    "drink": "Mint Julep 🏇🇺🇸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210319.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-03-12",
+    "theme": "Övrigt",
+    "drink": "Pornstar Martini",
+    "note": "Med passionsfrukt & vanilj 🍸💋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210312.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-03-05",
+    "theme": "Övrigt",
+    "drink": "Million Dollar Cocktail💸🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210305.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-02-26",
+    "theme": "Övrigt",
+    "drink": "Bourbon Flip",
+    "note": "Med brynt smör. Som en smörkola i cocktailformat 🍬🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210226.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-02-19",
+    "theme": "Övrigt",
+    "drink": "Screwdriver🍊",
+    "note": "Back to Basic",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210219.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-02-12",
+    "theme": "Övrigt",
+    "drink": "Singapore Sling 🍍🍒 🇸🇬",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210212.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-02-05",
+    "theme": "Övrigt",
+    "drink": "HANZO",
+    "note": "Med asiatisk touch🐉",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210205.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-01-29",
+    "theme": "Övrigt",
+    "drink": "Between the Sheets",
+    "note": "Rom och konjak träffas för lite kul☺️",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210129.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-01-22",
+    "theme": "Övrigt",
+    "drink": "Isberg🍍🧊",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210122.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-01-15",
+    "theme": "Övrigt",
+    "drink": "Scofflaw",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210115.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2021-01-08",
+    "theme": "Övrigt",
+    "drink": "Gin Sour",
+    "note": "Med äpple och kanel🍎 🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20210108.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-12-25",
+    "theme": "Övrigt",
+    "drink": "Nissens favorit 🎅🏻",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201225.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-12-18",
+    "theme": "Övrigt",
+    "drink": "Lions Tail",
+    "note": "Skaka den Instagramvänlig eller med mer karaktär. Trevlig fredag🦁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201218.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-12-11",
+    "theme": "Övrigt",
+    "drink": "Lingoncosmo🍸🎄",
+    "note": "Svårslagen juldrink.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201211.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-12-04",
+    "theme": "Övrigt",
+    "drink": "Tomtesnurr🎅🏻😅",
+    "note": "Den ska igång - julen.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201204.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-11-27",
+    "theme": "Övrigt",
+    "drink": "JulMargarita🎄🍊",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201127.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-11-20",
+    "theme": "Övrigt",
+    "drink": "Whisky Flip",
+    "note": "En krämig cocktail, svår att motstå🍸🥚",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201120.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-11-13",
+    "theme": "Övrigt",
+    "drink": "Manhattan",
+    "note": "I hetaste laget🔥",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201113.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-11-06",
+    "theme": "Övrigt",
+    "drink": "Espressotini ☕️🍸",
+    "note": "Sofistikerad och uppiggande",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201106.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-10-30",
+    "theme": "Övrigt",
+    "drink": "Rabbithole🐰🥕",
+    "note": "Vitaminer  och viktiga näringsämnen",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201030.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-10-23",
+    "theme": "Övrigt",
+    "drink": "RönnbärsNegroni",
+    "note": "En cocktail med klös🦊🍁🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201023.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-10-16",
+    "theme": "Övrigt",
+    "drink": "French 75",
+    "note": "En kanondrink🤠🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201016.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-10-02",
+    "theme": "Övrigt",
+    "drink": "Höstmoln",
+    "note": "Ett mustigt🍎 höstmoln🍂🍁",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20201002.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-09-25",
+    "theme": "Övrigt",
+    "drink": "Bloody Mary",
+    "note": "En gammal goding - Bloody Mary med knaperstekt bacon 🍅🥓",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200925.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-09-18",
+    "theme": "Övrigt",
+    "drink": "Old Fashioned",
+    "note": "Definitionen av en klassisk cocktail; sprit, socker, vatten och bitter. Precis vad man behöver en fredag🍊🥃",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200918.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-09-11",
+    "theme": "Övrigt",
+    "drink": "Skogsvaktaren",
+    "note": "Fylld med vitaminer och andra godsaker🌲🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200911.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-09-04",
+    "theme": "Övrigt",
+    "drink": "Moscow mule🇷🇺",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200904.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-08-28",
+    "theme": "Övrigt",
+    "drink": "Krusbärsmojito🌱🍋‍🟩",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200828.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-06-26",
+    "theme": "Övrigt",
+    "drink": "Gin Basil Smash",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200626.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-06-19",
+    "theme": "Övrigt",
+    "drink": "Dalgards sommaröl",
+    "note": "Förvisso fredag men ingen fredagsdrink. Färsk lager, buteljerad och levererad till firandet. Glad midsommar med Dalgards Sommaröl🍻🌸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200619.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-06-12",
+    "theme": "Övrigt",
+    "drink": "Enebackens fläderdrink☀️",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200612.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-06-06",
+    "theme": "Övrigt",
+    "drink": "Hurricane",
+    "note": "En svalkande sommardrink😅🍹",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200606.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-05-29",
+    "theme": "Övrigt",
+    "drink": "Caribbean Massacre",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200529.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-05-22",
+    "theme": "Övrigt",
+    "drink": "Limoncello och basilika",
+    "note": "To die for🍋",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200522.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-05-20",
+    "theme": "Övrigt",
+    "drink": "Smådjävlar",
+    "note": "Onsdag men ändå som fredag.... Trevlig helg med några smådjävlar😈",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200520.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-05-15",
+    "theme": "Övrigt",
+    "drink": "GT med rosé, svartpeppar och gurka",
+    "note": "I väntan på solen; GT med rosé-, svartpeppar och gurka 🧊🥒",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200515.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-05-08",
+    "theme": "Övrigt",
+    "drink": "White Lady",
+    "note": "Äntligen fredag, ikväll med White Lady👻🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200508.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-30",
+    "theme": "Övrigt",
+    "drink": "Rabarberdrink",
+    "note": "Glad Valborg med vårlig rabarberdrink🇸🇪",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200430.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-24",
+    "theme": "Övrigt",
+    "drink": "Frozen Daiquiri,",
+    "note": "Serverad som vi fick den på Kuba😎 🇨🇺",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200424.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-17",
+    "theme": "Övrigt",
+    "drink": "Devils heart 😈❤️🔥",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200417.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-12",
+    "theme": "Övrigt",
+    "drink": "Caipirinha!",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200412.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-12",
+    "theme": "Övrigt",
+    "drink": "Eggnog🐣",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200412_1.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-12",
+    "theme": "Övrigt",
+    "drink": "Mangocaipirinha☀️",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200412_2.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-12",
+    "theme": "Övrigt",
+    "drink": "En favorit - Cosmopolitan!",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200412.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-12",
+    "theme": "Övrigt",
+    "drink": "Virgin sour🍋",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200412_3.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-12",
+    "theme": "Övrigt",
+    "drink": "Shaken not stirred🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200412_4.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-11",
+    "theme": "Övrigt",
+    "drink": "Art Director m twist",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200411.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-11",
+    "theme": "Övrigt",
+    "drink": "Lingoncosmopolitan, julens favoritcocktail🎄🍸",
+    "note": "Lingoncosmopolitan, julens favoritcocktail🎄🍸",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200411_1.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-11",
+    "theme": "Övrigt",
+    "drink": "Apelsinmargareta, en julcocktail🍊",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200411_2.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-04-11",
+    "theme": "Övrigt",
+    "drink": "Polkamartini🍸",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200411_3.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-03-21",
+    "theme": "Övrigt",
+    "drink": "Halloweendrink med gin och björnbär 👻🎃",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200321.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-03-20",
+    "theme": "Övrigt",
+    "drink": "Long Island Ice Tea",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200320.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-03-20",
+    "theme": "Övrigt",
+    "drink": "Äppelmartini🍎",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200320_2.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-03-20",
+    "theme": "Övrigt",
+    "drink": "Ginger Basil GT",
+    "note": "",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200320_3.mp4",
+    "ingredients": "",
+    "steps": ""
+  },
+  {
+    "date": "2020-03-20",
+    "theme": "Övrigt",
+    "drink": "Frozé",
+    "note": "När du tröttnat på rosén.",
+    "url": "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/20200320_1.mp4",
+    "ingredients": "",
+    "steps": ""
   }
 ]

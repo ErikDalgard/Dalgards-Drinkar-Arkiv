@@ -45,6 +45,19 @@ document.getElementById('filter-toggle').classList.toggle('active');
     currentPage = 1;
     render();
   });
+
+  document.getElementById('home-link').addEventListener('click', () => {
+    document.getElementById('search').value = '';
+    document.getElementById('theme-filter').value = '';
+    document.getElementById('date-from').value = '';
+    document.getElementById('date-to').value = '';
+    document.getElementById('sort-order').value = 'desc';
+    document.getElementById('filter-panel').classList.remove('open');
+    document.getElementById('filter-toggle').classList.remove('active');
+    currentPage = 1;
+    render();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
 }
 
 function render() {
@@ -89,46 +102,77 @@ function renderPagination(totalPages) {
   el.innerHTML = '';
   if (totalPages <= 1) return;
 
+  const goTo = (page) => {
+    currentPage = page;
+    render();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  const first = document.createElement('button');
+  first.textContent = '«';
+  first.setAttribute('aria-label', 'Första sidan');
+  first.disabled = currentPage === 1;
+  first.addEventListener('click', () => goTo(1));
+
   const prev = document.createElement('button');
-  prev.textContent = '← Föregående';
+  prev.textContent = '‹';
+  prev.setAttribute('aria-label', 'Föregående sida');
   prev.disabled = currentPage === 1;
-  prev.addEventListener('click', () => { currentPage--; render(); window.scrollTo({top: 0, behavior: 'smooth'}); });
+  prev.addEventListener('click', () => goTo(currentPage - 1));
 
   const label = document.createElement('span');
   label.textContent = `Sida ${currentPage} av ${totalPages}`;
 
   const next = document.createElement('button');
-  next.textContent = 'Nästa →';
+  next.textContent = '›';
+  next.setAttribute('aria-label', 'Nästa sida');
   next.disabled = currentPage === totalPages;
-  next.addEventListener('click', () => { currentPage++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); });
+  next.addEventListener('click', () => goTo(currentPage + 1));
 
+  const last = document.createElement('button');
+  last.textContent = '»';
+  last.setAttribute('aria-label', 'Sista sidan');
+  last.disabled = currentPage === totalPages;
+  last.addEventListener('click', () => goTo(totalPages));
+
+  el.appendChild(first);
   el.appendChild(prev);
   el.appendChild(label);
   el.appendChild(next);
-  
+  el.appendChild(last);
 }
+
 function makeCard(v) {
   const card = document.createElement('div');
   card.className = 'card';
+  const hue = hashHue(v.theme || '');
   card.innerHTML = `
-    <video src="${v.url}" preload="metadata" muted></video>
+    <video src="${v.url}" ${v.photo ? `poster="${v.photo}"` : ''} preload="metadata" muted></video>
     <div class="card-body">
       <p class="card-drink">${escapeHtml(v.drink)}</p>
       <div class="tag-row">
-        <span class="theme-tag">${escapeHtml(v.theme)}</span>
+        <span class="theme-tag" style="background:hsl(${hue},45%,88%); color:hsl(${hue},45%,30%);">${escapeHtml(v.theme)}</span>
         <span class="date">${v.date}</span>
       </div>
       <p class="note">${escapeHtml(v.note)}</p>
     </div>
   `;
   card.addEventListener('click', () => openModal(v));
+  card.querySelector('.theme-tag').addEventListener('click', (e) => {
+    e.stopPropagation();
+    filterByTheme(v.theme);
+  });
   return card;
 }
 
 function openModal(v) {
   document.getElementById('modal-video').src = v.url;
   document.getElementById('modal-drink').textContent = v.drink;
-  document.getElementById('modal-theme').textContent = v.theme;
+  const modalTheme = document.getElementById('modal-theme');
+  const hue = hashHue(v.theme || '');
+  modalTheme.textContent = v.theme;
+  modalTheme.style.background = `hsl(${hue},45%,88%)`;
+  modalTheme.style.color = `hsl(${hue},45%,30%)`;
   document.getElementById('modal-date').textContent = v.date;
   document.getElementById('modal-note').textContent = v.note;
 
@@ -169,6 +213,23 @@ function escapeHtml(str) {
   const d = document.createElement('div');
   d.textContent = str ?? '';
   return d.innerHTML;
+}
+
+function hashHue(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash) % 360;
+}
+
+function filterByTheme(theme) {
+  document.getElementById('theme-filter').value = theme;
+  document.getElementById('filter-panel').classList.add('open');
+  document.getElementById('filter-toggle').classList.add('active');
+  currentPage = 1;
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 init();
