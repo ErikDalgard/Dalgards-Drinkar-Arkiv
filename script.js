@@ -3,6 +3,8 @@ let allVideos = [];
 let currentPage = 1;
 const Page_Size = 24;
 let selectedTheme = '';
+let selectedSpirit = '';
+const SPIRITS = ['Vodka', 'Gin', 'Ljus Rom', 'Tequila', 'Bourbon', 'Mörk Rom'];
 
 async function init() {
   const res = await fetch('data.json');
@@ -13,6 +15,19 @@ async function init() {
 
 const themes = [...new Set(allVideos.map(v => v.theme))].filter(Boolean).sort();
 buildThemeChips(themes);
+
+buildSpiritChips();
+
+document.getElementById('spirit-picker-toggle').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('spirit-picker-panel').classList.toggle('open');
+});
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('spirit-picker-panel');
+  if (!panel.contains(e.target) && e.target.id !== 'spirit-picker-toggle') {
+    panel.classList.remove('open');
+  }
+});
 
 document.getElementById('theme-picker-toggle').addEventListener('click', () => {
   openThemeModal();
@@ -64,6 +79,7 @@ const filterPanel = document.getElementById('filter-panel');
   document.getElementById('date-to').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('filter-clear').addEventListener('click', () => {
     selectTheme('');
+    selectSpirit('');
     document.getElementById('date-from').value = '';
     document.getElementById('date-to').value = '';
     currentPage = 1;
@@ -72,6 +88,7 @@ const filterPanel = document.getElementById('filter-panel');
 
   document.getElementById('home-link').addEventListener('click', () => {
     selectTheme('');
+    selectSpirit('');
     document.getElementById('search').value = '';
     document.getElementById('date-from').value = '';
     document.getElementById('date-to').value = '';
@@ -91,7 +108,7 @@ function buildThemeChips(themes) {
   const allChip = document.createElement('button');
   allChip.type = 'button';
   allChip.className = 'theme-chip';
-  allChip.textContent = 'Alla teman';
+  allChip.textContent = 'Alla säsonger';
   allChip.addEventListener('click', () => selectTheme(''));
   list.appendChild(allChip);
 
@@ -108,11 +125,45 @@ function buildThemeChips(themes) {
   });
 }
 
+
+function buildSpiritChips() {
+  const list = document.getElementById('spirit-chip-list');
+  list.innerHTML = '';
+
+  const allChip = document.createElement('button');
+  allChip.type = 'button';
+  allChip.className = 'theme-chip';
+  allChip.textContent = 'All sprit';
+  allChip.addEventListener('click', () => selectSpirit(''));
+  list.appendChild(allChip);
+
+  SPIRITS.forEach(spirit => {
+    const hue = hashHue(spirit);
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'theme-chip';
+    chip.textContent = spirit;
+    chip.style.background = `hsl(${hue},45%,88%)`;
+    chip.style.color = `hsl(${hue},45%,30%)`;
+    chip.addEventListener('click', () => selectSpirit(spirit));
+    list.appendChild(chip);
+  });
+}
+
+function selectSpirit(spirit) {
+  selectedSpirit = spirit;
+    console.log('selectedSpirit är nu:', selectedSpirit);
+  document.getElementById('spirit-picker-label').textContent = spirit || 'All spritsorter';
+  document.getElementById('spirit-picker-panel').classList.remove('open');
+  currentPage = 1;
+  render();
+}
+
 function selectTheme(theme) {
   selectedTheme = theme;
 
   document.getElementById('theme-picker-label').textContent =
-    theme || 'Alla teman';
+    theme || 'Alla säsonger';
 
   closeThemeModal();
 
@@ -150,12 +201,13 @@ function render() {
   const dateFrom = document.getElementById('date-from').value;
   const dateTo = document.getElementById('date-to').value;
 
-  const filtered = allVideos.filter(v =>
-    (!theme || v.theme === theme) &&
-    (!dateFrom || v.date >= dateFrom) &&
-    (!dateTo || v.date <= dateTo) &&
-    (!q || `${v.drink} ${v.note} ${v.theme} ${v.date}`.toLowerCase().includes(q))
-  );
+const filtered = allVideos.filter(v =>
+  (!theme || v.theme === theme) &&
+  (!selectedSpirit || ingredientsContainSpirit(v.ingredients, selectedSpirit)) &&
+  (!dateFrom || v.date >= dateFrom) &&
+  (!dateTo || v.date <= dateTo) &&
+  (!q || `${v.drink} ${v.note} ${v.theme} ${v.date}`.toLowerCase().includes(q))
+);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / Page_Size));
   currentPage = Math.max(1, Math.min(currentPage, totalPages));
@@ -351,6 +403,12 @@ function filterByTheme(theme) {
   currentPage = 1;
   render();
   window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function ingredientsContainSpirit(ingredients, spirit) {
+  if (!ingredients) return false;
+  const pattern = new RegExp(`\\b${spirit}\\b`, 'i');
+  return pattern.test(ingredients);
 }
 
 init();
