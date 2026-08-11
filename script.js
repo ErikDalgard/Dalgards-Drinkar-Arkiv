@@ -10,9 +10,6 @@ async function init() {
 
   const subtitle = document.getElementById('subtitle');
   const years = [...new Set(allVideos.map(v => v.date.slice(0,4)))].sort();
-  subtitle.textContent = allVideos.length
-    ? `${allVideos.length} videos, ${years[0]}–${years[years.length-1]}`
-    : 'Inga videos ännu';
 
 const themes = [...new Set(allVideos.map(v => v.theme))].filter(Boolean).sort();
 buildThemeChips(themes);

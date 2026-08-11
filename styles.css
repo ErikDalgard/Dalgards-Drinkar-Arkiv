@@ -34,8 +34,29 @@ header h1 {
   color: var(--text-on-bg);
   cursor: pointer;
   transition: opacity 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
 }
 header h1:hover { opacity: 0.85; }
+
+.logo-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  font-weight: 700;
+}
+.logo-glass {
+  height: 1.05em;
+  width: auto;
+  vertical-align: middle;
+}
+.logo-sub {
+  font-size: 0.7em;
+  letter-spacing: 0.2em;
+  opacity: 0.85;
+}
 
 header p {
   color: var(--text-on-bg-muted);
