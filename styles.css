@@ -271,11 +271,11 @@ text-align: center;
 }
 .recipe-ingredients li { margin-bottom: 0.15rem; }
 .recipe-steps {
+  margin: 0;
+  padding-left: 1.1rem;
   font-size: 0.85rem;
   color: var(--text);
   line-height: 1.6;
-  margin: 0;
-  white-space: pre-line;
 }
 
 .filter-toggle {
@@ -359,3 +359,29 @@ text-align: center;
   white-space: nowrap;
 }
 .sort-select:focus { outline: none; border-color: var(--accent); }
+
+
+.taste-profile {
+  margin: 0.6rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+}
+.taste-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.15rem 0;
+}
+.taste-label {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.taste-dots { display: flex; gap: 0.25rem; }
+.taste-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: transparent;
+}
+.taste-dot.filled { background: var(--accent); }

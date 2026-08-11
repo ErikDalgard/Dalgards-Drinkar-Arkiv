@@ -11,7 +11,7 @@ import json
 import pandas as pd
 
 BASE_URL = "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev"
-SPREADSHEET = "data2.csv"
+SPREADSHEET = "data1.csv"
 OUTPUT = "data.json"
 
 df = pd.read_csv(SPREADSHEET)
@@ -38,6 +38,7 @@ for _, row in df.iterrows():
         "ingredients": clean(row.get("Ingridienser", "")),
         "steps": clean(row.get("Instruktioner", "")),    
         "photo": f"{BASE_URL}/{row.get('Bild', '')}",
+        "taste": str(row.get("Smakprofil", "") or "").strip(),
         })
 
 videos.sort(key=lambda v: v["date"], reverse=True)

@@ -165,6 +165,35 @@ function makeCard(v) {
   return card;
 }
 
+const TASTE_LABELS = ['Sötma', 'Syra', 'Beska', 'Styrka', 'Sälta']
+
+function renderTasteProfile(tasteStr){
+  const container = document.getElementById('taste-profile');
+  const rows = document.getElementById('taste-rows');
+
+  rows.innerHTML = '';
+
+  if (!tasteStr){
+    container.style.display = 'none';
+    return;
+  }
+
+  const values = tasteStr.split(',').map(s => parseInt(s.trim().split('/')[0], 10));
+
+  TASTE_LABELS.forEach((label, i) => {
+    const value = values[i] || 0;
+    let dots = '';
+    for (let d = 1; d<=5; d++){
+      dots += `<span class="taste-dot ${d <= value ? 'filled' : ''}"></span>`;
+    }
+    const row = document.createElement('div');
+    row.className = 'taste-row';
+    row.innerHTML = `<span class="taste-label">${label}</span><span class="taste-dots">${dots}</span>`;
+    rows.appendChild(row);
+  });
+  container.style.display = 'block';
+
+}
 function openModal(v) {
   document.getElementById('modal-video').src = v.url;
   document.getElementById('modal-drink').textContent = v.drink;
@@ -190,7 +219,15 @@ function openModal(v) {
     li.textContent = ing;
     ingredientsEl.appendChild(li);
   });
-  document.getElementById('modal-steps').textContent = v.steps || '';
+
+  const stepsEl = document.getElementById('modal-steps');
+  stepsEl.innerHTML = '';
+  (v.steps || '').split(',').map(s => s.trim()).filter(Boolean).forEach(step => {
+    const li = document.createElement('li');
+    li.textContent = step;
+    stepsEl.appendChild(li);
+  });
+  renderTasteProfile(v.taste);
   document.getElementById('modal-backdrop').classList.add('open');
 }
 
