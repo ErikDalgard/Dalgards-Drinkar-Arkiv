@@ -151,7 +151,7 @@ header p {
 }
 .theme-tag:hover { transform: scale(1.06); }
 
-.date { font-size: 0.78rem; color: var(--text-muted); }
+.date { font-size: 0.9rem; color: var(--text); }
 .note {
   font-size: 0.82rem;
   color: var(--text-muted);
@@ -327,12 +327,13 @@ text-align: center;
   color: var(--accent);
 }
 
-
+/* Grundstruktur (Desktop / Datorvy först) */
 .filter-panel {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-end; /* Linjerar alla fält och knappen längst ner i botten */
   gap: 1.2rem;
   max-width: 1100px;
   margin: 0 auto;
@@ -343,45 +344,102 @@ text-align: center;
   pointer-events: none;
   transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
 }
+
 .filter-panel.open { 
-  max-height: 220px;
+  max-height: 300px;
   opacity: 1;
-  padding: 1rem 1.5rem;
-  pointer-events: auto;}
+  padding: 1.2rem 1.5rem 0.5rem;
+  pointer-events: auto;
+}
+
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
+
 .filter-group label {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-on-bg-muted);
-  opacity: 0.7;
-  font-weight: 600;
-}
-.filter-group select, .filter-group input {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-on-bg-muted);
+  opacity: 0.9;
+  font-weight: 600;
+  text-align: left;
+}
+
+.filter-group input, 
+.filter-group select,
+.theme-picker-toggle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text);
   border-radius: 8px;
-  padding: 0.5rem 0.7rem;
+  padding: 0.55rem 0.8rem;
+  height: 40px; /* Sätter exakt samma höjd på alla fält */
 }
+
+/* Datumfälten horisontellt på desktop */
+.date-range {
+  display: flex;
+  gap: 1.2rem;
+}
+
+/* Rensa filter-knappen på Desktop */
 .filter-clear {
   font-family: 'Cormorant Garamond', serif;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text-muted);
   border-radius: 8px;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
   cursor: pointer;
+  height: 40px; /* Matchar fältens höjd perfekt */
+  transition: all 0.15s ease;
 }
-.filter-clear:hover { border-color: var(--accent); color: var(--accent); }
 
+.filter-clear:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ==========================================
+   ENDAST FÖR MOBIL (Skärmar under 650px)
+   ========================================== */
+@media (max-width: 650px) {
+  .filter-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  .filter-panel.open {
+    max-height: 500px; /* Mer höjdutrymme för staplad layout */
+  }
+
+  .filter-group {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  .date-range {
+    width: 100%;
+    max-width: 340px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .filter-clear {
+    width: auto;
+    margin-top: 0.2rem;
+  }
+}
 .sort-select {
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.9rem;
@@ -611,8 +669,8 @@ text-align: center;
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
 
-  background: var(--border);
-  border: 1px solid var(--border);
+  background: #ffffff;
+  border: 1px solid #eae6e0;
   color: var(--text);
 
   border-radius: 8px;
@@ -706,4 +764,125 @@ text-align: center;
 .menu .count {
   margin: 0;
   padding: 0;
+}
+
+* Footer-omslutning */
+.site-footer {
+  margin-top: 4rem;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text-on-bg);
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.footer-credit,
+.footer-contact {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--text-on-bg-muted);
+}
+
+.footer-credit strong {
+  color: var(--text-on-bg);
+  font-weight: 600;
+}
+
+.footer-contact a {
+  color: var(--text-on-bg);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.footer-contact a:hover {
+  opacity: 0.75;
+}
+
+.footer-glass {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.95;
+  flex-shrink: 0;
+}
+
+/* Responsiv anpassning för mobil */
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+  }
+  
+  .footer-glass {
+    width: 50px;
+  }
+}
+
+/* Container för sökfältet och sökikonen */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1; /* Gör att sökfältet tar upp tillgängligt utrymme */
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.85rem;
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Skjut in texten i sökfältet så den inte krockar med ikonen */
+.search-wrapper input#search {
+  width: 100%;
+  padding-left: 2.5rem;
+}
+
+/* Filterknapp med flex för att rikta in ikonen med texten */
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.filter-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Styling för rensa filter-knappen med ikon */
+.filter-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem; /* Avstånd mellan ikonen och texten */
+}
+
+/* Tvinga ikonen till rätt storlek */
+.clear-icon {
+  width: 15px !important;
+  height: 15px !important;
+  min-width: 15px;
+  min-height: 15px;
+  flex-shrink: 0;
 }

@@ -22,26 +22,52 @@
   </h1>
 </header>
 <div class="controls">
-  <input id="search" type="text" placeholder="Sök efter en drink…">
-  <button id="filter-toggle" class="filter-toggle">Visa filter</button>
-</div>
-<div class="filter-panel" id="filter-panel">
-<div class="filter-group">
-  <label>Tema</label>
-  <button type="button" class="theme-picker-toggle" id="theme-picker-toggle">
-    <span id="theme-picker-label">Alla teman</span>
+  <div class="search-wrapper">
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input id="search" type="text" placeholder="Sök efter en drink…">
+  </div>
+
+  <button id="filter-toggle" class="filter-toggle" type="button">
+    <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+    </svg>
+    <span id="filter-toggle-text">Visa filter</span>
   </button>
 </div>
-<div class="filter-group">
-  <label for="date-from">Från datum</label>
-  <input type="date" id="date-from">
+<div class="filter-panel" id="filter-panel">
+  <div class="filter-group">
+    <label>Tema</label>
+    <button type="button" class="theme-picker-toggle" id="theme-picker-toggle">
+      <span id="theme-picker-label">Alla teman</span>
+    </button>
+  </div>
+
+  <div class="date-range">
+    <div class="filter-group">
+      <label for="date-from">Från datum</label>
+      <input type="date" id="date-from">
+    </div>
+    <div class="filter-group">
+      <label for="date-to">Till datum</label>
+      <input type="date" id="date-to">
+    </div>
+  </div>
+
+<div class="filter-actions">
+  <button type="button" class="filter-clear" id="filter-clear">
+    <svg class="clear-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+      <path d="M3 3v5h5"></path>
+    </svg>
+    <span>Rensa filter</span>
+  </button>
 </div>
-<div class="filter-group">
-  <label for="date-to">Till datum</label>
-  <input type="date" id="date-to">
 </div>
-<button class="filter-clear" id="filter-clear">Rensa filter</button>
-</div>
+
+
 
 
 <div class="menu">
@@ -112,5 +138,22 @@
 
   </div>
 </div>
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-text">
+      <p class="footer-credit">Av <strong>Dalgards Drinkar</strong>.</p>
+      <p class="footer-contact">
+        Har du idéer?
+        <a href="https://www.instagram.com/dalgardsdrinkar/" target="_blank" rel="noopener">Skriv till oss</a>
+      </p>
+    </div>
+    <img
+      class="footer-glass"
+      src="glass.png"
+      alt="Dalgards Drinkars glas"
+    >
+  </div>
+</footer>
 </body>
 </html>

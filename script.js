@@ -45,17 +45,21 @@ document.getElementById('theme-picker-search').addEventListener('input', (e) => 
   render();
 
 document.getElementById('filter-toggle').addEventListener('click', () => {
-  const filterPanel = document.getElementById('filter-panel');
-  const filterToggle = document.getElementById('filter-toggle');
+const filterPanel = document.getElementById('filter-panel');
+  const filterText = document.getElementById('filter-toggle-text');
 
+  if (!filterPanel) return;
+
+  // 2. Växla klassen 'open' på panelen
   filterPanel.classList.toggle('open');
-  filterToggle.classList.toggle('active');
 
-   filterToggle.textContent = filterPanel.classList.contains('open')
-    ? 'Dölj filter'
-    : 'Visa filter';
+  // 3. Kontrollera om den är öppen och uppdatera texten
+  const isOpen = filterPanel.classList.contains('open');
 
-  });
+  if (filterText) {
+    filterText.textContent = isOpen ? 'Dölj filter' : 'Visa filter';
+  }
+});
   document.getElementById('date-from').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('date-to').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('filter-clear').addEventListener('click', () => {
