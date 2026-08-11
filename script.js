@@ -350,7 +350,7 @@ function openModal(v) {
 
   const ingredientsEl = document.getElementById('modal-ingredients');
   ingredientsEl.innerHTML = '';
-  (v.ingredients || '').split(',').map(s => s.trim()).filter(Boolean).forEach(ing => {
+  (v.ingredients || '').split(';').map(s => s.trim()).filter(Boolean).forEach(ing => {
     const li = document.createElement('li');
     li.textContent = ing;
     ingredientsEl.appendChild(li);
@@ -358,7 +358,7 @@ function openModal(v) {
 
   const stepsEl = document.getElementById('modal-steps');
   stepsEl.innerHTML = '';
-  (v.steps || '').split(',').map(s => s.trim()).filter(Boolean).forEach(step => {
+  (v.steps || '').split(';').map(s => s.trim()).filter(Boolean).forEach(step => {
     const li = document.createElement('li');
     li.textContent = step;
     stepsEl.appendChild(li);
