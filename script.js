@@ -21,8 +21,8 @@ async function init() {
     sel.appendChild(o);
   });
 
-  document.getElementById('search').addEventListener('input', render);
-  sel.addEventListener('change', render);
+  document.getElementById('search').addEventListener('input', () => { currentPage = 1; render(); });
+  sel.addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('sort-order').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('recipe-toggle').addEventListener('click', toggleRecipe);
@@ -73,7 +73,7 @@ function render() {
     (!q || `${v.drink} ${v.note} ${v.theme} ${v.date}`.toLowerCase().includes(q))
   );
 
-  const totalPages = Math.ceil(filtered.length / Page_Size);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / Page_Size));
   currentPage = Math.min(currentPage, totalPages);
   const start = (currentPage -1 ) * Page_Size;
   const end = start + Page_Size;
