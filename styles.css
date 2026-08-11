@@ -110,7 +110,6 @@ header p {
   overflow: hidden;
   cursor: pointer;
   transition: border-color 0.15s ease, transform 0.15s ease;
-  max-height: ;
 }
 .card:hover {
   border-color: var(--accent);
