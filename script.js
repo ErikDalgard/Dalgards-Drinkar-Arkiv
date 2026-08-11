@@ -74,7 +74,7 @@ function render() {
   );
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / Page_Size));
-  currentPage = Math.min(currentPage, totalPages);
+  currentPage = Math.max(1, Math.min(currentPage, totalPages));
   const start = (currentPage -1 ) * Page_Size;
   const end = start + Page_Size;
   const sortOrder = document.getElementById('sort-order').value;
