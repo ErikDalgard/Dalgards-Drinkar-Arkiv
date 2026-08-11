@@ -67,8 +67,8 @@ document.getElementById('filter-toggle').addEventListener('click', () => {
   });
 
   document.getElementById('home-link').addEventListener('click', () => {
+    selectTheme('');
     document.getElementById('search').value = '';
-    document.getElementById('theme-filter').value = '';
     document.getElementById('date-from').value = '';
     document.getElementById('date-to').value = '';
     document.getElementById('sort-order').value = 'desc';
