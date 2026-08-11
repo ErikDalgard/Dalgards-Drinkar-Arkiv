@@ -110,6 +110,7 @@ header p {
   overflow: hidden;
   cursor: pointer;
   transition: border-color 0.15s ease, transform 0.15s ease;
+  max-height: ;
 }
 .card:hover {
   border-color: var(--accent);
@@ -157,6 +158,11 @@ header p {
   color: var(--text-muted);
   margin: 0.35rem 0 0;
   line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .empty {
   max-width: 1100px;
