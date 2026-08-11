@@ -19,18 +19,16 @@
   <p id="subtitle">Laddar arkivet …</p>
 </header>
 <div class="controls">
-  <input id="search" type="text" placeholder="Sök på drink, tema eller beskrivning …">
-  <select class="sort-select" id="sort-order">
-    <option value="desc">Nyast först</option>
-    <option value="asc">Äldst först</option>
-  </select>
-  <button id="filter-toggle" class="filter-toggle">Filtrera</button>
+  <input id="search" type="text" placeholder="Sök på drink…">
+  <button id="filter-toggle" class="filter-toggle">Visa filter</button>
 </div>
 <div class="filter-panel" id="filter-panel">
-  <div class="filter-group">
-    <label for="theme-filter">Tema</label>
-    <select id="theme-filter"><option value="">Alla teman</option></select>
-  </div>
+<div class="filter-group">
+  <label>Tema</label>
+  <button type="button" class="theme-picker-toggle" id="theme-picker-toggle">
+    <span id="theme-picker-label">Alla teman</span>
+  </button>
+</div>
 <div class="filter-group">
   <label for="date-from">Från datum</label>
   <input type="date" id="date-from">
@@ -43,11 +41,42 @@
 </div>
 
 
-<p class="count" id="count"></p>
+<div class="menu">
+  <p class="count" id="count"></p>
+  <select class="sort-select" id="sort-order">
+      <option value="desc">Nyast först</option>
+      <option value="asc">Äldst först</option>
+    </select>
+</div>
 <div class="grid" id="grid"></div>
 <p class="empty" id="empty" style="display:none;">Inga videos matchar sökningen.</p>
 <div class="pagination" id="pagination"></div>
 
+<div class="theme-modal-backdrop" id="theme-modal-backdrop">
+  <div class="theme-modal">
+    
+    <div class="theme-modal-header">
+      <div>
+        <p class="theme-modal-kicker">Filtrera arkivet</p>
+        <h2>Välj tema</h2>
+      </div>
+
+      <button type="button" class="theme-modal-close" id="theme-modal-close">
+        ×
+      </button>
+    </div>
+
+    <input
+      type="text"
+      id="theme-picker-search"
+      placeholder="Sök tema …"
+      autocomplete="off"
+    >
+
+    <div class="theme-chip-list" id="theme-chip-list"></div>
+
+  </div>
+</div>
 
 <div class="modal-backdrop" id="modal-backdrop">
   <div class="modal">

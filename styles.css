@@ -288,11 +288,20 @@ text-align: center;
   padding: 0.65rem 1.1rem;
   cursor: pointer;
   white-space: nowrap;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
-.filter-toggle:hover, .filter-toggle.active {
+
+.filter-toggle:hover {
+  background: var(--surface-hover);
   border-color: var(--accent);
   color: var(--accent);
 }
+
+
 .filter-panel {
   display: flex;
   flex-wrap: wrap;
@@ -349,16 +358,33 @@ text-align: center;
 
 .sort-select {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.95rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-  border-radius: 8px;
-  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  background: rgba(255, 248, 239, 0.12);
+  border: 1px solid rgba(255, 248, 239, 0.35);
+  color: var(--text-on-bg);
+
+  border-radius: 7px;
+  padding: 0.45rem 0.7rem;
+
   cursor: pointer;
   white-space: nowrap;
+
+  transition:
+  background 0.15s ease,
+  border-color 0.15s ease;
 }
-.sort-select:focus { outline: none; border-color: var(--accent); }
+
+.sort-select:hover {
+  background: rgba(255, 248, 239, 0.2);
+  border-color: rgba(255, 248, 239, 0.55);
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: rgba(255, 248, 239, 0.6);
+}
 
 
 .taste-profile {
@@ -385,3 +411,273 @@ text-align: center;
   background: transparent;
 }
 .taste-dot.filled { background: var(--accent); }
+
+.theme-picker-toggle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  min-width: 160px;
+  text-align: left;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.theme-picker-toggle:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* Date inputs */
+.filter-group input[type="date"] {
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.filter-group input[type="date"]:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+
+
+/* Clear filters */
+.filter-clear {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.filter-clear:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* Bakgrunden */
+.theme-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 20, 12, 0.72);
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.5rem;
+
+  z-index: 100;
+}
+
+.theme-modal-backdrop.open {
+  display: flex;
+}
+
+
+/* Själva rutan */
+.theme-modal {
+  width: min(600px, 100%);
+  max-height: min(700px, 90vh);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  padding: 1.4rem;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Header */
+.theme-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-bottom: 1.2rem;
+}
+
+.theme-modal-kicker {
+  margin: 0 0 0.15rem;
+
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+
+  color: var(--leaf);
+}
+
+.theme-modal h2 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+
+  color: var(--text);
+}
+
+
+/* Stäng-knappen */
+.theme-modal-close {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: none;
+  color: var(--text-muted);
+
+  font-size: 1.4rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: border-color 0.15s ease,
+              color 0.15s ease,
+              background 0.15s ease;
+}
+
+.theme-modal-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(110, 68, 35, 0.06);
+}
+
+
+/* Sökfält */
+#theme-picker-search {
+  width: 100%;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+
+  background: var(--border);
+  border: 1px solid var(--border);
+  color: var(--text);
+
+  border-radius: 8px;
+
+  padding: 0.65rem 0.8rem;
+
+  margin-bottom: 1rem;
+}
+
+#theme-picker-search::placeholder {
+  color: var(--text-muted);
+}
+
+#theme-picker-search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+
+/* Temana */
+.theme-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  overflow-y: auto;
+
+  padding: 0.15rem;
+}
+
+
+.theme-chip {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: 0.68rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  border: none;
+  border-radius: 20px;
+
+  padding: 0.45rem 0.75rem;
+
+  cursor: pointer;
+
+  transition: transform 0.1s ease,
+              box-shadow 0.1s ease;
+}
+
+.theme-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Mobil */
+@media (max-width: 600px) {
+
+  .theme-modal-backdrop {
+    padding: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .theme-modal {
+    max-height: 88vh;
+    border-radius: 14px 14px 10px 10px;
+    padding: 1.2rem;
+  }
+
+  .theme-modal h2 {
+    font-size: 1.6rem;
+  }
+
+  .theme-chip {
+    font-size: 0.64rem;
+    padding: 0.4rem 0.65rem;
+  }
+}
+
+.menu {
+  max-width: 1100px;
+  margin: 0.9rem auto 0;
+  padding: 0 1.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu .count {
+  margin: 0;
+  padding: 0;
+}

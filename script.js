@@ -2,6 +2,7 @@ let allVideos = [];
 
 let currentPage = 1;
 const Page_Size = 24;
+let selectedTheme = '';
 
 async function init() {
   const res = await fetch('data.json');
@@ -13,16 +14,30 @@ async function init() {
     ? `${allVideos.length} videos, ${years[0]}–${years[years.length-1]}`
     : 'Inga videos ännu';
 
-  const themes = [...new Set(allVideos.map(v => v.theme))].sort();
-  const sel = document.getElementById('theme-filter');
-  themes.forEach(t => {
-    const o = document.createElement('option');
-    o.value = t; o.textContent = t;
-    sel.appendChild(o);
+const themes = [...new Set(allVideos.map(v => v.theme))].filter(Boolean).sort();
+buildThemeChips(themes);
+
+document.getElementById('theme-picker-toggle').addEventListener('click', () => {
+  openThemeModal();
+});
+
+document.getElementById('theme-modal-close').addEventListener('click', () => {
+  closeThemeModal();
+});
+
+document.getElementById('theme-modal-backdrop').addEventListener('click', (e) => {
+  if (e.target.id === 'theme-modal-backdrop') {
+    closeThemeModal();
+  }
+});
+document.getElementById('theme-picker-search').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('.theme-chip').forEach(chip => {
+    chip.style.display = chip.textContent.toLowerCase().includes(q) ? '' : 'none';
   });
+});
 
   document.getElementById('search').addEventListener('input', () => { currentPage = 1; render(); });
-  sel.addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('sort-order').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('modal-close').addEventListener('click', closeModal);
   document.getElementById('recipe-toggle').addEventListener('click', toggleRecipe);
@@ -33,13 +48,21 @@ async function init() {
   render();
 
 document.getElementById('filter-toggle').addEventListener('click', () => {
-document.getElementById('filter-panel').classList.toggle('open');
-document.getElementById('filter-toggle').classList.toggle('active');
+  const filterPanel = document.getElementById('filter-panel');
+  const filterToggle = document.getElementById('filter-toggle');
+
+  filterPanel.classList.toggle('open');
+  filterToggle.classList.toggle('active');
+
+   filterToggle.textContent = filterPanel.classList.contains('open')
+    ? 'Dölj filter'
+    : 'Visa filter';
+
   });
   document.getElementById('date-from').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('date-to').addEventListener('change', () => { currentPage = 1; render(); });
   document.getElementById('filter-clear').addEventListener('click', () => {
-    document.getElementById('theme-filter').value = '';
+    selectTheme('');
     document.getElementById('date-from').value = '';
     document.getElementById('date-to').value = '';
     currentPage = 1;
@@ -60,9 +83,69 @@ document.getElementById('filter-toggle').classList.toggle('active');
   });
 }
 
+function buildThemeChips(themes) {
+  const list = document.getElementById('theme-chip-list');
+  list.innerHTML = '';
+
+  const allChip = document.createElement('button');
+  allChip.type = 'button';
+  allChip.className = 'theme-chip';
+  allChip.textContent = 'Alla teman';
+  allChip.addEventListener('click', () => selectTheme(''));
+  list.appendChild(allChip);
+
+  themes.forEach(t => {
+    const hue = hashHue(t);
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'theme-chip';
+    chip.textContent = t;
+    chip.style.background = `hsl(${hue},45%,88%)`;
+    chip.style.color = `hsl(${hue},45%,30%)`;
+    chip.addEventListener('click', () => selectTheme(t));
+    list.appendChild(chip);
+  });
+}
+
+function selectTheme(theme) {
+  selectedTheme = theme;
+
+  document.getElementById('theme-picker-label').textContent =
+    theme || 'Alla teman';
+
+  closeThemeModal();
+
+  currentPage = 1;
+  render();
+}
+
+function openThemeModal() {
+  const modal = document.getElementById('theme-modal-backdrop');
+
+  modal.classList.add('open');
+
+  const search = document.getElementById('theme-picker-search');
+  search.value = '';
+
+  document.querySelectorAll('.theme-chip').forEach(chip => {
+    chip.style.display = '';
+  });
+
+  setTimeout(() => {
+    search.focus();
+  }, 50);
+}
+
+
+function closeThemeModal() {
+  document
+    .getElementById('theme-modal-backdrop')
+    .classList.remove('open');
+}
+
 function render() {
   const q = document.getElementById('search').value.toLowerCase();
-  const theme = document.getElementById('theme-filter').value;
+  const theme = selectedTheme;
   const dateFrom = document.getElementById('date-from').value;
   const dateTo = document.getElementById('date-to').value;
 
@@ -261,7 +344,7 @@ function hashHue(str) {
 }
 
 function filterByTheme(theme) {
-  document.getElementById('theme-filter').value = theme;
+  selectTheme(theme);
   document.getElementById('filter-panel').classList.add('open');
   document.getElementById('filter-toggle').classList.add('active');
   currentPage = 1;
