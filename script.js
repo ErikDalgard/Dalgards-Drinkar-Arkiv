@@ -447,7 +447,60 @@ function renderTasteProfile(tasteStr){
   });
   container.style.display = 'block';
 
+  
+
 }
+
+function renderRecipeGroups(ingredientsRaw, stepsRaw, drinkNameRaw) {
+  const container = document.getElementById('recipe-groups');
+  container.innerHTML = '';
+
+  const ingredientGroups = (ingredientsRaw || '').split('||').map(g => g.trim()).filter(Boolean);
+  const stepGroups = (stepsRaw || '').split('||').map(g => g.trim()).filter(Boolean);
+  const groupCount = Math.max(ingredientGroups.length, stepGroups.length, 1);
+
+  // Dela upp drinknamnen (vi delar på "&" eftersom du skrev "Russian Punsch & Weeping Jesus")
+  const drinkNames = (drinkNameRaw || '').split('&').map(name => name.trim());
+
+  for (let i = 0; i < groupCount; i++) {
+    if (groupCount > 1) {
+      const label = document.createElement('p');
+      label.className = 'recipe-group-label';
+      // Använd det riktiga namnet från JSON, fallback till "Recept 1" etc om namnet saknas
+      label.textContent = drinkNames[i] ? `${drinkNames[i]}` : `Recept ${i + 1}`;
+      container.appendChild(label);
+    }
+
+    const ingHeading = document.createElement('p');
+    ingHeading.className = 'recipe-heading';
+    ingHeading.textContent = 'Ingredienser';
+    container.appendChild(ingHeading);
+
+    const ul = document.createElement('ul');
+    ul.className = 'recipe-ingredients';
+    (ingredientGroups[i] || '').split(';').map(s => s.trim()).filter(Boolean).forEach(ing => {
+      const li = document.createElement('li');
+      li.textContent = ing;
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+
+    const stepHeading = document.createElement('p');
+    stepHeading.className = 'recipe-heading';
+    stepHeading.textContent = 'Gör såhär';
+    container.appendChild(stepHeading);
+
+    const ol = document.createElement('ol');
+    ol.className = 'recipe-steps';
+    (stepGroups[i] || '').split(';').map(s => s.trim()).filter(Boolean).forEach(step => {
+      const li = document.createElement('li');
+      li.textContent = step;
+      ol.appendChild(li);
+    });
+    container.appendChild(ol);
+  }
+}
+
 function openModal(v) {
   document.getElementById('modal-video').src = v.url;
   document.getElementById('modal-drink').textContent = v.drink;
@@ -466,21 +519,7 @@ function openModal(v) {
   toggle.textContent = 'Visa recept';
   block.style.display = 'none';
 
-  const ingredientsEl = document.getElementById('modal-ingredients');
-  ingredientsEl.innerHTML = '';
-  (v.ingredients || '').split(';').map(s => s.trim()).filter(Boolean).forEach(ing => {
-    const li = document.createElement('li');
-    li.textContent = ing;
-    ingredientsEl.appendChild(li);
-  });
-
-  const stepsEl = document.getElementById('modal-steps');
-  stepsEl.innerHTML = '';
-  (v.steps || '').split(';').map(s => s.trim()).filter(Boolean).forEach(step => {
-    const li = document.createElement('li');
-    li.textContent = step;
-    stepsEl.appendChild(li);
-  });
+  renderRecipeGroups(v.ingredients, v.steps, v.drink);
   renderTasteProfile(v.taste);
   document.getElementById('modal-backdrop').classList.add('open');
 }
@@ -531,4 +570,5 @@ function ingredientsContainSpirit(ingredients, selectedSpirit) {
 
   return terms.some(term => text.includes(term));
 }
+
 init();

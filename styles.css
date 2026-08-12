@@ -940,3 +940,18 @@ text-align: center;
   min-height: 15px;
   flex-shrink: 0;
 }
+
+.recipe-group-label {
+  font-size: 1.25rem;           /* Gör texten betydligt större */
+  font-weight: bold;           /* Fetstil för att den ska sticka ut */
+  color: #333;                 /* En mörkgrå/nästan svart färg för bra kontrast */
+  margin-top: 2rem;            /* Skapar ordentligt med luft från receptet ovanför */
+  margin-bottom: 1rem;         /* Avstånd ner till "INGREDIENSER" */
+  padding-bottom: 0.4rem;      /* Lite luft mellan texten och linjen under */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* En diskret linje som avskärmar recepten */
+}
+
+/* Vi vill inte ha en stor marginal ovanför det allra första receptet */
+#recipe-groups .recipe-group-label:first-child {
+  margin-top: 0;
+}
