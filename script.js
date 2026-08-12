@@ -87,6 +87,21 @@ const SPIRIT_SYNONYMS = {
   ]
 };
 
+let themeColorMap = {};
+
+function buildThemeColorMap(themes) {
+  themeColorMap = {};
+  const shuffled = [...themes].sort((a, b) => hashHue(a) - hashHue(b));
+
+  const n = shuffled.length;
+  shuffled.forEach((theme, i) => {
+    themeColorMap[theme] = Math.round((360 * i) / n);
+  });
+}
+
+function themeHue(theme) {
+  return theme in themeColorMap ? themeColorMap[theme] : hashHue(theme || 'ovrigt');
+}
 
 async function init() {
   const res = await fetch('data.json');
@@ -96,6 +111,7 @@ async function init() {
   const years = [...new Set(allVideos.map(v => v.date.slice(0,4)))].sort();
 
 const themes = [...new Set(allVideos.map(v => v.theme))].filter(Boolean).sort();
+buildThemeColorMap(themes);
 buildThemeChips(themes);
 
 buildSpiritChips();
@@ -183,6 +199,19 @@ const filterPanel = document.getElementById('filter-panel');
   });
 }
 
+function slugifyTheme(theme) {
+  return theme
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // å→a, ä→a, ö→o osv
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+function themeIconPath(theme) {
+  const slug = theme.trim() ? slugifyTheme(theme) : 'ovrigt';
+  return `icons/${slug}.png`;
+}
+
 function buildThemeChips(themes) {
   const list = document.getElementById('theme-chip-list');
   list.innerHTML = '';
@@ -190,19 +219,35 @@ function buildThemeChips(themes) {
   const allChip = document.createElement('button');
   allChip.type = 'button';
   allChip.className = 'theme-chip';
-  allChip.textContent = 'Alla säsonger';
+  allChip.dataset.theme = '__all__';
+  allChip.textContent = 'Alla teman';
   allChip.addEventListener('click', () => selectTheme(''));
   list.appendChild(allChip);
 
-  themes.forEach(t => {
-    const hue = hashHue(t);
+  themes.forEach(theme => {
+    const hue = themeHue(theme || 'ovrigt');
     const chip = document.createElement('button');
     chip.type = 'button';
     chip.className = 'theme-chip';
-    chip.textContent = t;
-    chip.style.background = `hsl(${hue},45%,88%)`;
-    chip.style.color = `hsl(${hue},45%,30%)`;
-    chip.addEventListener('click', () => selectTheme(t));
+    if (!theme.trim()) chip.classList.add('icon-only');
+    chip.dataset.theme = theme;
+ chip.style.background = `hsl(${hue},65%,35%)`;
+  chip.style.color = `hsl(${hue},20%,95%)`;
+
+    const img = document.createElement('img');
+    img.src = themeIconPath(theme);
+    img.alt = theme || 'Övrigt';
+    img.className = 'theme-chip-icon';
+    img.onerror = () => { img.style.display = 'none'; };  // döljs snyggt om ikonen saknas
+    chip.appendChild(img);
+
+    if (theme.trim()) {
+      const span = document.createElement('span');
+      span.textContent = theme;
+      chip.appendChild(span);
+    }
+
+    chip.addEventListener('click', () => selectTheme(theme));
     list.appendChild(chip);
   });
 }
@@ -399,15 +444,18 @@ function renderPagination(totalPages) {
 function makeCard(v) {
   const card = document.createElement('div');
   card.className = 'card';
-  const hue = hashHue(v.theme || '');
+  const hue = themeHue(v.theme || '');
   card.innerHTML = `
-    <video src="${v.url}" ${v.photo ? `poster="${v.photo}"` : ''} preload="metadata" muted></video>
+    <div class="card-media">
+      <video src="${v.url}" ${v.photo ? `poster="${v.photo}"` : ''} preload="metadata" muted></video>
+      <span class="theme-tag" style="background:hsl(${hue},45%,38%); color:hsl(${hue},20%,95%);">
+        <img src="${themeIconPath(v.theme)}" alt="" class="theme-tag-icon" onerror="this.style.display='none'">
+        ${v.theme.trim() ? escapeHtml(v.theme) : ''}
+      </span>
+    </div>
     <div class="card-body">
       <p class="card-drink">${escapeHtml(v.drink)}</p>
-      <div class="tag-row">
-        <span class="theme-tag" style="background:hsl(${hue},45%,88%); color:hsl(${hue},45%,30%);">${escapeHtml(v.theme)}</span>
-        <span class="date">${v.date}</span>
-      </div>
+      <span class="date">${v.date}</span>
       <p class="note">${escapeHtml(v.note)}</p>
     </div>
   `;
@@ -418,7 +466,6 @@ function makeCard(v) {
   });
   return card;
 }
-
 const TASTE_LABELS = ['Sötma', 'Syra', 'Beska', 'Styrka', 'Sälta']
 
 function renderTasteProfile(tasteStr){
@@ -505,10 +552,10 @@ function openModal(v) {
   document.getElementById('modal-video').src = v.url;
   document.getElementById('modal-drink').textContent = v.drink;
   const modalTheme = document.getElementById('modal-theme');
-  const hue = hashHue(v.theme || '');
+  const hue = themeHue(v.theme || '');
   modalTheme.textContent = v.theme;
-  modalTheme.style.background = `hsl(${hue},45%,88%)`;
-  modalTheme.style.color = `hsl(${hue},45%,30%)`;
+  modalTheme.style.background = `hsl(${hue},65%,35%)`;
+  modalTheme.style.color = `hsl(${hue},20%,95%)`;
   document.getElementById('modal-date').textContent = v.date;
   document.getElementById('modal-note').textContent = v.note;
 

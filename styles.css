@@ -131,25 +131,45 @@ header p {
   margin: 0 0 0.35rem;
   color: var(--text);
 }
-.tag-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.3rem;
-  flex-wrap: wrap;
+.date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: block;
+  margin: 0.15rem 0 0.35rem;
 }
+
 .theme-tag {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.18rem 0.55rem;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.7rem;
   border-radius: 20px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
   transition: transform 0.1s ease;
+  max-width: calc(100% - 1.2rem);
 }
-.theme-tag:hover { transform: scale(1.06); }
+.theme-tag:hover { transform: scale(1.05); }
+.theme-tag-icon {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-media {
+  position: relative;
+}
 
 .date { font-size: 0.9rem; color: var(--text); }
 .note {
@@ -413,34 +433,38 @@ text-align: center;
    ENDAST FÖR MOBIL (Skärmar under 650px)
    ========================================== */
 @media (max-width: 650px) {
+ @media (max-width: 650px) {
+  /* 1. Gör hela panelen till en grid med två lika stora kolumner */
   .filter-panel {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; /* Samma gap som du har i datumen för perfekt linjering */
+    width: 100%;
   }
 
-  .filter-panel.open {
-    max-height: 500px; /* Mer höjdutrymme för staplad layout */
-  }
-
+  /* 2. Se till att dropdowns fyller ut sin respektive kolumn */
   .filter-group {
     width: 100%;
-    max-width: 150px;
+    max-width: none; 
   }
 
+  /* 3. Låt datum-containern sträcka sig över hela bredden (båda kolumnerna) */
   .date-range {
+    grid-column: 1 / -1; 
     width: 100%;
-    max-width: 340px;
+    /* Din befintliga grid för datumen ligger kvar här inuti */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
   }
 
-  .filter-clear {
-    width: auto;
+  /* 4. Låt rensa-knappens container också sträcka sig över hela bredden */
+  .filter-actions {
+    grid-column: 1 / -1;
     margin-top: 0.2rem;
   }
+}
+  
 }
 .sort-select {
   font-family: 'Cormorant Garamond', serif;
@@ -760,24 +784,57 @@ text-align: center;
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
   font-size: 0.68rem;
-
   text-transform: uppercase;
   letter-spacing: 0.08em;
-
   border: none;
   border-radius: 20px;
-
   padding: 0.45rem 0.75rem;
-
   cursor: pointer;
-
-  transition: transform 0.1s ease,
-              box-shadow 0.1s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.theme-chip-icon {
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.theme-chip.icon-only {
+  padding: 0.4rem;
+  border-radius: 50%;
+}
+.theme-chip.icon-only .theme-chip-icon {
+  width: 1.8em;
+  height: 1.8em;
 }
 
 .theme-chip:hover {
   transform: translateY(-1px);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+#theme-chip-list .theme-chip {
+  font-size: 0.85rem;
+  padding: 0.6rem 1.1rem;
+  gap: 0.55rem;
+}
+#theme-chip-list .theme-chip-icon {
+  width: 1.8em;
+  height: 1.8em;
+}
+#theme-chip-list .theme-chip.icon-only .theme-chip-icon {
+  width: 2.2em;
+  height: 2.2em;
+}
+
+#modal-theme {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
 }
 
 
@@ -911,12 +968,7 @@ text-align: center;
 }
 
 /* Filterknapp med flex för att rikta in ikonen med texten */
-.filter-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
+
 
 .filter-icon {
   width: 16px;
