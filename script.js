@@ -162,7 +162,7 @@ function selectTheme(theme) {
   selectedTheme = theme;
 
   document.getElementById('theme-picker-label').textContent =
-    theme || 'Alla säsonger';
+    theme || 'Alla teman';
 
   closeThemeModal();
 
