@@ -152,7 +152,6 @@ function buildSpiritChips() {
 
 function selectSpirit(spirit) {
   selectedSpirit = spirit;
-    console.log('selectedSpirit är nu:', selectedSpirit);
   document.getElementById('spirit-picker-label').textContent = spirit || 'All spritsorter';
   document.getElementById('spirit-picker-panel').classList.remove('open');
   currentPage = 1;
