@@ -3,8 +3,90 @@ let allVideos = [];
 let currentPage = 1;
 const Page_Size = 24;
 let selectedTheme = '';
-let selectedSpirit = '';
-const SPIRITS = ['Vodka', 'Gin', 'Ljus Rom', 'Tequila', 'Bourbon', 'Mörk Rom'];
+let selectedSpirits = new Set();
+
+const SPIRITS = [
+  'Vodka', 
+  'Gin', 
+  'Ljus Rom', 
+  'Mörk Rom', 
+  'Tequila', 
+  'Whiskey', 
+  'Cognac', 
+  'Calvados', 
+  'Limoncello',
+  'Aperitif & Bitter',
+  'Vermouth'
+];
+
+const SPIRIT_SYNONYMS = {
+  'Vodka': [
+    'vodka', 
+    'vaniljvodka', 
+    'citronvodka', 
+    'citrongräsinfluerad vodka'
+  ],
+  'Gin': [
+    'gin', 
+    'london dry gin', 
+    'old tom gin', 
+    'sloe gin', 
+    'rejmyregin', 
+    'westerviks gin', 
+    'rönnbärsgin'
+  ],
+  'Ljus Rom': [
+    'ljus rom', 
+    'vit rom'
+  ],
+  'Mörk Rom': [
+    'mörk rom', 
+    'demarara rom', 
+    'demerara rom'
+  ],
+  'Tequila': [
+    'tequila', 
+    'mezcal'
+  ],
+  'Whiskey': [
+    'whiskey', 
+    'bourbon', 
+    'rågwhiskey', 
+    'rye', 
+    'scotch', 
+    'skotsk blended whiskey', 
+    'fireball'
+  ],
+  'Cognac': [
+    'cognac', 
+    'konjak', 
+    'brandy'
+  ],
+  'Calvados': [
+    'calvados'
+  ],
+  'Limoncello': [
+    'limoncello'
+  ],
+  'Aperitif & Bitter': [
+    'campari', 
+    'carmpano bitter', 
+    'aperol', 
+    'gammel dansk', 
+    'dubonnet', 
+    'fernet branca', 
+    'lillet', 
+    'kina lillet'
+  ],
+  'Vermouth': [
+    'vermouth', 
+    'vermuth', 
+    'röd vermouth', 
+    'söt vermouth', 
+    'torr vermouth'
+  ]
+};
+
 
 async function init() {
   const res = await fetch('data.json');
@@ -142,6 +224,7 @@ function buildSpiritChips() {
     const chip = document.createElement('button');
     chip.type = 'button';
     chip.className = 'theme-chip';
+    chip.dataset.spirit = spirit;
     chip.textContent = spirit;
     chip.style.background = `hsl(${hue},45%,88%)`;
     chip.style.color = `hsl(${hue},45%,30%)`;
@@ -150,12 +233,46 @@ function buildSpiritChips() {
   });
 }
 
-function selectSpirit(spirit) {
+function selectSpirit1(spirit) {
   selectedSpirit = spirit;
   document.getElementById('spirit-picker-label').textContent = spirit || 'All spritsorter';
   document.getElementById('spirit-picker-panel').classList.remove('open');
   currentPage = 1;
   render();
+}
+
+function selectSpirit(spirit) {
+  if (spirit === '') {
+    selectedSpirits.clear();
+  } else if (selectedSpirits.has(spirit)) {
+    selectedSpirits.delete(spirit);
+  } else {
+    selectedSpirits.add(spirit);
+  }
+
+  updateSpiritLabel();
+  updateSpiritChipStyles();
+  currentPage = 1;
+  render();
+}
+
+function updateSpiritLabel() {
+  const label = document.getElementById('spirit-picker-label');
+  if (selectedSpirits.size === 0) {
+    label.textContent = 'Alla sprit';
+  } else if (selectedSpirits.size === 1) {
+    label.textContent = [...selectedSpirits][0];
+  } else {
+    label.textContent = `${selectedSpirits.size} sorter valda`;
+  }
+}
+
+function updateSpiritChipStyles() {
+  document.querySelectorAll('#spirit-chip-list .theme-chip').forEach(chip => {
+    const spirit = chip.dataset.spirit;
+    const isActive = spirit === '' ? selectedSpirits.size === 0 : selectedSpirits.has(spirit);
+    chip.classList.toggle('active', isActive);
+  });
 }
 
 function selectTheme(theme) {
@@ -200,9 +317,11 @@ function render() {
   const dateFrom = document.getElementById('date-from').value;
   const dateTo = document.getElementById('date-to').value;
 
+  console.log('Drinkar: ', selectedSpirits);
+
 const filtered = allVideos.filter(v =>
   (!theme || v.theme === theme) &&
-  (!selectedSpirit || ingredientsContainSpirit(v.ingredients, selectedSpirit)) &&
+  (selectedSpirits.size === 0 || [...selectedSpirits].every(s => ingredientsContainSpirit(v.ingredients, s))) &&
   (!dateFrom || v.date >= dateFrom) &&
   (!dateTo || v.date <= dateTo) &&
   (!q || `${v.drink} ${v.note} ${v.theme} ${v.date}`.toLowerCase().includes(q))
@@ -404,10 +523,12 @@ function filterByTheme(theme) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function ingredientsContainSpirit(ingredients, spirit) {
-  if (!ingredients) return false;
-  const pattern = new RegExp(`\\b${spirit}\\b`, 'i');
-  return pattern.test(ingredients);
-}
+function ingredientsContainSpirit(ingredients, selectedSpirit) {
+  if (!ingredients || !selectedSpirit) return false;
+  
+  const text = ingredients.toLowerCase();
+  const terms = SPIRIT_SYNONYMS[selectedSpirit] || [selectedSpirit.toLowerCase()];
 
+  return terms.some(term => text.includes(term));
+}
 init();

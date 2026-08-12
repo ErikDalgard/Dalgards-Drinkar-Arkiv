@@ -749,6 +749,12 @@ text-align: center;
   padding: 0.15rem;
 }
 
+.theme-chip.active {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  font-weight: 800;
+}
+
 
 .theme-chip {
   font-family: 'Archivo', sans-serif;
