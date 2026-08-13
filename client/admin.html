@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin — Dalgards Drinkar</title>
+<title>Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Archivo:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="public/css/styles.css">
@@ -99,8 +99,17 @@
       <input type="hidden" id="f-photo-url">
       <input type="hidden" id="f-id">
 
-      <button type="submit" class="filter-toggle" id="submit-btn">Spara drink</button>
-      <button type="button" class="filter-clear" id="delete-btn" style="display:none;">Ta bort denna drink</button>
+      <button type="submit" class="filter-toggle" id="submit-btn">
+        Lägg till drink
+      </button>
+
+      <button type="submit" class="filter-toggle" id="edit-submit-btn" style="display:none;">
+        Spara ändringar
+      </button>
+
+      <button type="button" class="filter-clear" id="delete-btn" style="display:none;">
+        Ta bort denna drink
+      </button>
     </form>
 
     <p id="status-msg"></p>

@@ -114,7 +114,7 @@ export default {
 		// request.body är själva fil-bytesen, skickade rakt av (inte JSON)
 		await env.MEDIA.put(filename, request.body);
 
-		const publicUrl = `https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/${filename}`;
+		const publicUrl = filename;
 		return new Response(JSON.stringify({ url: publicUrl }), {
 			status: 201,
 			headers: { "Content-Type": "application/json", ...corsHeaders },

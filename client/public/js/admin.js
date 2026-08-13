@@ -70,13 +70,30 @@ async function loadDrinks() {
 
 document.getElementById("mode-select").addEventListener("change", (e) => {
   const isEdit = e.target.value === "edit";
+  const form = document.getElementById("drink-form");
 
   document.getElementById("edit-picker-group").style.display =
     isEdit ? "block" : "none";
 
-  if (!isEdit) {
+  if (isEdit) {
+    // Redigeringsläge – visa inte formuläret förrän en drink valts
+    form.style.display = "none";
+
+    document.getElementById("submit-btn").style.display = "none";
+    document.getElementById("edit-submit-btn").style.display = "none";
+    document.getElementById("delete-btn").style.display = "none";
+
+  } else {
+    // Lägg till-läge – formuläret visas direkt
     clearForm();
+
     editSearch.value = "";
+    editResults.classList.remove("open");
+
+    form.style.display = "grid";
+
+    document.getElementById("submit-btn").style.display = "inline-block";
+    document.getElementById("edit-submit-btn").style.display = "none";
     document.getElementById("delete-btn").style.display = "none";
   }
 });
@@ -201,6 +218,8 @@ function clearForm() {
 }
 
 function fillForm(d) {
+  document.getElementById("drink-form").style.display = "grid";
+
   document.getElementById("f-id").value = d.id;
   document.getElementById("f-date").value = d.date;
   document.getElementById("f-drink").value = d.drink;
@@ -220,6 +239,11 @@ function fillForm(d) {
 
   document.getElementById("f-photo-filename").textContent =
     "Ingen fil vald";
+
+  document.getElementById("submit-btn").style.display = "none";
+  document.getElementById("edit-submit-btn").style.display = "inline-block";
+  document.getElementById("delete-btn").style.display = "inline-block";
+    
 }
 
 function validateForm() {
@@ -371,9 +395,23 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
     statusEl.textContent = "";
 
     clearForm();
+    if (isEdit) {
+      document.getElementById("mode-select").value = "add";
+      document.getElementById("edit-picker-group").style.display = "none";
+      document.getElementById("submit-btn").style.display = "inline-block";
+      document.getElementById("edit-submit-btn").style.display = "none";
+      document.getElementById("delete-btn").style.display = "none";
+
+      editSearch.value = "";
+      editResults.classList.remove("open");
+    }
 
     document.getElementById("f-video-file").value = "";
     document.getElementById("f-photo-file").value = "";
+
+    document.getElementById("submit-btn").style.display = "inline-block";
+    document.getElementById("edit-submit-btn").style.display = "none";
+    document.getElementById("delete-btn").style.display = "none";
 
     loadDrinks();
   } catch (err) {
@@ -407,15 +445,18 @@ document.getElementById("delete-btn").addEventListener("click", async () => {
     showToast("Raderad", "error");
 
     document.getElementById("status-msg").textContent = "";
-
     clearForm();
-
     loadDrinks();
 
     editSearch.value = "";
     editResults.classList.remove("open");
 
-    document.getElementById("delete-btn").style.display = "none";
+  document.getElementById("mode-select").value = "add";
+  document.getElementById("edit-picker-group").style.display = "none";
+
+  document.getElementById("submit-btn").style.display = "inline-block";
+  document.getElementById("edit-submit-btn").style.display = "none";
+  document.getElementById("delete-btn").style.display = "none";
   }
 });
 

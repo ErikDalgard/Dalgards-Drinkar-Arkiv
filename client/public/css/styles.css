@@ -1004,6 +1004,11 @@ header p {
   background-color: #45d545ad;
   color: black;
 }
+
+#edit-submit-btn{
+  background-color: #45d545ad;
+  color: black;
+}
 #delete-btn {
   background-color: #d54545b0;
   color: black;
