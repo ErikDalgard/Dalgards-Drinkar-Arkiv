@@ -1163,3 +1163,41 @@ header p {
 .edit-search-wrap #edit-search {
   padding-left: 60px;
 }
+
+
+/* ============================================
+   Mobile – adminpanel
+   ============================================ */
+
+@media (max-width: 600px) {
+
+  .admin-wrap {
+    width: 90%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 24px 16px;
+  }
+
+  #admin-panel {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #drink-form {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .filter-group {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .filter-group input,
+  .filter-group select,
+  .filter-group textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}

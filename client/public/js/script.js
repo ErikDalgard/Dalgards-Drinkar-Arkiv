@@ -347,13 +347,6 @@ function slugifyTheme(theme) {
     .replace(/(^-|-$)/g, "");
 }
 
-function themeIconPath(theme) {
-  const slug = theme.trim()
-    ? slugifyTheme(theme)
-    : "ovrigt";
-
-  return `icons/${slug}.png`;
-}
 
 
 // ============================================
@@ -395,17 +388,6 @@ function buildThemeChips(themes) {
     chip.style.background = `hsl(${hue},65%,35%)`;
     chip.style.color = `hsl(${hue},20%,95%)`;
 
-    const img = document.createElement("img");
-
-    img.src = themeIconPath(theme);
-    img.alt = theme || "Övrigt";
-    img.className = "theme-chip-icon";
-
-    img.onerror = () => {
-      img.style.display = "none";
-    };
-
-    chip.appendChild(img);
 
     if (theme.trim()) {
       const span = document.createElement("span");
@@ -735,12 +717,6 @@ function makeCard(v) {
           color:hsl(${hue},20%,95%);
         "
       >
-        <img
-          src="${themeIconPath(v.theme)}"
-          alt=""
-          class="theme-tag-icon"
-          onerror="this.style.display='none'"
-        >
 
         ${v.theme.trim() ? escapeHtml(v.theme) : ""}
       </span>
