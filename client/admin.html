@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Dalgards Drinkar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Archivo:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="public/css/styles.css">
+<link rel="shortcut icon" href="public/assets/glass.png" type="image/png">
+
+</head>
+<body>
+
+
+<div id="toast" class="toast"></div>
+
+<header>
+  <h1 id="home-link">
+    <span class="logo-line">Dalgards <img src="public/assets/glass.png" alt="" class="logo-glass"> Drinkar</span>
+    <span class="logo-sub">Arkivet</span>
+  </h1>
+</header>
+
+<div class="admin-wrap" id="admin-wrap">
+
+  <div class="filter-group" id="key-section">
+    <input type="password" id="admin-key-input" placeholder="Lösenord">
+    <button type="button" class="filter-toggle" id="key-save">Logga in</button>
+  </div>
+
+  <div id="admin-panel" style="display:none;">
+
+    <div class="filter-group">
+      <label>Läge</label>
+      <select id="mode-select">
+        <option value="add">Lägg till ny drink</option>
+        <option value="edit">Redigera befintlig</option>
+      </select>
+    </div>
+
+    <div class="filter-group" id="edit-picker-group" style="display:none;">
+    <label for="edit-search">Sök drink att redigera</label>
+    <div class="edit-search-wrap" id="edit-search-wrap">
+        <input type="text" id="edit-search" placeholder="Sök på datum eller drinknamn …" autocomplete="off">
+        <div class="edit-search-results" id="edit-search-results"></div>
+    </div>
+    </div>
+
+    <form id="drink-form">
+      <div class="filter-group">
+        <label for="f-date" class="required-label">Datum</label>
+        <input type="text" id="f-date" placeholder="ÅÅÅÅ-MM-DD" required>
+      </div>
+      <div class="filter-group">
+        <label for="f-drink" class="required-label">Drinknamn</label>
+        <input type="text" id="f-drink" required>
+      </div>
+      <div class="filter-group">
+        <label for="f-theme">Tema</label>
+        <input type="text" id="f-theme">
+      </div>
+      <div class="filter-group full-width">
+        <label for="f-note">Kommentar</label>
+        <input type="text" id="f-note">
+      </div>
+      <div class="filter-group full-width">
+        <label for="f-ingredients">Ingredienser (separera med ;)</label>
+        <input type="text" id="f-ingredients">
+      </div>
+      <div class="filter-group full-width">
+        <label for="f-steps">Instruktioner (separera med ;)</label>
+        <input type="text" id="f-steps">
+      </div>
+      <div class="filter-group">
+        <label for="f-taste">Smakprofil (t.ex. 2/5, 3/5, 1/5, 2/5, 0/5)</label>
+        <input type="text" id="f-taste">
+      </div>
+
+        <div class="filter-group">
+        <label class="required-label">Video (mp4)</label>
+        <div class="file-input-wrap">
+            <label for="f-video-file" class="file-button">Välj fil</label>
+            <span class="file-name" id="f-video-filename">Ingen fil vald</span>
+        </div>
+        <input type="file" id="f-video-file" accept="video/mp4" class="file-input-hidden">
+        </div>
+
+        <div class="filter-group">
+        <label class="required-label">Poster-bild (jpeg/png)</label>
+        <div class="file-input-wrap">
+            <label for="f-photo-file" class="file-button">Välj fil</label>
+            <span class="file-name" id="f-photo-filename">Ingen fil vald</span>
+        </div>
+        <input type="file" id="f-photo-file" accept="image/*" class="file-input-hidden">
+        </div>
+
+      <input type="hidden" id="f-video-url">
+      <input type="hidden" id="f-photo-url">
+      <input type="hidden" id="f-id">
+
+      <button type="submit" class="filter-toggle" id="submit-btn">Spara drink</button>
+      <button type="button" class="filter-clear" id="delete-btn" style="display:none;">Ta bort denna drink</button>
+    </form>
+
+    <p id="status-msg"></p>
+  </div>
+</div>
+
+<script src="/public/js/admin.js"></script>
+</body>
+</html>
