@@ -10,7 +10,7 @@ const PAGE_SIZE = 24;
 let selectedTheme = "";
 let selectedSpirits = new Set();
 
-
+const R2_BASE_URL = "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/";
 // ============================================
 // Spirits
 // ============================================
@@ -720,10 +720,10 @@ function makeCard(v) {
   const hue = themeHue(v.theme || "");
 
   card.innerHTML = `
-    <div class="card-media">
+  <div class="card-media">
       <video
-        src="${v.url}"
-        ${v.photo ? `poster="${v.photo}"` : ""}
+        src="${R2_BASE_URL}${v.url}"
+        poster="${R2_BASE_URL}${v.photo}"
         preload="metadata"
         muted
       ></video>
@@ -947,8 +947,8 @@ function renderRecipeGroups(
 // ============================================
 
 function openModal(v) {
-  document.getElementById("modal-video").src = v.url;
 
+  document.getElementById("modal-video").src = `${R2_BASE_URL}${v.url}`;
   document.getElementById("modal-drink").textContent =
     v.drink;
 
