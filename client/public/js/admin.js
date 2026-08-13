@@ -3,6 +3,8 @@
 // ============================================
 
 const API_BASE = "https://dalgardsdrinkar-api.dalgard-erik.workers.dev";
+const R2_BASE_URL = "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/";
+
 
 let adminKey = "";
 let allDrinks = [];
@@ -218,8 +220,6 @@ function clearForm() {
 }
 
 function fillForm(d) {
-  document.getElementById("drink-form").style.display = "grid";
-
   document.getElementById("f-id").value = d.id;
   document.getElementById("f-date").value = d.date;
   document.getElementById("f-drink").value = d.drink;
@@ -231,19 +231,48 @@ function fillForm(d) {
   document.getElementById("f-video-url").value = d.url;
   document.getElementById("f-photo-url").value = d.photo;
 
+  // Visa befintliga filnamn
+  const videoFilename = d.url
+    ? decodeURIComponent(d.url.split("/").pop())
+    : "Ingen fil vald";
+
+  const photoFilename = d.photo
+    ? decodeURIComponent(d.photo.split("/").pop())
+    : "Ingen fil vald";
+
   document.getElementById("f-video-file").value = "";
   document.getElementById("f-photo-file").value = "";
 
-  document.getElementById("f-video-filename").textContent =
-    "Ingen fil vald";
+const videoFilenameEl = document.getElementById("f-video-filename");
+const photoFilenameEl = document.getElementById("f-photo-filename");
 
-  document.getElementById("f-photo-filename").textContent =
-    "Ingen fil vald";
+if (d.url) {
+  videoFilenameEl.innerHTML = `
+    <a href="${R2_BASE_URL}${d.url}" download target="_blank">
+      ${escapeHtml(videoFilename)}
+    </a>
+  `;
+} else {
+  videoFilenameEl.textContent = "Ingen fil vald";
+}
 
+if (d.photo) {
+  photoFilenameEl.innerHTML = `
+    <a href="${R2_BASE_URL}${d.photo}" download target="_blank">
+      ${escapeHtml(photoFilename)}
+    </a>
+  `;
+} else {
+  photoFilenameEl.textContent = "Ingen fil vald";
+}
+
+  // Visa redigeringsknappar
   document.getElementById("submit-btn").style.display = "none";
   document.getElementById("edit-submit-btn").style.display = "inline-block";
   document.getElementById("delete-btn").style.display = "inline-block";
-    
+
+  // Visa formuläret
+  document.getElementById("drink-form").style.display = "grid";
 }
 
 function validateForm() {
