@@ -30,7 +30,6 @@
   </div>
 
   <div id="admin-panel" style="display:none;">
-
     <div class="filter-group">
       <label>Läge</label>
       <select id="mode-select">
@@ -40,11 +39,15 @@
     </div>
 
     <div class="filter-group" id="edit-picker-group" style="display:none;">
-    <label for="edit-search">Sök drink att redigera</label>
-    <div class="edit-search-wrap" id="edit-search-wrap">
-        <input type="text" id="edit-search" placeholder="Sök på datum eller drinknamn …" autocomplete="off">
+      <label for="edit-search">Sök drink att redigera</label>
+      <div class="search-wrapper edit-search-wrap" id="edit-search-wrap">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="edit-search" placeholder="Sök efter drink …" autocomplete="off">
         <div class="edit-search-results" id="edit-search-results"></div>
-    </div>
+      </div>
     </div>
 
     <form id="drink-form">

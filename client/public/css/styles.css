@@ -1145,3 +1145,21 @@ header p {
   content: ' *';
   color: #a34848;
 }
+
+.edit-search-wrap {
+  position: relative;
+}
+
+.edit-search-wrap .search-icon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+.edit-search-wrap #edit-search {
+  padding-left: 60px;
+}
