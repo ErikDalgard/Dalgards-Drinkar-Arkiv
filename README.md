@@ -9,8 +9,8 @@ A project to collect and display my parents cocktail recipes, photos, and videos
 ## Project structure
 
 * **`client/` (Frontend)**
-  * Plain HTML, CSS, and vanilla JavaScript.
-  * Hosted on Cloudflare Pages and automatically deploys whenever changes are pushed to GitHub.
+  * HTML, CSS, and JavaScript.
+  * Hosted on Cloudflare Pages.
 
 * **`api/` (Backend)**
   * A Cloudflare Worker connecting the frontend to a D1 database and R2 bucket for media storage.
@@ -23,7 +23,7 @@ A project to collect and display my parents cocktail recipes, photos, and videos
 ```text
 dalgardsdrinkar/
 ├── client/                      # Frontend website
-│   ├── public/                  # CSS, JS, images
+│   ├── public/                  
 │   │   ├── assets/              
 │   │   ├── css/                 
 │   │   └── js/                  

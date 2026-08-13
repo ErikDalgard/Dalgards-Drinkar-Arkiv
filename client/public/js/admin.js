@@ -25,7 +25,7 @@ async function login() {
     });
 
     if (!res.ok) {
-      alert("Fel lösenord!");
+      showToast("Fel lösenord!", "error")
       return;
     }
 
