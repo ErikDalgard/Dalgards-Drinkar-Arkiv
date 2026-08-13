@@ -13,26 +13,42 @@ let toastTimeout = null;
 // Admin Login
 // ============================================
 
-function login() {
-  adminKey = document.getElementById("admin-key-input").value.trim();
+async function login() {
+  const inputKey = document.getElementById("admin-key-input").value.trim();
+  if (!inputKey) return;
 
-  if (!adminKey) return;
+  try {
+    // Fråga API:et om nyckeln är rätt
+    const res = await fetch("https://dalgardsdrinkar-api.dalgard-erik.workers.dev/admin/verify", {
+      method: "POST",
+      headers: { "X-Admin-Key": inputKey }
+    });
 
-  document.getElementById("key-section").style.display = "none";
-  document.getElementById("admin-panel").style.display = "block";
-  document.getElementById("admin-wrap").classList.add("logged-in");
+    if (!res.ok) {
+      alert("Fel lösenord!");
+      return;
+    }
 
-  loadDrinks();
+    // Om nyckeln var rätt: spara den och visa adminpanelen
+    adminKey = inputKey;
+    document.getElementById("key-section").style.display = "none";
+    document.getElementById("admin-panel").style.display = "block";
+    document.getElementById("admin-wrap").classList.add("logged-in");
+
+    loadDrinks();
+  } catch (err) {
+    alert("Kunde inte ansluta till servern.");
+  }
 }
-
+// Koppla knappen till login-funktionen
 document.getElementById("key-save").addEventListener("click", login);
 
+// Gör så att man kan trycka Enter i lösenordsfältet
 document.getElementById("admin-key-input").addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     login();
   }
 });
-
 
 document.getElementById("home-link").addEventListener("click", ()=>{
     window.location.href = "index.html";

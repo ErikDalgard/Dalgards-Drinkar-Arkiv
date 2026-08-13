@@ -121,6 +121,19 @@ export default {
 	});
 	}
 
+      // POST /admin/verify — validera om nyckeln är rätt
+    if (url.pathname === "/admin/verify" && request.method === "POST") {
+      if (!isAuthorized(request)) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
 
 
 
