@@ -2,8 +2,6 @@
 // Configuration & State
 // ============================================
 
-const API_BASE = "https://dalgardsdrinkar-api.dalgard-erik.workers.dev";
-const R2_BASE_URL = "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/";
 
 
 let adminKey = "";
@@ -21,7 +19,7 @@ async function login() {
 
   try {
     // Fråga API:et om nyckeln är rätt
-    const res = await fetch("https://dalgardsdrinkar-api.dalgard-erik.workers.dev/admin/verify", {
+    const res = await fetch(`${API_BASE}/admin/verify`, {
       method: "POST",
       headers: { "X-Admin-Key": inputKey }
     });

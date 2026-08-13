@@ -10,7 +10,7 @@ const PAGE_SIZE = 24;
 let selectedTheme = "";
 let selectedSpirits = new Set();
 
-const R2_BASE_URL = "https://pub-d688f8858d1642c38d005fae0305bb3c.r2.dev/";
+
 // ============================================
 // Spirits
 // ============================================
@@ -140,10 +140,7 @@ function themeHue(theme) {
 // ============================================
 
 async function init() {
-  const res = await fetch(
-    "https://dalgardsdrinkar-api.dalgard-erik.workers.dev/drinks"
-  );
-
+  const res = await fetch(`${API_BASE}/drinks`);
   allVideos = await res.json();
 
   const subtitle = document.getElementById("subtitle");
