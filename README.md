@@ -1,6 +1,6 @@
 # Dalgards Drinkar
 
-A project to collect and display my parents cocktail recipes, photos, and videos in one place.
+My parents run a Instagram account where they post a cocktail each Friday. This is a project to collect and display all of those recipes, photos, and videos in one place.
 
 **Live site:** [dalgardsdrinkar.dalgard-erik.workers.dev](https://dalgardsdrinkar.dalgard-erik.workers.dev/)
 
@@ -14,9 +14,8 @@ A project to collect and display my parents cocktail recipes, photos, and videos
 
 * **`api/` (Backend)**
   * A Cloudflare Worker connecting the frontend to a D1 database and R2 bucket for media storage.
-  * **Note:** Most of the files in this directory (`tsconfig`, `vitest`, `worker-configuration`, etc.) are auto-generated boilerplate created by Cloudflare's CLI. 
-
----
+  * Development and production use separate Cloudflare D1 databases and R2 buckets.
+  * **Note:** Most of the files in this directory (`tsconfig`, `vitest`, `worker-configuration`, etc.) are auto-generated boilerplate created by Cloudflare's CLI.
 
 ## Directory Structure
 
@@ -37,3 +36,4 @@ dalgardsdrinkar/
 │
 ├── .gitignore                   # Ignores node_modules, .wrangler, etc.
 └── README.md
+```
