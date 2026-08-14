@@ -325,8 +325,10 @@ document.getElementById("f-photo-file").addEventListener("change", (e) => {
 // ============================================
 
 async function uploadFile(file) {
+  const date = document.getElementById("f-date").value;
+
   const res = await fetch(
-    `${API_BASE}/upload?filename=${encodeURIComponent(file.name)}`,
+    `${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,
     {
       method: "POST",
       headers: {

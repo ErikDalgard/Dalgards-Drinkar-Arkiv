@@ -79,47 +79,115 @@ export default {
     }
 
     // DELETE /drinks/:id — ta bort, KRÄVER nyckel
-    const deleteMatch = url.pathname.match(/^\/drinks\/(\d+)$/);
-    if (deleteMatch && request.method === "DELETE") {
-      if (!isAuthorized(request)) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), {
-          status: 401,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        });
-      }
-      const id = deleteMatch[1];
-      await env.DB.prepare("DELETE FROM drinks WHERE id=?").bind(id).run();
-      return new Response(JSON.stringify({ success: true }), {
+   const deleteMatch = url.pathname.match(/^\/drinks\/(\d+)$/);
+
+  if (deleteMatch && request.method === "DELETE") {
+    if (!isAuthorized(request)) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
-	// POST /upload — laddar upp en fil (video eller bild) till R2, KRÄVER nyckel
-	if (url.pathname === "/upload" && request.method === "POST") {
-		if (!isAuthorized(request)) {
-			return new Response(JSON.stringify({ error: "Unauthorized" }), {
-			status: 401,
-			headers: { "Content-Type": "application/json", ...corsHeaders },
-			});
-		}
+    const id = deleteMatch[1];
 
-		const filename = url.searchParams.get("filename");
-		if (!filename) {
-			return new Response(JSON.stringify({ error: "Filnamn saknas i ?filename=" }), {
-			status: 400,
-			headers: { "Content-Type": "application/json", ...corsHeaders },
-			});
-		}
+    // Hämta drinken först så vi vet vilka mediafiler som hör till den
+    const drink = await env.DB
+      .prepare("SELECT photo_url, video_url FROM drinks WHERE id=?")
+      .bind(id)
+      .first();
 
-		// request.body är själva fil-bytesen, skickade rakt av (inte JSON)
-		await env.MEDIA.put(filename, request.body);
+    if (!drink) {
+      return new Response(JSON.stringify({ error: "Drink not found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
 
-		const publicUrl = filename;
-		return new Response(JSON.stringify({ url: publicUrl }), {
-			status: 201,
-			headers: { "Content-Type": "application/json", ...corsHeaders },
-	});
-	}
+    // Ta bort eventuell bild från R2
+    if (drink.photo_url) {
+      await env.MEDIA.delete(drink.photo_url);
+    }
+
+    // Ta bort eventuell video från R2
+    if (drink.video_url) {
+      await env.MEDIA.delete(drink.video_url);
+    }
+
+    // Ta bort drinken från D1
+    await env.DB
+      .prepare("DELETE FROM drinks WHERE id=?")
+      .bind(id)
+      .run();
+
+    return new Response(JSON.stringify({ success: true }), {
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+    // POST /upload — laddar upp en fil (video eller bild) till R2, KRÄVER nyckel
+  if (url.pathname === "/upload" && request.method === "POST") {
+    if (!isAuthorized(request)) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    const filename = url.searchParams.get("filename");
+    const date = url.searchParams.get("date");
+
+    if (!filename || !date) {
+      return new Response(
+        JSON.stringify({ error: "Filnamn och datum krävs" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    // YYYY-MM-DD → YYYYMMDD
+    const datePrefix = date.replace(/-/g, "");
+
+    // Behåll filens riktiga extension (.jpg, .heic, .mov, .mp4 osv.)
+    const extension = filename.includes(".")
+      ? "." + filename.split(".").pop()!.toLowerCase()
+      : "";
+
+    // Hitta första lediga filnamnet
+    let counter = 0;
+    let finalFilename: string;
+
+    while (true) {
+      finalFilename =
+        counter === 0
+          ? `${datePrefix}${extension}`
+          : `${datePrefix}_${counter}${extension}`;
+
+      const existing = await env.MEDIA.head(finalFilename);
+
+      if (!existing) {
+        break;
+      }
+
+      counter++;
+    }
+
+    // Ladda upp filen
+    await env.MEDIA.put(finalFilename, request.body);
+
+    return new Response(
+      JSON.stringify({ url: finalFilename }),
+      {
+        status: 201,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    );
+  }
 
       // POST /admin/verify — validera om nyckeln är rätt
     if (url.pathname === "/admin/verify" && request.method === "POST") {
