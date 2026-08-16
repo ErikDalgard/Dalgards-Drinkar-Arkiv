@@ -443,34 +443,35 @@ header p {
    ENDAST FÖR MOBIL (Skärmar under 650px)
    ========================================== */
 @media (max-width: 650px) {
-  @media (max-width: 650px) {
-    /* 1. Gör hela panelen till en grid med två lika stora kolumner */
-    .filter-panel {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      /* Samma gap som du har i datumen för perfekt linjering */
-      width: 100%;
-    }
-    /* 2. Se till att dropdowns fyller ut sin respektive kolumn */
-    .filter-group {
-      width: 100%;
-      max-width: none;
-    }
-    /* 3. Låt datum-containern sträcka sig över hela bredden (båda kolumnerna) */
-    .date-range {
-      grid-column: 1 / -1;
-      width: 100%;
-      /* Din befintliga grid för datumen ligger kvar här inuti */
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-    /* 4. Låt rensa-knappens container också sträcka sig över hela bredden */
-    .filter-actions {
-      grid-column: 1 / -1;
-      margin-top: 0.2rem;
-    }
+  .filter-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .filter-group {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+  .date-range {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .date-range .filter-group input[type="date"] {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.4rem;
+  }
+  .filter-actions {
+    grid-column: 1 / -1;
+    margin-top: 0.2rem;
   }
 }
 .sort-select {
