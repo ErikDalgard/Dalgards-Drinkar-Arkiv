@@ -175,8 +175,25 @@ export default {
     }
 
     // Ladda upp filen
-    await env.MEDIA.put(finalFilename, request.body);
+    try {
+      await env.MEDIA.put(finalFilename, request.body);
+    } catch (err) {
+      console.error("R2 upload failed:", err);
 
+      return new Response(
+        JSON.stringify({
+          error: "Uppladdningen till lagringen misslyckades",
+          details: err instanceof Error ? err.message : String(err),
+        }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        }
+      );
+    }
     return new Response(
       JSON.stringify({ url: finalFilename }),
       {

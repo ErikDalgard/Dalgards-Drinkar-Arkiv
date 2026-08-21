@@ -188,15 +188,17 @@ function showToast(message, type = "success") {
 
 function setStatus(message) {
   const statusEl = document.getElementById("status-msg");
+  const statusText = document.getElementById("status-text");
 
-  statusEl.textContent = message;
-  statusEl.style.display = "block";
+  statusText.textContent = message;
+  statusEl.style.display = "flex";
 }
 
 function clearStatus() {
   const statusEl = document.getElementById("status-msg");
+  const statusText = document.getElementById("status-text");
 
-  statusEl.textContent = "";
+  statusText.textContent = "";
   statusEl.style.display = "none";
 }
 

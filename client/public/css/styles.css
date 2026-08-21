@@ -1126,8 +1126,18 @@ header p {
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+
+  /* Viktigt för längre felmeddelanden */
+  box-sizing: border-box;
+  max-width: 500px;
+  text-align: center;
+  line-height: 1.4;
 }
+
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
@@ -1141,6 +1151,29 @@ header p {
   background: #6b2626;
   color: #fce8e8;
   border: 1px solid #a34848;
+}
+
+
+/* Mobil */
+@media (max-width: 600px) {
+  .toast {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+
+    width: auto;
+    max-width: none;
+
+    transform: translateY(-20px);
+
+    padding: 0.8rem 1rem;
+
+    font-size: 0.95rem;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+  }
 }
 .required-label::after {
   content: ' *';
@@ -1200,5 +1233,29 @@ header p {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+}
+
+.upload-status {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
