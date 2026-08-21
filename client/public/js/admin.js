@@ -186,6 +186,20 @@ function showToast(message, type = "success") {
   }, 3000);
 }
 
+function setStatus(message) {
+  const statusEl = document.getElementById("status-msg");
+
+  statusEl.textContent = message;
+  statusEl.style.display = "block";
+}
+
+function clearStatus() {
+  const statusEl = document.getElementById("status-msg");
+
+  statusEl.textContent = "";
+  statusEl.style.display = "none";
+}
+
 
 // ============================================
 // Form Helpers
@@ -324,28 +338,49 @@ document.getElementById("f-photo-file").addEventListener("change", (e) => {
 // File Upload
 // ============================================
 
-async function uploadFile(file) {
+async function uploadFile(file, type) {
   const date = document.getElementById("f-date").value;
 
-  const res = await fetch(
-    `${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,
-    {
-      method: "POST",
-      headers: {
-        "X-Admin-Key": adminKey,
-      },
-      body: file,
+  try{
+    const res = await fetch(
+      `${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,
+      {
+        method: "POST",
+        headers: {
+          "X-Admin-Key": adminKey,
+        },
+        body: file,
+      }
+    );
+
+    if (!res.ok) {
+      let details = "";
+
+      try {
+        const data = await res.json();
+        details = data.message || data.error || data.details || "";
+      } catch {
+        details = await res.text();
+      }
+
+      throw new Error(
+        `${type}-uppladdning misslyckades (${res.status})${
+          details ? `: ${details}` : ""
+        }`
+      );
     }
-  );
+    const data = await res.json();
+    if (!data.url){
+      throw new Error(`${type}-uppladdningen lyckades men servern returnerade ingen fil-URL.`)
+    }
 
-  if (!res.ok) {
-    throw new Error("Uppladdning misslyckades");
+    return data.url;
   }
-
-  const data = await res.json();
-
-  return data.url;
-}
+  catch (err){
+    console.error(`Upload error (${type}):`, err);
+    throw err;
+  }
+  }
 
 
 // ============================================
@@ -363,8 +398,12 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
   }
 
   const statusEl = document.getElementById("status-msg");
+  const submitBtn = document.getElementById("submit-btn");
+  const editSubmitBtn = document.getElementById("edit-submit-btn");
 
   try {
+    submitBtn.disabled = true;
+    editSubmitBtn.disabled = true;
     const videoFile =
       document.getElementById("f-video-file").files[0];
 
@@ -378,11 +417,15 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
       document.getElementById("f-photo-url").value;
 
     if (videoFile) {
-      videoUrl = await uploadFile(videoFile);
+      setStatus("Laddar upp video...");
+      videoUrl = await uploadFile(videoFile, "Video");
+      setStatus("Video uppladdad ✓");
     }
 
     if (photoFile) {
-      photoUrl = await uploadFile(photoFile);
+      setStatus("Laddar upp bild...");
+      photoUrl = await uploadFile(photoFile, "Bild");
+      setStatus("Bild uppladdad ✓");
     }
 
     const theme =
@@ -403,6 +446,7 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
     const id = document.getElementById("f-id").value;
     const isEdit = !!id;
 
+    setStatus("Sparar drinken...");
     const res = await fetch(
       `${API_BASE}/drinks${isEdit ? "/" + id : ""}`,
       {
@@ -444,8 +488,17 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
 
     loadDrinks();
   } catch (err) {
-    showToast("Fel: " + err.message, "error");
-    statusEl.textContent = "";
+    console.error("Save failed:", err);
+
+      clearStatus();
+
+      showToast(
+        "Fel: " + (err.message || "Något gick fel"),
+        "error");
+  }
+  finally {
+    submitBtn.disabled = false;
+    editSubmitBtn.disabled = false;
   }
 });
 
