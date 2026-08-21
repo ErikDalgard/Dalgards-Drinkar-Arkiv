@@ -1,5 +1,9 @@
 export default {
   async fetch(request: Request, env: any) {
+      console.log("WORKER VERSION UPLOAD TEST", {
+          method: request.method,
+          path: new URL(request.url).pathname
+        });
     const url = new URL(request.url);
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
@@ -127,6 +131,12 @@ export default {
 
     // POST /upload — laddar upp en fil (video eller bild) till R2, KRÄVER nyckel
   if (url.pathname === "/upload" && request.method === "POST") {
+      console.log("=== UPLOAD REQUEST RECEIVED ===", {
+        filename: url.searchParams.get("filename"),
+        date: url.searchParams.get("date"),
+        contentType: request.headers.get("Content-Type"),
+        contentLength: request.headers.get("Content-Length"),
+      });
     if (!isAuthorized(request)) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
@@ -174,11 +184,20 @@ export default {
       counter++;
     }
 
+    console.log("R2 upload started:", {filename, date, finalFilename,});
+
     // Ladda upp filen
     try {
       await env.MEDIA.put(finalFilename, request.body);
+      console.log("R2 upload successful:", finalFilename);
+
     } catch (err) {
-      console.error("R2 upload failed:", err);
+        console.error("R2 upload failed:", {
+          filename,
+          finalFilename,
+          date,
+          error: err instanceof Error ? err.message : String(err),
+        });
 
       return new Response(
         JSON.stringify({
@@ -205,6 +224,109 @@ export default {
       }
     );
   }
+
+  // VIDEO MULTIPART
+  if (url.pathname === "/upload/start" && request.method === "POST") {
+    if (!isAuthorized(request)) return new Response(JSON.stringify({error:"Unauthorized"}),{status:401,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    const filename=url.searchParams.get("filename");
+    const date=url.searchParams.get("date");
+    if (!filename||!date) return new Response(JSON.stringify({error:"Filnamn och datum krävs"}),{status:400,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    const prefix=date.replace(/-/g,"");
+    const ext=filename.includes(".")?"."+filename.split(".").pop()!.toLowerCase():"";
+    let counter=0, key="";
+
+    while (true) {
+      key=counter===0?`${prefix}${ext}`:`${prefix}_${counter}${ext}`;
+      if (!(await env.MEDIA.head(key))) break;
+      counter++;
+    }
+
+    try {
+      const upload=await env.MEDIA.createMultipartUpload(key,{
+        httpMetadata:{contentType:filename.toLowerCase().endsWith(".mov")?"video/quicktime":"video/mp4"}
+      });
+      console.log("MULTIPART STARTED",{key,uploadId:upload.uploadId});
+      return new Response(JSON.stringify({key,uploadId:upload.uploadId}),{status:201,headers:{"Content-Type":"application/json",...corsHeaders}});
+    } catch(err) {
+        console.error("MULTIPART START FAILED", {
+          error: String(err),
+          name: err instanceof Error ? err.name : undefined,
+          message: err instanceof Error ? err.message : undefined,
+          stack: err instanceof Error ? err.stack : undefined,
+          key,
+          filename,
+          date,
+        });
+        return new Response(JSON.stringify({error:"Kunde inte starta videouppladdningen",details:String(err)}),{status:500,headers:{"Content-Type":"application/json",...corsHeaders}});
+    }
+  }
+
+  if (url.pathname === "/upload/part" && request.method === "PUT") {
+    if (!isAuthorized(request)) return new Response(JSON.stringify({error:"Unauthorized"}),{status:401,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    const key=url.searchParams.get("key");
+    const uploadId=url.searchParams.get("uploadId");
+    const partNumber=Number(url.searchParams.get("partNumber"));
+
+    if (!key||!uploadId||!partNumber||!request.body) return new Response(JSON.stringify({error:"Ogiltiga upload-parametrar"}),{status:400,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    try {
+      const upload=env.MEDIA.resumeMultipartUpload(key,uploadId);
+      const part=await upload.uploadPart(partNumber,request.body);
+      console.log("MULTIPART PART OK",{partNumber,etag:part.etag});
+      return new Response(JSON.stringify(part),{headers:{"Content-Type":"application/json",...corsHeaders}});
+    } catch(err) {
+      console.error("MULTIPART PART FAILED",{partNumber,error:String(err)});
+      return new Response(JSON.stringify({error:"Deluppladdning misslyckades",details:String(err)}),{status:500,headers:{"Content-Type":"application/json",...corsHeaders}});
+    }
+  }
+
+  if (url.pathname === "/upload/complete" && request.method === "POST") {
+    if (!isAuthorized(request)) return new Response(JSON.stringify({error:"Unauthorized"}),{status:401,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    const key=url.searchParams.get("key");
+    const uploadId=url.searchParams.get("uploadId");
+    if (!key||!uploadId) return new Response(JSON.stringify({error:"Upload-parametrar saknas"}),{status:400,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    try {
+      const {parts}=await request.json<{parts:R2UploadedPart[]}>();
+      const upload=env.MEDIA.resumeMultipartUpload(key,uploadId);
+      await upload.complete(parts);
+
+      const verified=await env.MEDIA.head(key);
+      console.log("!!! MULTIPART FILE VERIFIED !!!",{
+        key:verified?.key,
+        size:verified?.size,
+        etag:verified?.etag,
+        contentType:verified?.httpMetadata?.contentType
+      });
+
+      return new Response(JSON.stringify({url:key}),{status:201,headers:{"Content-Type":"application/json",...corsHeaders}});
+    } catch(err) {
+      console.error("MULTIPART COMPLETE FAILED",err);
+      return new Response(JSON.stringify({error:"Kunde inte slutföra videon",details:String(err)}),{status:500,headers:{"Content-Type":"application/json",...corsHeaders}});
+    }
+  }
+
+  if (url.pathname === "/upload/abort" && request.method === "POST") {
+    if (!isAuthorized(request)) return new Response(JSON.stringify({error:"Unauthorized"}),{status:401,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    const key=url.searchParams.get("key");
+    const uploadId=url.searchParams.get("uploadId");
+    if (!key||!uploadId) return new Response(JSON.stringify({error:"Upload-parametrar saknas"}),{status:400,headers:{"Content-Type":"application/json",...corsHeaders}});
+
+    try {
+      await env.MEDIA.resumeMultipartUpload(key,uploadId).abort();
+      console.log("MULTIPART ABORTED",{key,uploadId});
+      return new Response(null,{status:204,headers:corsHeaders});
+    } catch(err) {
+      console.error("MULTIPART ABORT FAILED",err);
+      return new Response(JSON.stringify({error:String(err)}),{status:500,headers:{"Content-Type":"application/json",...corsHeaders}});
+    }
+  }
+
 
       // POST /admin/verify — validera om nyckeln är rätt
     if (url.pathname === "/admin/verify" && request.method === "POST") {

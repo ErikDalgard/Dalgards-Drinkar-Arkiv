@@ -324,15 +324,31 @@ function validateForm() {
 // ============================================
 
 document.getElementById("f-video-file").addEventListener("change", (e) => {
-  const name = e.target.files[0]?.name || "Ingen fil vald";
+  const file = e.target.files[0];
 
-  document.getElementById("f-video-filename").textContent = name;
+  console.log("VIDEO FILE SELECTED:", {
+    exists: !!file,
+    name: file?.name,
+    size: file?.size,
+    type: file?.type,
+  });
+
+  document.getElementById("f-video-filename").textContent =
+    file?.name || "Ingen fil vald";
 });
 
 document.getElementById("f-photo-file").addEventListener("change", (e) => {
-  const name = e.target.files[0]?.name || "Ingen fil vald";
+  const file = e.target.files[0];
 
-  document.getElementById("f-photo-filename").textContent = name;
+  console.log("PHOTO FILE SELECTED:", {
+    exists: !!file,
+    name: file?.name,
+    size: file?.size,
+    type: file?.type,
+  });
+
+  document.getElementById("f-photo-filename").textContent =
+    file?.name || "Ingen fil vald";
 });
 
 
@@ -340,50 +356,114 @@ document.getElementById("f-photo-file").addEventListener("change", (e) => {
 // File Upload
 // ============================================
 
-async function uploadFile(file, type) {
-  const date = document.getElementById("f-date").value;
+async function uploadFile(file,type) {
+  const date=document.getElementById("f-date").value;
 
-  try{
-    const res = await fetch(
-      `${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,
-      {
-        method: "POST",
-        headers: {
-          "X-Admin-Key": adminKey,
-        },
-        body: file,
-      }
-    );
-
-    if (!res.ok) {
-      let details = "";
-
-      try {
-        const data = await res.json();
-        details = data.message || data.error || data.details || "";
-      } catch {
-        details = await res.text();
-      }
-
-      throw new Error(
-        `${type}-uppladdning misslyckades (${res.status})${
-          details ? `: ${details}` : ""
-        }`
-      );
-    }
-    const data = await res.json();
-    if (!data.url){
-      throw new Error(`${type}-uppladdningen lyckades men servern returnerade ingen fil-URL.`)
-    }
-
+  // Bilder använder vanlig upload
+  if (type!=="Video") {
+    const res=await fetch(`${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,{
+      method:"POST",
+      headers:{"X-Admin-Key":adminKey,"Content-Type":file.type||"application/octet-stream"},
+      body:file
+    });
+    if(!res.ok) throw new Error(`${type}-uppladdning misslyckades (${res.status}): ${await res.text()}`);
+    const data=await res.json();
+    if(!data.url) throw new Error(`${type}-uppladdningen returnerade ingen URL.`);
     return data.url;
   }
-  catch (err){
-    console.error(`Upload error (${type}):`, err);
-    throw err;
-  }
+
+  // Video: multipart, 10 MB per del
+  const CHUNK_SIZE=10*1024*1024;
+  const totalChunks=Math.ceil(file.size/CHUNK_SIZE);
+
+  console.log("=== MULTIPART VIDEO START ===",{
+    name:file.name,
+    sizeMB:(file.size/1024/1024).toFixed(2),
+    chunks:totalChunks
+  });
+
+  let startRes;
+  try {
+    startRes=await fetch(`${API_BASE}/upload/start?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,{
+      method:"POST",
+      headers:{"X-Admin-Key":adminKey}
+    });
+  } catch(err) {
+    throw new Error("Kunde inte starta videouppladdningen. Kontrollera internetanslutningen.");
   }
 
+  if(!startRes.ok) throw new Error(`Kunde inte starta videouppladdningen (${startRes.status}): ${await startRes.text()}`);
+
+  const {key,uploadId}=await startRes.json();
+  const parts=[];
+
+  try {
+    for(let i=0;i<totalChunks;i++) {
+      const partNumber=i+1;
+      const chunk=file.slice(i*CHUNK_SIZE,Math.min((i+1)*CHUNK_SIZE,file.size));
+      const progress=Math.round(partNumber/totalChunks*100);
+      setStatus(`Laddar upp video... ${progress}%`);
+      let uploaded=null;
+      let lastError=null;
+      for(let attempt=1;attempt<=3;attempt++) {
+        try {
+          console.log("Uploading part",{partNumber,totalChunks,attempt});
+          const res=await fetch(`${API_BASE}/upload/part?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}&partNumber=${partNumber}`,{
+            method:"PUT",
+            headers:{
+              "X-Admin-Key":adminKey,
+              "Content-Type":"application/octet-stream"
+            },
+            body:chunk
+          });
+
+          if(!res.ok) throw new Error(`${res.status}: ${await res.text()}`);
+          uploaded=await res.json();
+          break;
+        } catch(err) {
+          lastError=err;
+          console.error(`Part ${partNumber} attempt ${attempt} failed`,err);
+          if(attempt<3) await new Promise(r=>setTimeout(r,1000*attempt));
+        }
+      }
+
+      if(!uploaded) throw new Error(`Del ${partNumber}/${totalChunks} misslyckades: ${lastError?.message||"okänt fel"}`);
+      parts.push(uploaded);
+    }
+
+    setStatus("Slutför videouppladdningen...");
+    const completeRes=await fetch(`${API_BASE}/upload/complete?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}`,{
+      method:"POST",
+      headers:{
+        "X-Admin-Key":adminKey,
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({parts})
+    });
+
+    if(!completeRes.ok) throw new Error(`Kunde inte slutföra videon (${completeRes.status}): ${await completeRes.text()}`);
+
+    const data=await completeRes.json();
+
+    console.log("=== MULTIPART VIDEO COMPLETE ===",data);
+
+    return data.url;
+
+  } catch(err) {
+    console.error("=== MULTIPART VIDEO FAILED ===",err);
+
+    try {
+      await fetch(`${API_BASE}/upload/abort?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}`,{
+        method:"POST",
+        headers:{"X-Admin-Key":adminKey}
+      });
+    } catch(abortErr) {
+      console.error("Abort failed",abortErr);
+    }
+
+    throw err;
+  }
+}
 
 // ============================================
 // Add / Edit Drink
@@ -391,6 +471,7 @@ async function uploadFile(file, type) {
 
 document.getElementById("drink-form").addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("=== FORM SUBMIT STARTED ===");
 
   const missing = validateForm();
 
@@ -418,13 +499,22 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
     let photoUrl =
       document.getElementById("f-photo-url").value;
 
+      console.log("VIDEO FILE SELECTED:", {
+        name: videoFile?.name,
+        size: videoFile?.size,
+        type: videoFile?.type
+      });
+
+
     if (videoFile) {
+      console.log("ABOUT TO CALL uploadFile() on video file.");
       setStatus("Laddar upp video...");
       videoUrl = await uploadFile(videoFile, "Video");
       setStatus("Video uppladdad ✓");
     }
 
     if (photoFile) {
+      console.log("ABOUT TO CALL uploadFile() on photo file.");
       setStatus("Laddar upp bild...");
       photoUrl = await uploadFile(photoFile, "Bild");
       setStatus("Bild uppladdad ✓");
