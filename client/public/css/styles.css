@@ -221,6 +221,14 @@ header p {
   overflow: hidden;
   border: 1px solid var(--border);
 }
+
+.modal .note {
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: initial;
+  overflow: visible;
+}
+
 .modal video {
   width: 100%;
   max-height: 50vh;
