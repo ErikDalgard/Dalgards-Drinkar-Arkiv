@@ -557,7 +557,7 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
 
     showToast(isEdit ? "Ändrad!" : "Tillagd!", "success");
 
-    statusEl.textContent = "";
+    clearStatus();
 
     clearForm();
     if (isEdit) {
@@ -618,7 +618,6 @@ document.getElementById("delete-btn").addEventListener("click", async () => {
   if (res.ok) {
     showToast("Raderad", "error");
 
-    document.getElementById("status-msg").textContent = "";
     clearForm();
     loadDrinks();
 
