@@ -562,9 +562,9 @@ function render() {
     (!dateTo || v.date <= dateTo) &&
     (
       !q ||
-      `${v.drink} ${v.note} ${v.theme} ${v.date}`
+      `${v.drink} ${v.note} ${v.theme} ${v.date} ${v.ingredients} ${v.steps}` 
         .toLowerCase()
-        .includes(q)
+        .includes(q.toLowerCase())
     )
   );
 
