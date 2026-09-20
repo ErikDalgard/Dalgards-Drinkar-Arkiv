@@ -140,8 +140,16 @@ function themeHue(theme) {
 // ============================================
 
 async function init() {
-  const res = await fetch(`${API_BASE}/drinks`);
-  allVideos = await res.json();
+  try{
+    const res = await fetch(`${API_BASE}/drinks`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    allVideos = await res.json();
+  }
+  catch (err){
+    console.error(err);
+    showError("Kunde inte ladda urkällan. Försök igen om en stund!");
+    return
+  }
 
   const subtitle = document.getElementById("subtitle");
 
