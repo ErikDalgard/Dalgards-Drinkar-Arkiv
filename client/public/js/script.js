@@ -255,6 +255,14 @@ async function init() {
       }
     });
 
+  document
+  .getElementById("modal-theme")
+  .addEventListener("click", () => {
+    const theme = document.getElementById("modal-theme").textContent.trim();
+    closeModal();
+    filterByTheme(theme);
+  });
+
   // Filter panel
   document
     .getElementById("filter-toggle")
