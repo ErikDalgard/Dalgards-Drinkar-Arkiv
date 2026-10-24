@@ -1278,3 +1278,273 @@ header p {
   }
 }
 
+/* Cards: photo and name first, supporting details underneath. */
+.card {
+  position: relative;
+}
+.card-media {
+  aspect-ratio: 5 / 4;
+  background: #2a1d12;
+}
+.card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-play {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding-left: 2px;
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 50%;
+  background: rgba(30,20,12,0.55);
+  color: var(--surface);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+.card-body {
+  padding: 0.95rem 1rem 1.1rem;
+}
+.card-drink {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  margin: 0 0 0.6rem;
+  overflow-wrap: anywhere;
+}
+.card-open {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.card-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 10px;
+}
+.card-open:focus-visible {
+  outline: none;
+}
+.card-open:focus-visible::after {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+}
+.card-theme {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+  max-width: calc(100% - 1.2rem);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: hsl(var(--theme-hue, 30), 45%, 38%);
+  padding: 0.35rem 0.65rem;
+  color: hsl(var(--theme-hue, 30), 20%, 95%);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.card-theme:hover {
+  background: hsl(var(--theme-hue, 30), 45%, 32%);
+}
+.card .date {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+.card .note {
+  margin-top: 0.65rem;
+  -webkit-line-clamp: 2;
+}
+.card .note:empty {
+  display: none;
+}
+
+/* Native dialog provides keyboard focus containment and an inert background. */
+dialog.modal-backdrop {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  color: var(--text);
+}
+dialog.modal-backdrop::backdrop {
+  background: transparent;
+}
+.modal {
+  position: relative;
+  max-width: 900px;
+}
+.modal-scroll {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+.modal-media {
+  background: #21190f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal video {
+  max-height: 80vh;
+}
+.modal-info {
+  min-width: 0;
+  padding: 2.5rem 1.75rem 1.75rem;
+  overflow-wrap: anywhere;
+}
+.modal-info h2 {
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+.modal .tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.modal #modal-theme {
+  border: 0;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+}
+.modal #modal-theme[hidden] {
+  display: none;
+}
+.modal .date {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+.modal .note {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.modal .note:empty {
+  display: none;
+}
+.modal .recipe-block {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+}
+.modal .recipe-ingredients,
+.modal .recipe-steps {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.modal .recipe-steps li + li {
+  margin-top: 0.5rem;
+}
+.modal .recipe-heading {
+  margin-top: 1rem;
+}
+.modal .taste-profile {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+}
+.modal .modal-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border-color: var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  font: 1.8rem/1 sans-serif;
+  box-shadow: 0 2px 10px rgba(30,20,12,0.15);
+}
+.card-theme:focus-visible,
+.modal button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  dialog.modal-backdrop {
+    padding: 0.75rem;
+  }
+  .modal {
+    max-width: 480px;
+    max-height: 92dvh;
+  }
+  .modal-scroll {
+    display: block;
+    max-height: 92dvh;
+  }
+  .modal video {
+    max-height: 45dvh;
+  }
+  .modal-info {
+    padding: 1.25rem;
+  }
+}
+
+/* More generous reading sizes for the desktop recipe layout. */
+@media (min-width: 701px) {
+  .modal {
+    max-width: 1040px;
+  }
+  .modal-scroll {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+  .modal-info h2 {
+    font-size: 2.2rem;
+  }
+  .modal .note,
+  .modal .recipe-ingredients,
+  .modal .recipe-steps {
+    font-size: 1.25rem;
+    line-height: 1.65;
+  }
+  .modal .recipe-ingredients li + li {
+    margin-top: 0.25rem;
+  }
+  .modal .recipe-group-label {
+    font-size: 1.6rem;
+  }
+  .modal .recipe-heading {
+    font-size: 0.875rem;
+  }
+  .modal .date {
+    font-size: 1.2rem;
+  }
+  .modal .taste-label {
+    font-size: 1.1rem;
+  }
+  .modal #modal-theme {
+    font-size: 0.9rem;
+    padding: 0.45rem 0.8rem;
+  }
+}

@@ -243,9 +243,10 @@ async function init() {
     .getElementById("modal-close")
     .addEventListener("click", closeModal);
 
-  document
-    .getElementById("recipe-toggle")
-    .addEventListener("click", toggleRecipe);
+  document.getElementById("modal-backdrop").addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeModal();
+  });
 
   document
     .getElementById("modal-backdrop")
@@ -708,60 +709,46 @@ function renderPagination(totalPages) {
 // ============================================
 
 function makeCard(v) {
-  const card = document.createElement("div");
-
+  const card = document.createElement("article");
   card.className = "card";
-
-  const hue = themeHue(v.theme || "");
-
   card.innerHTML = `
-  <div class="card-media">
-      <video
-        src="${R2_BASE_URL}${v.url}"
-        poster="${R2_BASE_URL}${v.photo}"
-        preload="metadata"
-        muted
-      ></video>
-
-      <span
-        class="theme-tag"
-        style="
-          background:hsl(${hue},45%,38%);
-          color:hsl(${hue},20%,95%);
-        "
-      >
-
-        ${v.theme.trim() ? escapeHtml(v.theme) : ""}
-      </span>
+    <div class="card-media">
+        ${v.theme?.trim() ? `<button type="button" class="card-theme">${escapeHtml(v.theme)}</button>` : ""}
+      <span class="card-play" aria-hidden="true">▶</span>
     </div>
-
     <div class="card-body">
-      <p class="card-drink">
-        ${escapeHtml(v.drink)}
-      </p>
+      <h2 class="card-drink"><button type="button" class="card-open">${escapeHtml(v.drink)}</button></h2>
+      <div class="card-meta">
+        <time class="date"></time>
+      </div>
+      <p class="note">${escapeHtml(v.note)}</p>
+    </div>`;
 
-      <span class="date">
-        ${v.date}
-      </span>
-
-      <p class="note">
-        ${escapeHtml(v.note)}
-      </p>
-    </div>
-  `;
-
-  card.addEventListener("click", () => {
-    openModal(v);
-  });
-
-  card
-    .querySelector(".theme-tag")
-    .addEventListener("click", (e) => {
-      e.stopPropagation();
-      filterByTheme(v.theme);
-    });
-
+  if (v.photo) {
+    const image = document.createElement("img");
+    image.src = `${R2_BASE_URL}${v.photo}`;
+    image.alt = "";
+    image.loading = "lazy";
+    image.decoding = "async";
+    card.querySelector(".card-media").prepend(image);
+  }
+  const date = card.querySelector("time");
+  date.dateTime = v.date;
+  date.textContent = formatDrinkDate(v.date);
+  card.querySelector(".card-open").addEventListener("click", () => openModal(v));
+  const themeButton = card.querySelector(".card-theme");
+  if (themeButton) {
+    themeButton.style.setProperty("--theme-hue", themeHue(v.theme));
+    themeButton.addEventListener("click", () => filterByTheme(v.theme));
+  }
   return card;
+}
+
+function formatDrinkDate(value) {
+  const date = new Date(`${value}T12:00:00`);
+  return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString("sv-SE", {
+    day: "numeric", month: "long", year: "numeric",
+  });
 }
 
 
@@ -935,9 +922,16 @@ function renderRecipeGroups(
 // Modal
 // ============================================
 
+let modalTrigger = null;
+let previousBodyOverflow = "";
+
 function openModal(v) {
+  modalTrigger = document.activeElement;
+  previousBodyOverflow = document.body.style.overflow;
+  document.body.style.overflow = "hidden";
 
   document.getElementById("modal-video").src = `${R2_BASE_URL}${v.url}`;
+  document.getElementById("modal-video").poster = v.photo ? `${R2_BASE_URL}${v.photo}` : "";
   document.getElementById("modal-drink").textContent =
     v.drink;
 
@@ -947,6 +941,7 @@ function openModal(v) {
   const hue = themeHue(v.theme || "");
 
   modalTheme.textContent = v.theme;
+  modalTheme.hidden = !v.theme?.trim();
 
   modalTheme.style.background =
     `hsl(${hue},65%,35%)`;
@@ -955,7 +950,7 @@ function openModal(v) {
     `hsl(${hue},20%,95%)`;
 
   document.getElementById("modal-date").textContent =
-    v.date;
+    formatDrinkDate(v.date);
 
   document.getElementById("modal-note").textContent =
     v.note;
@@ -965,18 +960,7 @@ function openModal(v) {
     (v.steps && v.steps.trim())
   );
 
-  const toggle =
-    document.getElementById("recipe-toggle");
-
-  const block =
-    document.getElementById("recipe-block");
-
-  toggle.style.display =
-    hasRecipe ? "inline-block" : "none";
-
-  toggle.textContent = "Visa recept";
-
-  block.style.display = "none";
+  document.getElementById("recipe-block").style.display = hasRecipe ? "block" : "none";
 
   renderRecipeGroups(
     v.ingredients,
@@ -989,23 +973,9 @@ function openModal(v) {
   document
     .getElementById("modal-backdrop")
     .classList.add("open");
-}
-
-function toggleRecipe() {
-  const block =
-    document.getElementById("recipe-block");
-
-  const toggle =
-    document.getElementById("recipe-toggle");
-
-  const showing =
-    block.style.display !== "none";
-
-  block.style.display =
-    showing ? "none" : "block";
-
-  toggle.textContent =
-    showing ? "Visa recept" : "Dölj recept";
+  document.getElementById("modal-backdrop").showModal();
+  document.querySelector(".modal-scroll").scrollTop = 0;
+  document.getElementById("modal-close").focus();
 }
 
 function closeModal() {
@@ -1018,6 +988,9 @@ function closeModal() {
   document
     .getElementById("modal-backdrop")
     .classList.remove("open");
+  document.getElementById("modal-backdrop").close();
+  document.body.style.overflow = previousBodyOverflow;
+  if (modalTrigger?.isConnected) modalTrigger.focus();
 }
 
 

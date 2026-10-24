@@ -120,34 +120,29 @@
   </div>
 </div>
 
-<div class="modal-backdrop" id="modal-backdrop">
+<dialog class="modal-backdrop" id="modal-backdrop" aria-labelledby="modal-drink">
   <div class="modal">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Stäng drink">×</button>
     <div class="modal-scroll">
-
-    <video id="modal-video" controls playsinline></video>
-    <div class="modal-info">
-      <h2 id="modal-drink"></h2>
-      <div class="tag-row">
-        <span class="theme-tag" id="modal-theme"></span>
-        <span class="date" id="modal-date"></span>
-      </div>
-      <p class="note" id="modal-note"></p>
-      <div class="taste-profile" id="taste-profile" style="display:none;">
-        <p class="recipe-heading">Smakprofil</p>
-        <div class="taste-rows" id="taste-rows"></div>
-      </div>
-<div class="recipe-block" id="recipe-block" style="display:none;">
-  <div id="recipe-groups"></div>
-</div>     
-      <div class="modal-actions">
-        <button class="recipe-toggle" id="recipe-toggle" style="display:none;">Visa recept</button>
-        <button class="modal-close" id="modal-close">Stäng</button>
+      <div class="modal-media"><video id="modal-video" controls playsinline preload="metadata"></video></div>
+      <div class="modal-info">
+        <h2 id="modal-drink"></h2>
+        <div class="tag-row">
+          <button type="button" class="theme-tag" id="modal-theme"></button>
+          <span class="date" id="modal-date"></span>
+        </div>
+        <p class="note" id="modal-note"></p>
+        <div class="recipe-block" id="recipe-block" style="display:none;">
+          <div id="recipe-groups"></div>
+        </div>
+        <div class="taste-profile" id="taste-profile" style="display:none;">
+          <p class="recipe-heading">Smakprofil</p>
+          <div class="taste-rows" id="taste-rows"></div>
+        </div>
       </div>
     </div>
-        </div>
-
   </div>
-</div>
+</dialog>
 <footer class="site-footer">
   <div class="footer-content">
     <div class="footer-text">
