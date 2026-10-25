@@ -1673,7 +1673,7 @@ dialog.modal-backdrop::backdrop {
   min-width: 0;
   width: 100%;
   min-height: 48px;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 1.4;
 }
 .controls #filter-toggle {
@@ -1695,7 +1695,7 @@ dialog.modal-backdrop::backdrop {
 }
 .menu .sort-select {
   min-height: 48px;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 @media (max-width: 650px) {
   .controls,
@@ -1720,5 +1720,104 @@ dialog.modal-backdrop::backdrop {
 @media (max-width: 360px) {
   .controls {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.drink-share {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin: 0.8rem 0 1rem;
+  color: var(--accent);
+}
+.copy-drink-link {
+  padding: 0.45rem 0.8rem;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.copy-drink-link:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+#drink-link-fallback {
+  width: 100%;
+  min-width: 0;
+  padding: 0.6rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.drink-link-notice {
+  max-width: 1052px;
+  margin: 1rem auto;
+  padding: 1rem 1.5rem;
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* An invalid shared link has its own clear recovery state. */
+.drink-not-found .controls,
+.drink-not-found .filter-panel,
+.drink-not-found .active-filters,
+.drink-not-found .menu,
+.drink-not-found .grid,
+.drink-not-found .empty,
+.drink-not-found .pagination {
+  display: none;
+}
+.drink-link-notice {
+  max-width: 650px;
+  margin: 3rem auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.drink-link-notice[hidden] {
+  display: none;
+}
+.drink-link-notice h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1.2;
+}
+.drink-link-notice p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.drink-link-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.drink-link-home:hover {
+  background: var(--text);
+}
+.drink-link-home:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .drink-link-notice {
+    margin: 2rem 1rem;
   }
 }

@@ -93,6 +93,10 @@
       <option value="asc">Äldst först</option>
     </select>
 </div>
+<section class="drink-link-notice" id="drink-link-notice" aria-labelledby="drink-not-found-title" hidden>
+  <h2 id="drink-not-found-title" tabindex="-1">Drinken finns ej i Urkällan...</h2>
+  <a class="drink-link-home" id="drink-link-home" href="./">Tillbaka</a>
+</section>
 <div class="grid" id="grid"></div>
 <p class="empty" id="empty" style="display:none;">Inga videos matchar sökningen.</p>
 <div class="pagination" id="pagination"></div>
@@ -133,6 +137,11 @@
         <div class="tag-row">
           <button type="button" class="theme-tag" id="modal-theme"></button>
           <span class="date" id="modal-date"></span>
+        </div>
+        <div class="drink-share">
+          <button type="button" id="copy-drink-link" class="copy-drink-link">Kopiera länk</button>
+          <span id="copy-link-status" role="status" aria-live="polite"></span>
+          <input id="drink-link-fallback" type="text" readonly aria-label="Länk till drinken – kopiera manuellt" hidden>
         </div>
         <p class="note" id="modal-note"></p>
         <div class="recipe-block" id="recipe-block" style="display:none;">

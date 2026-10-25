@@ -1,12 +1,15 @@
 import { themeHue } from "./themes.js";
 import { formatDrinkDate } from "./utils.js";
 import { renderRecipeGroups, renderTasteProfile } from "./recipes.js";
-export function createDrinkDialog(onThemeSelect) {
+export function createDrinkDialog(onThemeSelect, onClose = () => {}) {
     let modalTrigger = null;
     let previousBodyOverflow = "";
     function openModal(v) {
-        modalTrigger = document.activeElement;
-        previousBodyOverflow = document.body.style.overflow;
+        const dialog = document.getElementById("modal-backdrop");
+        if (!dialog.open) {
+            modalTrigger = document.activeElement;
+            previousBodyOverflow = document.body.style.overflow;
+        }
         document.body.style.overflow = "hidden";
         document.getElementById("modal-video").src = `${R2_BASE_URL}${v.url}`;
         document.getElementById("modal-video").poster = v.photo ? `${R2_BASE_URL}${v.photo}` : "";
@@ -32,11 +35,12 @@ export function createDrinkDialog(onThemeSelect) {
         document
             .getElementById("modal-backdrop")
             .classList.add("open");
-        document.getElementById("modal-backdrop").showModal();
+        if (!dialog.open) dialog.showModal();
         document.querySelector(".modal-scroll").scrollTop = 0;
         document.getElementById("modal-close").focus();
     }
-    function closeModal() {
+    function closeModal({ updateHistory = true } = {}) {
+        if (!document.getElementById("modal-backdrop").open) return;
         const video = document.getElementById("modal-video");
         video.pause();
         video.src = "";
@@ -46,7 +50,8 @@ export function createDrinkDialog(onThemeSelect) {
         document.getElementById("modal-backdrop").close();
         document.body.style.overflow = previousBodyOverflow;
         if (modalTrigger?.isConnected)
-            modalTrigger.focus();
+            modalTrigger.focus({ preventScroll: true });
+        if (updateHistory) onClose();
     }
     document
         .getElementById("modal-close")

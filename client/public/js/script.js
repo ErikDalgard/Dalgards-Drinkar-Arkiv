@@ -2,11 +2,13 @@ import { buildThemeColorMap } from "./themes.js";
 import { createFilters } from "./filters.js";
 import { makeCard } from "./cards.js";
 import { createDrinkDialog } from "./dialogs.js";
+import { createDrinkNavigation } from "./drink-links.js";
 let allVideos = [];
 let currentPage = 1;
 const PAGE_SIZE = 24;
 let filters;
 let drinkDialog;
+let drinkNavigation;
 async function init() {
     try {
         const res = await fetch(`${API_BASE}/drinks`);
@@ -27,8 +29,10 @@ async function init() {
         currentPage = 1;
         render();
     });
-    drinkDialog = createDrinkDialog(filters.filterByTheme);
+    drinkDialog = createDrinkDialog(filters.filterByTheme, () => drinkNavigation.close());
+    drinkNavigation = createDrinkNavigation(allVideos, drinkDialog);
     render();
+    drinkNavigation.restore();
 }
 function render() {
     const filtered = filters.apply(allVideos);
@@ -45,7 +49,7 @@ function render() {
     grid.innerHTML = "";
     pageItems.forEach((v) => {
         grid.appendChild(makeCard(v, {
-            onOpen: drinkDialog.open,
+            onOpen: drinkNavigation.open,
             onThemeSelect: filters.filterByTheme,
         }));
     });
