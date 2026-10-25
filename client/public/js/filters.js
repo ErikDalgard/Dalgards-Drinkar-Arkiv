@@ -1,9 +1,79 @@
 import { themeHue } from "./themes.js";
-import { hashHue } from "./utils.js";
+import { formatDrinkDate, hashHue } from "./utils.js";
 import { SPIRITS, SPIRIT_SYNONYMS } from "./spirits.js";
 export function createFilters(themes, onChange) {
     let selectedTheme = "";
     const selectedSpirits = new Set();
+    function notifyChange() {
+        updateSpiritLabel();
+        updateSpiritChipStyles();
+        document.getElementById("theme-picker-label").textContent = selectedTheme || "Alla teman";
+        document.querySelectorAll("#theme-chip-list .theme-chip").forEach((chip) => {
+            const active = chip.dataset.theme === (selectedTheme || "__all__");
+            chip.classList.toggle("active", active);
+            chip.setAttribute("aria-pressed", String(active));
+        });
+        renderActiveFilters();
+        onChange();
+    }
+    function resetFilters() {
+        selectedTheme = "";
+        selectedSpirits.clear();
+        ["search", "date-from", "date-to"].forEach((id) => {
+            document.getElementById(id).value = "";
+        });
+        notifyChange();
+    }
+    function renderActiveFilters() {
+        const container = document.getElementById("active-filters");
+        const list = document.getElementById("active-filter-list");
+        list.replaceChildren();
+        const selections = [];
+        const search = document.getElementById("search");
+        if (search.value) {
+            selections.push({ label: `Sök: ${search.value}`, remove: () => { search.value = ""; } });
+        }
+        if (selectedTheme) {
+            selections.push({ label: selectedTheme, theme: true, remove: () => { selectedTheme = ""; } });
+        }
+        selectedSpirits.forEach((spirit) => {
+            selections.push({ label: spirit, spirit: true, remove: () => selectedSpirits.delete(spirit) });
+        });
+        [["date-from", "Från"], ["date-to", "Till"]].forEach(([id, label]) => {
+            const input = document.getElementById(id);
+            if (input.value) {
+                selections.push({ label: `${label} ${formatDrinkDate(input.value)}`, remove: () => { input.value = ""; } });
+            }
+        });
+        selections.forEach((selection, index) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "active-filter-chip";
+            button.setAttribute("aria-label", `Ta bort filter: ${selection.label}`);
+            const label = document.createElement("span");
+            label.textContent = selection.label;
+            const cross = document.createElement("span");
+            cross.textContent = "×";
+            cross.setAttribute("aria-hidden", "true");
+            button.append(label, cross);
+            if (selection.theme) {
+                button.classList.add("active-filter-theme");
+                button.style.setProperty("--theme-hue", themeHue(selectedTheme));
+            }
+            if (selection.spirit) {
+                button.classList.add("active-filter-spirit");
+                button.style.setProperty("--spirit-hue", hashHue(selection.label));
+            }
+            button.addEventListener("click", () => {
+                selection.remove();
+                notifyChange();
+                const next = list.children[Math.min(index, list.children.length - 1)];
+                (next || search).focus({ preventScroll: true });
+            });
+            list.appendChild(button);
+        });
+        container.hidden = selections.length === 0;
+    }
     function buildThemeChips(themes) {
         const list = document.getElementById("theme-chip-list");
         list.innerHTML = "";
@@ -48,6 +118,7 @@ export function createFilters(themes, onChange) {
         allChip.type = "button";
         allChip.className = "theme-chip";
         allChip.textContent = "All sprit";
+        allChip.dataset.spirit = "";
         allChip.addEventListener("click", () => {
             selectSpirit("");
         });
@@ -79,12 +150,12 @@ export function createFilters(themes, onChange) {
         }
         updateSpiritLabel();
         updateSpiritChipStyles();
-        onChange();
+        notifyChange();
     }
     function updateSpiritLabel() {
         const label = document.getElementById("spirit-picker-label");
         if (selectedSpirits.size === 0) {
-            label.textContent = "Alla sprit";
+            label.textContent = "All sprit";
         }
         else if (selectedSpirits.size === 1) {
             label.textContent = [...selectedSpirits][0];
@@ -103,6 +174,7 @@ export function createFilters(themes, onChange) {
                 ? selectedSpirits.size === 0
                 : selectedSpirits.has(spirit);
             chip.classList.toggle("active", isActive);
+            chip.setAttribute("aria-pressed", String(isActive));
         });
     }
     // ============================================
@@ -113,14 +185,14 @@ export function createFilters(themes, onChange) {
         document.getElementById("theme-picker-label").textContent =
             theme || "Alla teman";
         closeThemeModal();
-        onChange();
+        notifyChange();
     }
     function openThemeModal() {
         const modal = document.getElementById("theme-modal-backdrop");
         modal.classList.add("open");
         const search = document.getElementById("theme-picker-search");
         search.value = "";
-        document.querySelectorAll(".theme-chip").forEach((chip) => {
+        document.querySelectorAll("#theme-chip-list .theme-chip").forEach((chip) => {
             chip.style.display = "";
         });
         setTimeout(() => {
@@ -134,13 +206,14 @@ export function createFilters(themes, onChange) {
     }
     function filterByTheme(theme) {
         selectTheme(theme);
+        document.getElementById("filter-toggle-text").textContent = "Dölj filter";
         document
             .getElementById("filter-panel")
             .classList.add("open");
         document
             .getElementById("filter-toggle")
             .classList.add("active");
-        onChange();
+        notifyChange();
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -193,7 +266,7 @@ export function createFilters(themes, onChange) {
         .getElementById("theme-picker-search")
         .addEventListener("input", (e) => {
         const q = e.target.value.toLowerCase();
-        document.querySelectorAll(".theme-chip").forEach((chip) => {
+        document.querySelectorAll("#theme-chip-list .theme-chip").forEach((chip) => {
             chip.style.display = chip.textContent
                 .toLowerCase()
                 .includes(q)
@@ -205,12 +278,12 @@ export function createFilters(themes, onChange) {
     document
         .getElementById("search")
         .addEventListener("input", () => {
-        onChange();
+        notifyChange();
     });
     document
         .getElementById("sort-order")
         .addEventListener("change", () => {
-        onChange();
+        notifyChange();
     });
     // Filter panel
     document
@@ -231,39 +304,36 @@ export function createFilters(themes, onChange) {
     document
         .getElementById("date-from")
         .addEventListener("change", () => {
-        onChange();
+        notifyChange();
     });
     document
         .getElementById("date-to")
         .addEventListener("change", () => {
-        onChange();
+        notifyChange();
     });
-    document
-        .getElementById("filter-clear")
-        .addEventListener("click", () => {
-        selectTheme("");
-        selectSpirit("");
-        document.getElementById("date-from").value = "";
-        document.getElementById("date-to").value = "";
-        onChange();
+    document.getElementById("filter-clear").addEventListener("click", () => {
+        resetFilters();
+        document.getElementById("filter-panel").classList.remove("open");
+        document.getElementById("filter-toggle-text").textContent = "Visa filter";
+    });
+    document.getElementById("active-filter-clear").addEventListener("click", () => {
+        resetFilters();
+        document.getElementById("search").focus({ preventScroll: true });
     });
     // Home
     document
         .getElementById("home-link")
         .addEventListener("click", () => {
-        selectTheme("");
-        selectSpirit("");
-        document.getElementById("search").value = "";
-        document.getElementById("date-from").value = "";
-        document.getElementById("date-to").value = "";
         document.getElementById("sort-order").value = "desc";
+        resetFilters();
+        document.getElementById("filter-toggle-text").textContent = "Visa filter";
         document
             .getElementById("filter-panel")
             .classList.remove("open");
         document
             .getElementById("filter-toggle")
             .classList.remove("active");
-        onChange();
+        notifyChange();
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -286,5 +356,7 @@ export function createFilters(themes, onChange) {
     }
     buildThemeChips(themes);
     buildSpiritChips();
+    updateSpiritChipStyles();
+    renderActiveFilters();
     return { apply, filterByTheme };
 }

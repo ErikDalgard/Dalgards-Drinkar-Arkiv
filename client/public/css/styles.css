@@ -5,7 +5,7 @@
   --border: #e6cea3;
   --text: #3a2a1c;
   --text-on-bg: #fff8ef;
-  --text-muted: #8a6a48;
+  --text-muted: #5c4431;
   --accent: #6e4423;
   --leaf: #6b7654;
   --text-on-bg-muted: #f5f5f5;
@@ -492,24 +492,26 @@ header p {
 }
 .sort-select {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background: rgba(255, 248, 239, 0.12);
-  border: 1px solid rgba(255, 248, 239, 0.35);
-  color: var(--text-on-bg);
-  border-radius: 7px;
-  padding: 0.45rem 0.7rem;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 600;
+  min-height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
   cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s ease,   border-color 0.15s ease;
+  max-width: 100%;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 .sort-select:hover {
-  background: rgba(255, 248, 239, 0.2);
-  border-color: rgba(255, 248, 239, 0.55);
+  background: var(--surface-hover);
+  border-color: var(--accent);
 }
-.sort-select:focus {
-  outline: none;
-  border-color: rgba(255, 248, 239, 0.6);
+.sort-select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
 .taste-profile {
   margin: 0.6rem 0 0;
@@ -816,11 +818,17 @@ header p {
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 .menu .count {
   margin: 0;
   padding: 0;
+  color: var(--text);
+  opacity: 1;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 /* Footer-omslutning */
 .site-footer {
@@ -1552,5 +1560,161 @@ dialog.modal-backdrop::backdrop {
   .modal #modal-theme {
     font-size: 0.9rem;
     padding: 0.45rem 0.8rem;
+  }
+}
+
+/* Active selections remain visible when the filter panel is collapsed. */
+.active-filters {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.8rem;
+}
+.active-filters[hidden] {
+  display: none;
+}
+.active-filters-label {
+  color: var(--text-on-bg);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.active-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-width: 0;
+  max-width: 100%;
+}
+.active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  max-width: 100%;
+  min-height: 40px;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+.active-filter-chip span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.active-filter-chip span:last-child {
+  font: 1.2rem/1 sans-serif;
+}
+.active-filter-chip:hover {
+  background: var(--surface-hover);
+}
+.active-filter-theme {
+  background: hsl(var(--theme-hue), 45%, 38%);
+  border-color: transparent;
+  color: hsl(var(--theme-hue), 20%, 95%);
+}
+.active-filter-theme:hover {
+  background: hsl(var(--theme-hue), 45%, 32%);
+}
+.active-filter-spirit {
+  background: hsl(var(--spirit-hue), 45%, 88%);
+  border-color: transparent;
+  color: hsl(var(--spirit-hue), 45%, 30%);
+}
+.active-filter-spirit:hover {
+  background: hsl(var(--spirit-hue), 45%, 82%);
+}
+.active-filter-clear {
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.active-filter-clear:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+.active-filters button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Keep the archive controls aligned and comfortably sized. */
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+}
+.controls .search-wrapper {
+  min-width: 0;
+}
+.controls input#search,
+.controls #filter-toggle {
+  min-width: 0;
+  width: 100%;
+  min-height: 48px;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+.controls #filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.controls .filter-icon {
+  width: 20px;
+  height: 20px;
+}
+.controls .search-icon {
+  width: 20px;
+  height: 20px;
+}
+.menu {
+  justify-content: space-between;
+}
+.menu .sort-select {
+  min-height: 48px;
+  font-size: 1.25rem;
+}
+@media (max-width: 650px) {
+  .controls,
+  .menu {
+    gap: 0.65rem;
+  }
+  .controls input#search,
+  .controls #filter-toggle,
+  .menu .sort-select {
+    font-size: 1.0625rem;
+  }
+  .controls #filter-toggle {
+    padding-inline: 0.75rem;
+  }
+  .menu .count {
+    font-size: 1.25rem;
+  }
+  .menu .sort-select {
+    margin-left: auto;
+  }
+}
+@media (max-width: 360px) {
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
