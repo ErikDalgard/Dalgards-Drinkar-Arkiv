@@ -6,6 +6,7 @@
     "deploy": "wrangler deploy",
     "start": "wrangler dev",
     "test": "vitest",
+    "test:run": "vitest run",
     "cf-typegen": "wrangler types",
     "dev": "wrangler dev --env dev --remote"
   },
