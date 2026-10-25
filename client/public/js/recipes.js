@@ -68,37 +68,34 @@ export function renderRecipeGroups(ingredientsRaw, stepsRaw, drinkNameRaw) {
                 : `Recept ${i + 1}`;
             container.appendChild(label);
         }
-        const ingHeading = document.createElement("p");
-        ingHeading.className = "recipe-heading";
-        ingHeading.textContent = "Ingredienser";
-        container.appendChild(ingHeading);
-        const ul = document.createElement("ul");
-        ul.className = "recipe-ingredients";
-        (ingredientGroups[i] || "")
-            .split(";")
-            .map((s) => s.trim())
-            .filter(Boolean)
-            .forEach((ing) => {
-            const li = document.createElement("li");
-            li.textContent = ing;
-            ul.appendChild(li);
-        });
-        container.appendChild(ul);
-        const stepHeading = document.createElement("p");
-        stepHeading.className = "recipe-heading";
-        stepHeading.textContent = "Gör såhär";
-        container.appendChild(stepHeading);
-        const ol = document.createElement("ol");
-        ol.className = "recipe-steps";
-        (stepGroups[i] || "")
-            .split(";")
-            .map((s) => s.trim())
-            .filter(Boolean)
-            .forEach((step) => {
-            const li = document.createElement("li");
-            li.textContent = step;
-            ol.appendChild(li);
-        });
-        container.appendChild(ol);
+        const ingredients = (ingredientGroups[i] || "").split(";").map((s) => s.trim()).filter(Boolean);
+        const steps = (stepGroups[i] || "").split(";").map((s) => s.trim()).filter(Boolean);
+        if (ingredients.length) {
+            container.appendChild(makeRecipeSection("Ingredienser", ingredients, false));
+        }
+        if (steps.length) {
+            container.appendChild(makeRecipeSection("Gör såhär", steps, true));
+        }
     }
+}
+
+function makeRecipeSection(title, items, ordered) {
+    const section = document.createElement("section");
+    section.className = `recipe-section ${ordered ? "recipe-method" : "recipe-shopping"}`;
+    section.setAttribute("aria-label", title);
+    const heading = document.createElement("h3");
+    heading.className = "recipe-heading";
+    heading.textContent = title;
+    section.appendChild(heading);
+    const list = document.createElement(ordered ? "ol" : "ul");
+    list.className = ordered ? "recipe-steps" : "recipe-ingredients";
+    // Preserve list semantics in Safari when removing the default markers.
+    list.setAttribute("role", "list");
+    items.forEach((text) => {
+        const item = document.createElement("li");
+        item.textContent = text;
+        list.appendChild(item);
+    });
+    section.appendChild(list);
+    return section;
 }

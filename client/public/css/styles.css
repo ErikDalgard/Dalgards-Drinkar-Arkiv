@@ -1821,3 +1821,67 @@ dialog.modal-backdrop::backdrop {
     margin: 2rem 1rem;
   }
 }
+
+/* Recipe panels keep ingredients and preparation easy to scan. */
+.modal .recipe-section {
+  margin-bottom: 1rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.modal .recipe-shopping {
+  background: #f4eadb;
+}
+.modal .recipe-method {
+  background: #f0f1e8;
+  border-color: #d8ddc9;
+}
+.modal .recipe-section .recipe-heading {
+  margin: 0 0 0.8rem;
+  line-height: 1.4;
+}
+.modal .recipe-section .recipe-ingredients,
+.modal .recipe-section .recipe-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.modal .recipe-section .recipe-ingredients li {
+  margin: 0;
+  padding: 0.55rem 0;
+}
+.modal .recipe-section .recipe-ingredients li + li {
+  border-top: 1px solid rgba(110, 68, 35, 0.14);
+  margin-top: 0;
+}
+.modal .recipe-section .recipe-steps {
+  counter-reset: recipe-step;
+}
+.modal .recipe-section .recipe-steps li {
+  position: relative;
+  counter-increment: recipe-step;
+  min-height: 1.8rem;
+  padding-left: 2.5rem;
+}
+.modal .recipe-section .recipe-steps li + li {
+  margin-top: 1rem;
+}
+.modal .recipe-section .recipe-steps li::before {
+  content: counter(recipe-step);
+  position: absolute;
+  top: 0.15em;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--leaf);
+  color: #fff;
+  font: 600 0.9rem/1 'Inter', sans-serif;
+}
+@media (max-width: 700px) {
+  .modal .recipe-section {
+    padding: 1rem;
+  }
+}
