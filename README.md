@@ -37,3 +37,9 @@ dalgardsdrinkar/
 ├── .gitignore                   # Ignores node_modules, .wrangler, etc.
 └── README.md
 ```
+
+## CI & tests
+
+GitHub Actions runs API tests and TypeScript checks on every push and pull request. Tests use isolated local D1 and R2 storage, without touching development or production data.
+
+Run locally from `api/` with `npm run test:run`.

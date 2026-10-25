@@ -22,6 +22,7 @@ export function createFilters(themes, onChange) {
         ["date-from", "date-to"].forEach((id) => {
             document.getElementById(id).value = "";
         });
+        document.getElementById("filter-panel").classList.remove("open")
         notifyChange();
     }
     function renderActiveFilters() {
