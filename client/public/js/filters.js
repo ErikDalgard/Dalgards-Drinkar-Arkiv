@@ -19,7 +19,7 @@ export function createFilters(themes, onChange) {
     function resetFilters() {
         selectedTheme = "";
         selectedSpirits.clear();
-        ["search", "date-from", "date-to"].forEach((id) => {
+        ["date-from", "date-to"].forEach((id) => {
             document.getElementById(id).value = "";
         });
         notifyChange();
@@ -30,9 +30,6 @@ export function createFilters(themes, onChange) {
         list.replaceChildren();
         const selections = [];
         const search = document.getElementById("search");
-        if (search.value) {
-            selections.push({ label: `Sök: ${search.value}`, remove: () => { search.value = ""; } });
-        }
         if (selectedTheme) {
             selections.push({ label: selectedTheme, theme: true, remove: () => { selectedTheme = ""; } });
         }
@@ -320,6 +317,7 @@ export function createFilters(themes, onChange) {
         .getElementById("home-link")
         .addEventListener("click", () => {
         document.getElementById("sort-order").value = "desc";
+        document.getElementById("search").value = "";
         resetFilters();
         document.getElementById("filter-toggle-text").textContent = "Visa filter";
         document
