@@ -8,6 +8,9 @@ let adminKey = "";
 let allDrinks = [];
 let toastTimeout = null;
 
+const ingredientFields = createRecipeFields("ingredients", "Ingrediens", false);
+const stepFields = createRecipeFields("steps", "Steg", true);
+
 
 // ============================================
 // Admin Login
@@ -208,13 +211,13 @@ function clearStatus() {
 // ============================================
 
 function clearForm() {
+  ingredientFields.setValue("");
+  stepFields.setValue("");
   [
     "f-date",
     "f-drink",
     "f-theme",
     "f-note",
-    "f-ingredients",
-    "f-steps",
     "f-taste",
     "f-video-url",
     "f-photo-url",
@@ -239,8 +242,8 @@ function fillForm(d) {
   document.getElementById("f-drink").value = d.drink;
   document.getElementById("f-theme").value = d.theme;
   document.getElementById("f-note").value = d.note;
-  document.getElementById("f-ingredients").value = d.ingredients;
-  document.getElementById("f-steps").value = d.steps;
+  ingredientFields.setValue(d.ingredients);
+  stepFields.setValue(d.steps);
   document.getElementById("f-taste").value = d.taste;
   document.getElementById("f-video-url").value = d.url;
   document.getElementById("f-photo-url").value = d.photo;
@@ -528,8 +531,8 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
       drink: document.getElementById("f-drink").value,
       theme: theme,
       note: document.getElementById("f-note").value,
-      ingredients: document.getElementById("f-ingredients").value,
-      steps: document.getElementById("f-steps").value,
+      ingredients: ingredientFields.getValue(),
+      steps: stepFields.getValue(),
       taste: document.getElementById("f-taste").value,
       url: videoUrl,
       photo: photoUrl,

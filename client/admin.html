@@ -67,14 +67,16 @@
         <label for="f-note">Kommentar</label>
         <input type="text" id="f-note">
       </div>
-      <div class="filter-group full-width">
-        <label for="f-ingredients">Ingredienser (separera med ;)</label>
-        <input type="text" id="f-ingredients">
-      </div>
-      <div class="filter-group full-width">
-        <label for="f-steps">Instruktioner (separera med ;)</label>
-        <input type="text" id="f-steps">
-      </div>
+      <fieldset class="admin-recipe-fields full-width">
+        <legend>Ingredienser</legend>
+        <div id="f-ingredients" class="admin-recipe-rows"></div>
+        <button type="button" id="add-ingredients" class="admin-recipe-add">+ Lägg till ingrediens</button>
+      </fieldset>
+      <fieldset class="admin-recipe-fields full-width">
+        <legend>Gör såhär</legend>
+        <div id="f-steps" class="admin-recipe-rows"></div>
+        <button type="button" id="add-steps" class="admin-recipe-add">+ Lägg till steg</button>
+      </fieldset>
       <div class="filter-group">
         <label for="f-taste">Smakprofil (t.ex. 2/5, 3/5, 1/5, 2/5, 0/5)</label>
         <input type="text" id="f-taste">
@@ -123,6 +125,7 @@
 </div>
 
 <script src="public/js/config.js"></script>
+<script src="public/js/admin-recipe-fields.js"></script>
 <script src="public/js/admin.js"></script>
 </body>
 </html>
