@@ -311,11 +311,6 @@ export function createFilters(themes, onChange) {
         .addEventListener("change", () => {
         notifyChange();
     });
-    document.getElementById("filter-clear").addEventListener("click", () => {
-        resetFilters();
-        document.getElementById("filter-panel").classList.remove("open");
-        document.getElementById("filter-toggle-text").textContent = "Visa filter";
-    });
     document.getElementById("active-filter-clear").addEventListener("click", () => {
         resetFilters();
         document.getElementById("search").focus({ preventScroll: true });
