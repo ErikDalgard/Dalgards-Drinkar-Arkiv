@@ -1,13 +1,8 @@
 import { getDrinkSpirits } from "./spirits.js";
 import { hashHue } from "./utils.js";
 
-const TASTE_LABELS = [
-    "Sötma",
-    "Syra",
-    "Beska",
-    "Styrka",
-    "Sälta",
-];
+import { TASTE_LABELS } from "./taste.js";
+
 export function renderTasteProfile(tasteStr) {
     const container = document.getElementById("taste-profile");
     const rows = document.getElementById("taste-rows");

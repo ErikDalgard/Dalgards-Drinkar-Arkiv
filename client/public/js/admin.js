@@ -1,3 +1,4 @@
+import { createTasteFields } from "./admin-taste-fields.js";
 import { createSpiritEditor } from "./admin-spirits.js";
 import { createAdminPreview } from "./admin-preview.js";
 
@@ -14,6 +15,7 @@ let isSaving = false;
 
 const ingredientFields = createRecipeFields("ingredients", "Ingrediens", false);
 const stepFields = createRecipeFields("steps", "Steg", true);
+const tasteFields = createTasteFields();
 const preview = createAdminPreview();
 const spiritEditor = createSpiritEditor(() => adminKey, showToast);
 
@@ -25,7 +27,7 @@ function collectDrink() {
     note: document.getElementById("f-note").value,
     ingredients: ingredientFields.getValue(),
     steps: stepFields.getValue(),
-    taste: document.getElementById("f-taste").value,
+    taste: tasteFields.getValue(),
     url: document.getElementById("f-video-url").value,
     photo: document.getElementById("f-photo-url").value,
   };
@@ -275,12 +277,12 @@ function clearForm() {
   preview.close();
   ingredientFields.setValue("");
   stepFields.setValue("");
+  tasteFields.setValue("");
   [
     "f-date",
     "f-drink",
     "f-theme",
     "f-note",
-    "f-taste",
     "f-video-url",
     "f-photo-url",
     "f-id",
@@ -308,7 +310,7 @@ function fillForm(d) {
   document.getElementById("f-note").value = d.note;
   ingredientFields.setValue(d.ingredients);
   stepFields.setValue(d.steps);
-  document.getElementById("f-taste").value = d.taste;
+  tasteFields.setValue(d.taste);
   document.getElementById("f-video-url").value = d.url;
   document.getElementById("f-photo-url").value = d.photo;
 
@@ -371,6 +373,7 @@ function validateForm() {
     document.getElementById("f-photo-url").value.trim();
 
   const missing = [];
+  if (!tasteFields.isComplete()) missing.push("Smakprofil – välj alla fem värden eller rensa profilen");
 
   if (!date) missing.push("Datum");
   if (!drink) missing.push("Drinknamn");

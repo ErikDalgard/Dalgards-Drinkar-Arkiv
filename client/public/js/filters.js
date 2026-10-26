@@ -1,10 +1,13 @@
 import { themeHue } from "./themes.js";
 import { formatDrinkDate, hashHue } from "./utils.js";
 import { SPIRITS, ingredientsContainSpirit } from "./spirits.js";
-export function createFilters(themes, onChange) {
+import { TASTE_FILTERS, parseTasteProfile, matchesTasteFilters } from "./taste.js";
+export function createFilters(themes, onChange, videos = []) {
     let selectedTheme = "";
     const selectedSpirits = new Set();
+    const selectedTastes = new Set();
     function notifyChange() {
+        updateTasteControls();
         updateSpiritLabel();
         updateSpiritChipStyles();
         document.getElementById("theme-picker-label").textContent = selectedTheme || "Alla teman";
@@ -19,10 +22,15 @@ export function createFilters(themes, onChange) {
     function resetFilters() {
         selectedTheme = "";
         selectedSpirits.clear();
+        selectedTastes.clear();
+        closeTastePicker();
         ["date-from", "date-to"].forEach((id) => {
             document.getElementById(id).value = "";
         });
-        document.getElementById("filter-panel").classList.remove("open")
+        document.getElementById("filter-panel").classList.remove("open");
+        document.getElementById("filter-toggle-text").textContent = "Visa filter";
+        document.getElementById("filter-toggle").classList.remove("active");
+        document.getElementById("spirit-picker-panel").classList.remove("open");
         notifyChange();
     }
     function renderActiveFilters() {
@@ -36,6 +44,10 @@ export function createFilters(themes, onChange) {
         }
         selectedSpirits.forEach((spirit) => {
             selections.push({ label: spirit, spirit: true, remove: () => selectedSpirits.delete(spirit) });
+        });
+        selectedTastes.forEach((id) => {
+            const filter = TASTE_FILTERS.find((item) => item.id === id);
+            selections.push({ label: filter.label, remove: () => selectedTastes.delete(id) });
         });
         [["date-from", "Från"], ["date-to", "Till"]].forEach(([id, label]) => {
             const input = document.getElementById(id);
@@ -220,6 +232,7 @@ export function createFilters(themes, onChange) {
     function filterBySpirit(spirit) {
         if (!SPIRITS.includes(spirit)) return;
         selectedTheme = "";
+        selectedTastes.clear();
         selectedSpirits.clear();
         selectedSpirits.add(spirit);
         ["search", "date-from", "date-to"].forEach((id) => {
@@ -232,11 +245,68 @@ export function createFilters(themes, onChange) {
         document.getElementById("spirit-picker-toggle").focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    // Taste picker uses only complete, valid profiles; missing data is not zero.
+    const tastePanel = document.getElementById("taste-picker-panel");
+    const tasteToggle = document.getElementById("taste-picker-toggle");
+    const profileCount = videos.filter((video) => parseTasteProfile(video.taste) !== null).length;
+    document.getElementById("taste-filter-info").textContent =
+        `Smakprofil finns för ${profileCount} av ${videos.length} drinkar.`;
+    function updateTasteControls() {
+        const chosen = TASTE_FILTERS.filter((item) => selectedTastes.has(item.id));
+        document.getElementById("taste-picker-label").textContent = chosen.length === 0
+            ? "Alla smaker" : chosen.length === 1 ? chosen[0].label : `${chosen.length} smaker valda`;
+        document.querySelectorAll("#taste-filter-options button").forEach((button) => {
+            const active = button.dataset.taste === "" ? selectedTastes.size === 0 : selectedTastes.has(button.dataset.taste);
+            button.classList.toggle("active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+    }
+    function closeTastePicker() {
+        tastePanel.hidden = true;
+        tastePanel.classList.remove("open");
+        tasteToggle.setAttribute("aria-expanded", "false");
+    }
+    const tasteOptions = document.getElementById("taste-filter-options");
+    [{ id: "", label: "Alla smaker" }, ...TASTE_FILTERS].forEach((filter) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "taste-filter-option";
+        button.dataset.taste = filter.id;
+        const label = document.createElement("span");
+        label.textContent = filter.label;
+        const description = document.createElement("small");
+        description.textContent = filter.description;
+        button.append(label, description);
+        button.addEventListener("click", () => {
+            if (!filter.id) selectedTastes.clear();
+            else if (selectedTastes.has(filter.id)) selectedTastes.delete(filter.id);
+            else selectedTastes.add(filter.id);
+            notifyChange();
+        });
+        tasteOptions.appendChild(button);
+    });
+    tasteToggle.addEventListener("click", () => {
+        const open = tastePanel.hidden;
+        tastePanel.hidden = !open;
+        tastePanel.classList.toggle("open", open);
+        tasteToggle.setAttribute("aria-expanded", String(open));
+        if (open) document.getElementById("spirit-picker-panel").classList.remove("open");
+    });
+    document.addEventListener("click", (event) => {
+        if (!tastePanel.contains(event.target) && !tasteToggle.contains(event.target)) closeTastePicker();
+    });
+    tasteToggle.parentElement.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeTastePicker();
+            tasteToggle.focus();
+        }
+    });
     // Spirit picker
     document
         .getElementById("spirit-picker-toggle")
         .addEventListener("click", (e) => {
         e.stopPropagation();
+        closeTastePicker();
         document
             .getElementById("spirit-picker-panel")
             .classList.toggle("open");
@@ -352,6 +422,7 @@ export function createFilters(themes, onChange) {
         return videos.filter((v) => (!theme || v.theme === theme) &&
             (selectedSpirits.size === 0 ||
                 [...selectedSpirits].every((s) => ingredientsContainSpirit(v.ingredients, s))) &&
+            matchesTasteFilters(v.taste, selectedTastes) &&
             (!dateFrom || v.date >= dateFrom) &&
             (!dateTo || v.date <= dateTo) &&
             (!q ||
@@ -359,6 +430,7 @@ export function createFilters(themes, onChange) {
                     .toLowerCase()
                     .includes(q.toLowerCase())));
     }
+    updateTasteControls();
     buildThemeChips(themes);
     buildSpiritChips();
     updateSpiritChipStyles();

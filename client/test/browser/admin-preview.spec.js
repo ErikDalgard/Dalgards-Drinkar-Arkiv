@@ -135,3 +135,37 @@ test('recipe headings can be added, previewed and saved using the existing API f
   expect(writes[0].body.ingredients).toBe('# Drinken;3 cl citronjuice;# Bärsyrup;150 g bär');
   expect(writes[0].body.steps).toBe('# Drinken;Sila;# Bärsyrup;Koka vatten och socker');
 });
+
+test('optional taste buttons gate partial profiles, render in preview and save existing API format', async ({ page }) => {
+  await page.getByRole('button', { name: 'Redigera en drink', exact: true }).click();
+  await page.locator('#edit-search').fill('Test Sour');
+  await page.locator('.edit-search-result').click();
+  const save = page.locator('#edit-submit-btn');
+  await expect(page.locator('.admin-taste-fields input:checked')).toHaveCount(0);
+  await expect(save).toBeEnabled();
+  await page.getByRole('radio', { name: 'Sötma: 3 av 5', exact: true }).check();
+  await expect(save).toBeDisabled();
+  await expect(page.locator('#preview-btn')).toBeDisabled();
+  for (const [name, value] of [['Syra', 4], ['Beska', 0], ['Styrka', 4], ['Sälta', 0]]) {
+    await page.getByRole('radio', { name: `${name}: ${value} av 5`, exact: true }).check();
+  }
+  await expect(save).toBeEnabled();
+  await page.locator('#preview-btn').click();
+  await expect(page.locator('#taste-profile')).toBeVisible();
+  const rows = page.locator('#taste-rows .taste-row');
+  for (const [index, count] of [3, 4, 0, 4, 0].entries()) {
+    await expect(rows.nth(index).locator('.filled')).toHaveCount(count);
+  }
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'Rensa smakprofil', exact: true }).click();
+  await expect(page.locator('.admin-taste-fields input:checked')).toHaveCount(0);
+  await expect(save).toBeEnabled();
+  for (const [name, value] of [['Sötma', 3], ['Syra', 4], ['Beska', 0], ['Styrka', 4], ['Sälta', 0]]) {
+    await page.getByRole('radio', { name: `${name}: ${value} av 5`, exact: true }).check();
+  }
+  await save.click();
+  await expect(page.locator('#f-drink')).toHaveValue('');
+  expect(writes).toHaveLength(1);
+  expect(writes[0].body.taste).toBe('3/5,4/5,0/5,4/5,0/5');
+  await expect(page.locator('.admin-taste-fields input:checked')).toHaveCount(0);
+});

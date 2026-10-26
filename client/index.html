@@ -64,7 +64,7 @@
   </div>
 </div>
 <div class="filter-panel" id="filter-panel">
-    <div class="filter-group">
+    <div class="filter-group filter-theme-group">
       <label>Tema</label>
       <button type="button" class="theme-picker-toggle" id="theme-picker-toggle">
         <span id="theme-picker-label">Alla teman</span>
@@ -82,6 +82,19 @@
       </div>
     </div>
 </div>
+
+  <div class="filter-group filter-taste-group">
+    <label id="taste-filter-label">Smakprofil</label>
+    <div class="theme-picker">
+      <button type="button" class="theme-picker-toggle" id="taste-picker-toggle" aria-expanded="false" aria-controls="taste-picker-panel" aria-labelledby="taste-filter-label taste-picker-label">
+        <span id="taste-picker-label">Alla smaker</span><span aria-hidden="true">▾</span>
+      </button>
+      <div class="theme-picker-panel" id="taste-picker-panel" hidden>
+        <p id="taste-filter-info" class="taste-filter-info"></p>
+        <div class="taste-filter-options" id="taste-filter-options" role="group" aria-label="Välj smakprofil" aria-describedby="taste-filter-info"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="date-range">
     <div class="filter-group">

@@ -83,10 +83,12 @@
           <button type="button" id="add-steps-heading" class="admin-recipe-add">+ Lägg till rubrik</button>
         </div>
       </fieldset>
-      <div class="filter-group">
-        <label for="f-taste">Smakprofil (t.ex. 2/5, 3/5, 1/5, 2/5, 0/5)</label>
-        <input type="text" id="f-taste">
-      </div>
+      <fieldset class="admin-taste-fields full-width" aria-describedby="admin-taste-hint">
+        <legend>Smakprofil</legend>
+        <p id="admin-taste-hint" role="status" aria-live="polite"></p>
+        <div id="admin-taste-rows" class="admin-taste-rows"></div>
+        <button type="button" id="admin-taste-clear" class="admin-recipe-remove" disabled>Rensa smakprofil</button>
+      </fieldset>
 
         <div class="filter-group">
         <label class="required-label">Video</label>

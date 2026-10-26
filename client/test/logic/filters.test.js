@@ -39,3 +39,39 @@ test('search, dates, exclusive spirit links and clear-filter behavior', () => {
 });
 
 setSpirits(JSON.parse(readFileSync(new URL("../spirits.json", import.meta.url), "utf8")));
+
+test('taste filters count complete profiles, combine with spirits, and reset cleanly', () => {
+  const videos = [
+    { ...drinks[0], taste: '3/5,4/5,0/5,4/5,0/5' },
+    { ...drinks[1], taste: '3/5,4/5,0/5,3/5,0/5' },
+    { ...drinks[0], drink: 'Utan profil', taste: '' },
+    { ...drinks[0], drink: 'Ofullständig profil', taste: '3/5,4/5' },
+  ];
+  const dom = new JSDOM(html);
+  globalThis.document = dom.window.document;
+  globalThis.window = dom.window;
+  dom.window.scrollTo = () => {};
+  try {
+    const filters = createFilters(['Sommar', 'Vinter'], () => {}, videos);
+    const choose = id => document.querySelector(`[data-taste="${id}"]`).click();
+    assert.match(document.getElementById('taste-filter-info').textContent, /2 av 4/);
+    assert.deepEqual(filters.apply(videos), videos);
+    choose('sour');
+    assert.deepEqual(filters.apply(videos), videos.slice(0, 2));
+    choose('strong');
+    assert.deepEqual(filters.apply(videos), [videos[0]]);
+    document.querySelector('[data-spirit="Vodka"]').click();
+    assert.deepEqual(filters.apply(videos), []);
+    document.querySelector('[aria-label="Ta bort filter: Stark"]').click();
+    assert.deepEqual(filters.apply(videos), [videos[1]]);
+    document.getElementById('active-filter-clear').click();
+    assert.deepEqual(filters.apply(videos), videos);
+    assert.equal(document.getElementById('taste-picker-label').textContent, 'Alla smaker');
+    choose('sour');
+    filters.filterBySpirit('Gin');
+    assert.deepEqual(filters.apply(videos), [videos[0], videos[2], videos[3]]);
+    assert.equal(document.querySelector('[data-taste="sour"]').getAttribute('aria-pressed'), 'false');
+  } finally {
+    dom.window.close(); delete globalThis.document; delete globalThis.window;
+  }
+});
