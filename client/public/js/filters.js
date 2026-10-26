@@ -1,6 +1,6 @@
 import { themeHue } from "./themes.js";
 import { formatDrinkDate, hashHue } from "./utils.js";
-import { SPIRITS, SPIRIT_SYNONYMS } from "./spirits.js";
+import { SPIRITS, ingredientsContainSpirit } from "./spirits.js";
 export function createFilters(themes, onChange) {
     let selectedTheme = "";
     const selectedSpirits = new Set();
@@ -217,14 +217,20 @@ export function createFilters(themes, onChange) {
             behavior: "smooth",
         });
     }
-    function ingredientsContainSpirit(ingredients, selectedSpirit) {
-        if (!ingredients || !selectedSpirit) {
-            return false;
-        }
-        const text = ingredients.toLowerCase();
-        const terms = SPIRIT_SYNONYMS[selectedSpirit] ||
-            [selectedSpirit.toLowerCase()];
-        return terms.some((term) => text.includes(term));
+    function filterBySpirit(spirit) {
+        if (!SPIRITS.includes(spirit)) return;
+        selectedTheme = "";
+        selectedSpirits.clear();
+        selectedSpirits.add(spirit);
+        ["search", "date-from", "date-to"].forEach((id) => {
+            document.getElementById(id).value = "";
+        });
+        document.getElementById("filter-panel").classList.add("open");
+        document.getElementById("filter-toggle").classList.add("active");
+        document.getElementById("filter-toggle-text").textContent = "Dölj filter";
+        notifyChange();
+        document.getElementById("spirit-picker-toggle").focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
     // Spirit picker
     document
@@ -357,5 +363,5 @@ export function createFilters(themes, onChange) {
     buildSpiritChips();
     updateSpiritChipStyles();
     renderActiveFilters();
-    return { apply, filterByTheme };
+    return { apply, filterByTheme, filterBySpirit };
 }

@@ -78,3 +78,15 @@ export const SPIRIT_SYNONYMS = {
         "torr vermouth",
     ],
 };
+
+// Match any synonym in the selected category, not just its display name.
+export function ingredientsContainSpirit(ingredients, selectedSpirit) {
+    if (!ingredients || !selectedSpirit) return false;
+    const text = ingredients.toLowerCase();
+    const synonyms = SPIRIT_SYNONYMS[selectedSpirit] ?? [];
+    return synonyms.some((synonym) => text.includes(synonym.toLowerCase()));
+}
+
+export function getDrinkSpirits(ingredients) {
+    return SPIRITS.filter((spirit) => ingredientsContainSpirit(ingredients, spirit));
+}
