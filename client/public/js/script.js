@@ -31,7 +31,7 @@ async function init() {
     filters = createFilters(themes, () => {
         currentPage = 1;
         render();
-    });
+    }, allVideos);
     drinkDialog = createDrinkDialog(filters.filterByTheme, () => drinkNavigation.close(), filters.filterBySpirit);
     drinkNavigation = createDrinkNavigation(allVideos, drinkDialog);
     searchSuggestions = createSearchSuggestions(drinkNavigation.open);

@@ -2405,3 +2405,137 @@ textarea.admin-recipe-value {
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
+
+/* Theme, spirit and taste share a row; dates stay paired. */
+#filter-panel {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+#filter-panel > .filter-group { min-width: 0; }
+#filter-panel .date-range {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: span 2;
+  min-width: 0;
+}
+#filter-panel .theme-picker-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .4rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 1.05rem;
+}
+#filter-panel .theme-picker-toggle span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#taste-picker-panel { right: 0; width: min(340px, calc(100vw - 3rem)); max-height: min(440px, 65vh); box-sizing: border-box; }
+#taste-picker-panel[hidden] { display: none; }
+.taste-filter-info {
+  margin: 0 0 .65rem;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.taste-filter-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+.taste-filter-option {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  align-items: flex-start;
+  min-height: 44px;
+  padding: .65rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.taste-filter-option small { font-size: .9rem; line-height: 1.3; }
+.taste-filter-option.active { background: var(--leaf); color: #fff; border-color: var(--leaf); }
+.taste-filter-option:hover:not(.active) { background: var(--surface-hover); }
+.taste-filter-option:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 650px) {
+  #filter-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #filter-panel.open { max-height: 450px; }
+  #filter-panel .filter-theme-group { grid-column: 1 / -1; }
+  #filter-panel .date-range { grid-column: 1 / -1; }
+}
+.taste-filter-option:first-child { grid-column: 1 / -1; }
+@media (max-width: 650px) {
+  #spirit-picker-panel {
+    left: 0;
+    right: auto;
+    width: min(340px, calc(100vw - 3rem));
+    box-sizing: border-box;
+  }
+}
+
+#filter-panel .date-range .filter-group { min-width: 0; }
+#filter-panel input[type="date"] { min-width: 0; width: 100%; min-height: 44px; box-sizing: border-box; }
+@media (min-width: 651px) and (max-width: 900px) {
+  #filter-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #filter-panel .date-range { grid-column: 1 / -1; }
+}
+
+/* Optional taste profile: no score is selected until the admin chooses one. */
+#drink-form .admin-taste-fields {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f0f1e8;
+}
+.admin-taste-fields > legend {
+  padding: 0 .4rem;
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+#admin-taste-hint { margin: 0 0 1rem; color: var(--text); font-size: 1rem; line-height: 1.4; }
+.admin-taste-rows { display: grid; gap: .9rem; margin-bottom: 1rem; }
+.admin-taste-row { min-width: 0; margin: 0; padding: 0; border: 0; }
+.admin-taste-row legend { margin-bottom: .4rem; padding: 0; color: var(--text); font-size: 1.1rem; font-weight: 600; }
+.admin-taste-choices { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .35rem; }
+.admin-taste-choice { position: relative; cursor: pointer; }
+.admin-taste-choice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.admin-taste-choice span {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.1rem;
+}
+.admin-taste-choice:hover span { background: var(--surface-hover); }
+.admin-taste-choice input:checked + span { background: var(--leaf); border-color: var(--leaf); color: #fff; font-weight: 700; }
+.admin-taste-choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+#admin-taste-clear:disabled { opacity: .5; cursor: not-allowed; }
+@media (min-width: 650px) {
+  .admin-taste-row { display: grid; grid-template-columns: 6rem minmax(0, 1fr); align-items: center; }
+  .admin-taste-row legend { float: left; width: 6rem; margin: 0; }
+  .admin-taste-choices { grid-column: 2; }
+}
