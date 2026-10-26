@@ -4,6 +4,7 @@ import { makeCard } from "./cards.js";
 import { createDrinkDialog } from "./dialogs.js";
 import { createDrinkNavigation } from "./drink-links.js";
 import { createSearchSuggestions } from "./search-suggestions.js";
+import { loadSpirits } from "./spirits.js";
 let allVideos = [];
 let currentPage = 1;
 const PAGE_SIZE = 24;
@@ -13,7 +14,7 @@ let drinkNavigation;
 let searchSuggestions;
 async function init() {
     try {
-        const res = await fetch(`${API_BASE}/drinks`);
+        const [res] = await Promise.all([fetch(`${API_BASE}/drinks`), loadSpirits(API_BASE)]);
         if (!res.ok)
             throw new Error(`HTTP ${res.status}`);
         allVideos = await res.json();

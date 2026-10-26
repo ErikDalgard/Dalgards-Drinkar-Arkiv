@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+const spirits = JSON.parse(readFileSync(new URL("../spirits.json", import.meta.url), "utf8"));
 import { test, expect } from '@playwright/test';
 const base = { theme: 'Klassiker', url: 'test.mp4', photo: '', note: '', ingredients: '6 cl gin;1 cl vermouth', steps: 'Rör med is;Sila', taste: '' };
 const drinks = [
@@ -9,7 +11,9 @@ test.beforeEach(async ({ page }) => {
   // Only the local static site and this fixture response are allowed.
   await page.route('**/*', async (route) => {
     const url = new URL(route.request().url());
-    if (url.origin === 'http://localhost:8787' && url.pathname === '/drinks') {
+    if (url.origin === 'http://localhost:8787' && url.pathname === '/spirits') {
+      await route.fulfill({ json: spirits });
+    } else if (url.origin === 'http://localhost:8787' && url.pathname === '/drinks') {
       await route.fulfill({ json: drinks });
     } else if (url.origin === 'http://127.0.0.1:4173') {
       await route.continue();

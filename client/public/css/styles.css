@@ -988,7 +988,7 @@ header p {
 .admin-wrap.logged-in {
   max-width: 900px;
 }
-#admin-panel > .filter-group {
+#admin-drinks-view > .filter-group {
   margin-bottom: 1.2rem;
 }
 #drink-form {
@@ -2274,4 +2274,90 @@ textarea.admin-recipe-value {
 .admin-preview #modal-theme:disabled {
   cursor: default;
   opacity: 1;
+}
+
+/* Spritsorter och sökord i admin */
+.admin-spirits {
+  padding: 1.25rem;
+  border: 1px solid var(--border, #d5b78f);
+  border-radius: 12px;
+  background: #fff8ef;
+  color: #3d2b1f;
+}
+.admin-spirits h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.admin-spirits p { font-size: 1.15rem; line-height: 1.5; }
+.admin-spirits fieldset { min-width: 0; border: 0; padding: 0; margin: 0; }
+.admin-spirits-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1rem 0; }
+.admin-spirit-row {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 1rem;
+  background: #f4e8d8;
+  border: 1px solid #d5b78f;
+  border-radius: 10px;
+}
+.admin-spirit-row label { font-size: 1.1rem; font-weight: 700; }
+.admin-spirit-row input, .admin-spirit-row textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: .7rem;
+  border: 1px solid #bfa17e;
+  border-radius: 6px;
+  background: #fffcf7;
+  color: #3d2b1f;
+  font: inherit;
+  font-size: 1.15rem;
+}
+.admin-spirit-row textarea { resize: vertical; }
+.admin-spirit-row .admin-recipe-remove { align-self: flex-start; margin-top: .3rem; }
+.admin-spirits-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.admin-spirits button:disabled { opacity: .5; cursor: not-allowed; }
+@media (max-width: 640px) {
+  .admin-spirits-rows { grid-template-columns: 1fr; }
+}
+
+.admin-spirits .filter-toggle, .admin-spirits .filter-clear {
+  min-height: 44px;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+/* Separate admin views, with the current action highlighted. */
+.admin-navigation {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .6rem;
+  margin-bottom: 1.5rem;
+}
+.admin-nav-button {
+  min-height: 48px;
+  padding: .75rem .6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  cursor: pointer;
+}
+.admin-nav-button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+  font-weight: 700;
+}
+.admin-nav-button:hover:not(:disabled):not([aria-pressed="true"]) { background: var(--surface-hover); }
+.admin-nav-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.admin-nav-button:disabled { opacity: .5; cursor: not-allowed; }
+#admin-drinks-view[hidden], #admin-filters-view[hidden] { display: none; }
+@media (max-width: 400px) {
+  .admin-navigation { gap: .35rem; }
+  .admin-nav-button { padding: .65rem .3rem; font-size: 1rem; }
 }

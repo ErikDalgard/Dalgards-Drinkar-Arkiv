@@ -18,7 +18,7 @@
 <header>
   <h1 id="home-link">
     <span class="logo-line">Dalgards <img src="public/assets/glass.png" alt="" class="logo-glass"> Drinkar</span>
-    <span class="logo-sub">Urkällan</span>
+    <span class="logo-sub">Admin</span>
   </h1>
 </header>
 
@@ -30,13 +30,13 @@
   </div>
 
   <div id="admin-panel" style="display:none;">
-    <div class="filter-group">
-      <label>Läge</label>
-      <select id="mode-select">
-        <option value="add">Lägg till ny drink</option>
-        <option value="edit">Redigera befintlig</option>
-      </select>
-    </div>
+    <nav class="admin-navigation" aria-label="Välj adminvy">
+      <button type="button" class="admin-nav-button" data-admin-mode="add" aria-pressed="true" aria-controls="admin-drinks-view">Lägg till drink</button>
+      <button type="button" class="admin-nav-button" data-admin-mode="edit" aria-pressed="false" aria-controls="admin-drinks-view">Redigera en drink</button>
+      <button type="button" class="admin-nav-button" data-admin-mode="filters" aria-pressed="false" aria-controls="admin-filters-view">Redigera filter</button>
+    </nav>
+
+    <section id="admin-drinks-view" aria-label="Hantera drinkar">
 
     <div class="filter-group" id="edit-picker-group" style="display:none;">
       <label for="edit-search">Sök drink att redigera</label>
@@ -118,6 +118,25 @@
       <button type="button" class="filter-toggle" id="preview-btn" disabled>Förhandsgranska</button>
 
     </form>
+
+    </section>
+
+    <section id="admin-filters-view" class="admin-spirits" aria-labelledby="admin-filters-title" hidden>
+      <h2 id="admin-filters-title">Spritsorter</h2>
+      <p>Här ändrar du spritfiltren och vilka ord i ingredienserna som matchar dem. Ta med spritsortens namn som sökord om även det ska matcha. Versaler spelar ingen roll.</p>
+      <form id="spirits-form">
+        <fieldset id="spirits-fields" aria-label="Redigera spritsorter" disabled>
+          <div id="spirits-rows" class="admin-spirits-rows"></div>
+          <button type="button" id="spirits-add" class="admin-recipe-add">+ Lägg till spritsort</button>
+          <div class="admin-spirits-actions">
+            <button type="submit" id="spirits-save" class="filter-toggle" disabled>Spara spritsorter</button>
+            <button type="button" id="spirits-discard" class="filter-clear" disabled>Ångra ändringar</button>
+          </div>
+        </fieldset>
+      </form>
+      <p id="spirits-status" role="status" aria-live="polite"></p>
+      <button type="button" id="spirits-retry" class="filter-toggle" hidden>Försök igen</button>
+    </section>
 
     <div id="status-msg" class="upload-status">
       <span class="spinner"></span>

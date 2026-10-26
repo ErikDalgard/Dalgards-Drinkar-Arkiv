@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { setSpirits } from "../../public/js/spirits.js";
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { getDrinkSpirits, ingredientsContainSpirit } from '../../public/js/spirits.js';
@@ -16,3 +18,5 @@ test('empty recipes and unknown categories do not match', () => {
   assert.deepEqual(getDrinkSpirits('citronjuice;sockerlag'), []);
   assert.equal(ingredientsContainSpirit('vodka', 'Unknown'), false);
 });
+
+setSpirits(JSON.parse(readFileSync(new URL("../spirits.json", import.meta.url), "utf8")));

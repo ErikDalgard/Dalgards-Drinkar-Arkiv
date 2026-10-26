@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Vodka",
+    "synonyms": [
+      "vodka",
+      "vaniljvodka",
+      "citronvodka",
+      "citrongräsinfluerad vodka"
+    ]
+  },
+  {
+    "name": "Gin",
+    "synonyms": [
+      "gin",
+      "london dry gin",
+      "old tom gin",
+      "sloe gin",
+      "rejmyregin",
+      "westerviks gin",
+      "rönnbärsgin"
+    ]
+  },
+  {
+    "name": "Ljus Rom",
+    "synonyms": [
+      "ljus rom",
+      "vit rom"
+    ]
+  },
+  {
+    "name": "Mörk Rom",
+    "synonyms": [
+      "mörk rom",
+      "demarara rom",
+      "demerara rom"
+    ]
+  },
+  {
+    "name": "Tequila",
+    "synonyms": [
+      "tequila",
+      "mezcal"
+    ]
+  },
+  {
+    "name": "Whiskey",
+    "synonyms": [
+      "whiskey",
+      "bourbon",
+      "rågwhiskey",
+      "rye",
+      "scotch",
+      "skotsk blended whiskey",
+      "fireball"
+    ]
+  },
+  {
+    "name": "Cognac",
+    "synonyms": [
+      "cognac",
+      "konjak",
+      "brandy"
+    ]
+  },
+  {
+    "name": "Calvados",
+    "synonyms": [
+      "calvados"
+    ]
+  },
+  {
+    "name": "Limoncello",
+    "synonyms": [
+      "limoncello"
+    ]
+  },
+  {
+    "name": "Aperitif & Bitter",
+    "synonyms": [
+      "campari",
+      "carmpano bitter",
+      "aperol",
+      "gammel dansk",
+      "dubonnet",
+      "fernet branca",
+      "lillet",
+      "kina lillet"
+    ]
+  },
+  {
+    "name": "Vermouth",
+    "synonyms": [
+      "vermouth",
+      "vermuth",
+      "röd vermouth",
+      "söt vermouth",
+      "torr vermouth"
+    ]
+  }
+]
