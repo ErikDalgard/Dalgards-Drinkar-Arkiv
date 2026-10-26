@@ -1,0 +1,6 @@
+# Only publish the static website. Keep dependencies, tests and config private.
+*
+!index.html
+!admin.html
+!public/
+!public/**
