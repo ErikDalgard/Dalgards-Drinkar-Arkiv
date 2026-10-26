@@ -50,8 +50,4 @@ dalgardsdrinkar/
 
 ## CI & tests
 
-GitHub Actions runs API tests and TypeScript checks on every push and pull request. Tests use isolated local D1 and R2 storage, without touching development or production data.
-
-Run locally from `api/` with `npm run test:run`.
-
-Frontend checks run in CI too. From `client/`, run `npm ci` and `npm test` for logic tests. For browser tests, first run `npx playwright install chromium`, then `npm run test:e2e`. Browser tests cover search suggestions and opening the correct recipe on desktop and mobile, using test data instead of the live API.
+GitHub Actions runs API and Frontend tests and TypeScript checks on every push and pull request. Tests use isolated local D1 and R2 storage, without touching development or production data.
