@@ -3,12 +3,14 @@ import { createFilters } from "./filters.js";
 import { makeCard } from "./cards.js";
 import { createDrinkDialog } from "./dialogs.js";
 import { createDrinkNavigation } from "./drink-links.js";
+import { createSearchSuggestions } from "./search-suggestions.js";
 let allVideos = [];
 let currentPage = 1;
 const PAGE_SIZE = 24;
 let filters;
 let drinkDialog;
 let drinkNavigation;
+let searchSuggestions;
 async function init() {
     try {
         const res = await fetch(`${API_BASE}/drinks`);
@@ -31,11 +33,13 @@ async function init() {
     });
     drinkDialog = createDrinkDialog(filters.filterByTheme, () => drinkNavigation.close(), filters.filterBySpirit);
     drinkNavigation = createDrinkNavigation(allVideos, drinkDialog);
+    searchSuggestions = createSearchSuggestions(drinkNavigation.open);
     render();
     drinkNavigation.restore();
 }
 function render() {
     const filtered = filters.apply(allVideos);
+    searchSuggestions?.update(filtered);
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
     currentPage = Math.max(1, Math.min(currentPage, totalPages));
     const start = (currentPage - 1) * PAGE_SIZE;
