@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dalgardsdrinkar",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-08-13",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/",
+      "/index.html"
+    ]
+  },
+  "vars": {
+    "API_BASE_URL": "https://dalgardsdrinkar-api.dalgard-erik.workers.dev",
+    "MEDIA_BASE_URL": "https://pub-bc043636a580470b9ca005f040b69b9c.r2.dev/",
+    "SITE_URL": "https://dalgardsdrinkar.dalgard-erik.workers.dev/"
+  },
+  "env": {
+    "local": {
+      "vars": {
+        "API_BASE_URL": "http://127.0.0.1:8787",
+        "MEDIA_BASE_URL": "https://pub-83faa7a86a754e4cb75268aefbb4d7c9.r2.dev/",
+        "SITE_URL": "http://127.0.0.1:8788/"
+      }
+    }
+  }
+}

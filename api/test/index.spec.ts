@@ -118,3 +118,17 @@ describe("media uploads", () => {
     expect(response.status).toBe(400); expect(await response.json()).toHaveProperty("error");
   });
 });
+
+describe("individual drink links", () => {
+  it("loads a drink by id without authentication", async () => {
+    const id = await create();
+    const response = await request(`/drinks/${id}`);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ...sample, id });
+  });
+  it("returns JSON 404 when the drink does not exist", async () => {
+    const response = await request('/drinks/999');
+    expect(response.status).toBe(404);
+    expect(await response.json()).toEqual({ error: 'Drink not found' });
+  });
+});

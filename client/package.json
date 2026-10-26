@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/logic/*.test.js",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "dev": "npx wrangler@latest dev --env local --ip 127.0.0.1 --port 8788"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

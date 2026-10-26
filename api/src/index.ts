@@ -33,6 +33,17 @@ export default {
       });
     }
 
+    // GET /drinks/:id — public lookup for individual drink links and metadata.
+    const getMatch = url.pathname.match(/^\/drinks\/(\d+)$/);
+    if (getMatch && request.method === "GET") {
+      const row = await env.DB.prepare("SELECT * FROM drinks WHERE id=?")
+        .bind(getMatch[1]).first();
+      return Response.json(row ? rowToDrink(row) : { error: "Drink not found" }, {
+        status: row ? 200 : 404,
+        headers: corsHeaders,
+      });
+    }
+
     // POST /drinks — skapa ny drink, KRÄVER nyckel
     if (url.pathname === "/drinks" && request.method === "POST") {
       if (!isAuthorized(request)) {
