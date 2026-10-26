@@ -1,7 +1,7 @@
 import { themeHue } from "./themes.js";
 import { formatDrinkDate } from "./utils.js";
 import { renderRecipeGroups, renderTasteProfile, renderSpiritLinks } from "./recipes.js";
-export function createDrinkDialog(onThemeSelect, onClose = () => {}, onSpiritSelect = () => {}) {
+export function createDrinkDialog(onThemeSelect, onClose = () => {}, onSpiritSelect = () => {}, mediaUrl = (path) => `${R2_BASE_URL}${path}`) {
     let modalTrigger = null;
     let previousBodyOverflow = "";
     function openModal(v) {
@@ -11,8 +11,8 @@ export function createDrinkDialog(onThemeSelect, onClose = () => {}, onSpiritSel
             previousBodyOverflow = document.body.style.overflow;
         }
         document.body.style.overflow = "hidden";
-        document.getElementById("modal-video").src = `${R2_BASE_URL}${v.url}`;
-        document.getElementById("modal-video").poster = v.photo ? `${R2_BASE_URL}${v.photo}` : "";
+        document.getElementById("modal-video").src = mediaUrl(v.url);
+        document.getElementById("modal-video").poster = v.photo ? mediaUrl(v.photo) : "";
         document.getElementById("modal-drink").textContent =
             v.drink;
         const modalTheme = document.getElementById("modal-theme");
