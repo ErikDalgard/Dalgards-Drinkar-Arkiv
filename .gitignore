@@ -10,3 +10,5 @@ dist/
 .gsheet
 
 .vscode/
+client/test-results/
+client/playwright-report/

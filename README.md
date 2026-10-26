@@ -27,13 +27,23 @@ dalgardsdrinkar/
 │   │   ├── css/                 
 │   │   └── js/                  
 │   ├── index.html               # Main recipe page
-│   └── admin.html               # Admin panel to manage drinks
+│   ├── admin.html               # Admin panel to manage drinks
+│   ├── test/
+│   │   ├── logic/               # Frontend logic tests
+│   │   ├── browser/             # Playwright browser tests
+│   │   └── server.js            # Local server for browser tests
+│   ├── playwright.config.js     # Desktop and mobile test configuration
+│   └── package.json             # Frontend test tools and commands
 │
 ├── api/                         # Backend (mostly Cloudflare boilerplate)
 │   ├── src/                     # API routes & logic (index.ts)
+│   ├── test/                    # API tests (index.spec.ts) and test types
+│   ├── vitest.config.mts         # Isolated local D1 and R2 test configuration
 │   ├── wrangler.jsonc           # D1 and R2 configuration
 │   └── ...                      # Auto-generated files (package.json, tsconfig, etc.)
 │
+├── .github/workflows/
+│   └── api-tests.yml             # API and frontend CI checks
 ├── .gitignore                   # Ignores node_modules, .wrangler, etc.
 └── README.md
 ```
@@ -43,3 +53,5 @@ dalgardsdrinkar/
 GitHub Actions runs API tests and TypeScript checks on every push and pull request. Tests use isolated local D1 and R2 storage, without touching development or production data.
 
 Run locally from `api/` with `npm run test:run`.
+
+Frontend checks run in CI too. From `client/`, run `npm ci` and `npm test` for logic tests. For browser tests, first run `npx playwright install chromium`, then `npm run test:e2e`. Browser tests cover search suggestions and opening the correct recipe on desktop and mobile, using test data instead of the live API.
