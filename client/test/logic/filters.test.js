@@ -1,3 +1,4 @@
+import { setSpirits } from "../../public/js/spirits.js";
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -36,3 +37,5 @@ test('search, dates, exclusive spirit links and clear-filter behavior', () => {
     dom.window.close(); delete globalThis.document; delete globalThis.window;
   }
 });
+
+setSpirits(JSON.parse(readFileSync(new URL("../spirits.json", import.meta.url), "utf8")));

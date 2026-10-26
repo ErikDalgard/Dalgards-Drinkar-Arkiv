@@ -1,90 +1,32 @@
-export const SPIRITS = [
-    "Vodka",
-    "Gin",
-    "Ljus Rom",
-    "Mörk Rom",
-    "Tequila",
-    "Whiskey",
-    "Cognac",
-    "Calvados",
-    "Limoncello",
-    "Aperitif & Bitter",
-    "Vermouth",
-];
-export const SPIRIT_SYNONYMS = {
-    Vodka: [
-        "vodka",
-        "vaniljvodka",
-        "citronvodka",
-        "citrongräsinfluerad vodka",
-    ],
-    Gin: [
-        "gin",
-        "london dry gin",
-        "old tom gin",
-        "sloe gin",
-        "rejmyregin",
-        "westerviks gin",
-        "rönnbärsgin",
-    ],
-    "Ljus Rom": [
-        "ljus rom",
-        "vit rom",
-    ],
-    "Mörk Rom": [
-        "mörk rom",
-        "demarara rom",
-        "demerara rom",
-    ],
-    Tequila: [
-        "tequila",
-        "mezcal",
-    ],
-    Whiskey: [
-        "whiskey",
-        "bourbon",
-        "rågwhiskey",
-        "rye",
-        "scotch",
-        "skotsk blended whiskey",
-        "fireball",
-    ],
-    Cognac: [
-        "cognac",
-        "konjak",
-        "brandy",
-    ],
-    Calvados: [
-        "calvados",
-    ],
-    Limoncello: [
-        "limoncello",
-    ],
-    "Aperitif & Bitter": [
-        "campari",
-        "carmpano bitter",
-        "aperol",
-        "gammel dansk",
-        "dubonnet",
-        "fernet branca",
-        "lillet",
-        "kina lillet",
-    ],
-    Vermouth: [
-        "vermouth",
-        "vermuth",
-        "röd vermouth",
-        "söt vermouth",
-        "torr vermouth",
-    ],
-};
+// The API catalog is shared by filters, recipes and the admin preview.
+export const SPIRITS = [];
+export const SPIRIT_SYNONYMS = Object.create(null);
+
+export function setSpirits(catalog) {
+    if (!Array.isArray(catalog) || catalog.some((item) =>
+        !item || typeof item.name !== "string" || !item.name.trim() ||
+        !Array.isArray(item.synonyms) || item.synonyms.some((word) => typeof word !== "string"))) {
+        throw new Error("Ogiltig lista med spritsorter");
+    }
+    SPIRITS.splice(0, SPIRITS.length, ...catalog.map((item) => item.name));
+    Object.keys(SPIRIT_SYNONYMS).forEach((name) => delete SPIRIT_SYNONYMS[name]);
+    catalog.forEach(({ name, synonyms }) => { SPIRIT_SYNONYMS[name] = [...synonyms]; });
+}
+
+export async function loadSpirits(apiBase) {
+    const response = await fetch(`${apiBase}/spirits`);
+    if (!response.ok) throw new Error(`Kunde inte ladda spritsorter (HTTP ${response.status})`);
+    const catalog = await response.json();
+    setSpirits(catalog);
+    return catalog;
+}
 
 // Match any synonym in the selected category, not just its display name.
 export function ingredientsContainSpirit(ingredients, selectedSpirit) {
     if (!ingredients || !selectedSpirit) return false;
     const text = ingredients.toLowerCase();
     const synonyms = SPIRIT_SYNONYMS[selectedSpirit] ?? [];
-    return synonyms.some((synonym) => text.includes(synonym.toLowerCase()));
+    return synonyms.some((synonym) => synonym && text.includes(synonym.toLowerCase()));
 }
 
 export function getDrinkSpirits(ingredients) {

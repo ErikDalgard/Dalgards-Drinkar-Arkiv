@@ -1,3 +1,4 @@
+import { createSpiritEditor } from "./admin-spirits.js";
 import { createAdminPreview } from "./admin-preview.js";
 
 // ============================================
@@ -14,6 +15,7 @@ let isSaving = false;
 const ingredientFields = createRecipeFields("ingredients", "Ingrediens", false);
 const stepFields = createRecipeFields("steps", "Steg", true);
 const preview = createAdminPreview();
+const spiritEditor = createSpiritEditor(() => adminKey, showToast);
 
 function collectDrink() {
   return {
@@ -31,6 +33,9 @@ function collectDrink() {
 function updateFormActions() {
   const missing = validateForm();
   const disabled = isSaving || missing.length > 0;
+  document.querySelectorAll("[data-admin-mode]").forEach((button) => {
+    button.disabled = isSaving;
+  });
   ["submit-btn", "edit-submit-btn", "preview-btn"].forEach((id) => {
     document.getElementById(id).disabled = disabled;
   });
@@ -85,6 +90,7 @@ async function login() {
     document.getElementById("admin-wrap").classList.add("logged-in");
 
     loadDrinks();
+    spiritEditor.load();
   } catch (err) {
     alert("Kunde inte ansluta till servern.");
   }
@@ -117,34 +123,43 @@ async function loadDrinks() {
 // Mode Selection
 // ============================================
 
-document.getElementById("mode-select").addEventListener("change", (e) => {
-  const isEdit = e.target.value === "edit";
-  const form = document.getElementById("drink-form");
+let drinkMode = "add";
 
-  document.getElementById("edit-picker-group").style.display =
-    isEdit ? "block" : "none";
+function selectAdminMode(mode) {
+  document.querySelectorAll("[data-admin-mode]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.adminMode === mode));
+  });
+  document.getElementById("admin-drinks-view").hidden = mode === "filters";
+  document.getElementById("admin-filters-view").hidden = mode !== "filters";
+
+  // Switching to filters and back keeps the current drink draft/search intact.
+  if (mode === "filters" || mode === drinkMode) return;
+  drinkMode = mode;
+  const isEdit = mode === "edit";
+  const form = document.getElementById("drink-form");
+  document.getElementById("edit-picker-group").style.display = isEdit ? "block" : "none";
 
   if (isEdit) {
-    // Redigeringsläge – visa inte formuläret förrän en drink valts
+    // Show the form once a drink has been selected.
     form.style.display = "none";
-
     document.getElementById("submit-btn").style.display = "none";
     document.getElementById("edit-submit-btn").style.display = "none";
     document.getElementById("delete-btn").style.display = "none";
-
   } else {
-    // Lägg till-läge – formuläret visas direkt
     clearForm();
-
     editSearch.value = "";
     editResults.classList.remove("open");
-
     form.style.display = "grid";
-
     document.getElementById("submit-btn").style.display = "inline-block";
     document.getElementById("edit-submit-btn").style.display = "none";
     document.getElementById("delete-btn").style.display = "none";
   }
+}
+
+document.querySelectorAll("[data-admin-mode]").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!isSaving) selectAdminMode(button.dataset.adminMode);
+  });
 });
 
 
@@ -602,7 +617,7 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
 
     clearForm();
     if (isEdit) {
-      document.getElementById("mode-select").value = "add";
+      selectAdminMode("add");
       document.getElementById("edit-picker-group").style.display = "none";
       document.getElementById("submit-btn").style.display = "inline-block";
       document.getElementById("edit-submit-btn").style.display = "none";
@@ -665,7 +680,7 @@ document.getElementById("delete-btn").addEventListener("click", async () => {
     editSearch.value = "";
     editResults.classList.remove("open");
 
-  document.getElementById("mode-select").value = "add";
+  selectAdminMode("add");
   document.getElementById("edit-picker-group").style.display = "none";
 
   document.getElementById("submit-btn").style.display = "inline-block";

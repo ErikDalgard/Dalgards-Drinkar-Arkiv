@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+const spirits = JSON.parse(readFileSync(new URL("../spirits.json", import.meta.url), "utf8"));
 import { test, expect } from '@playwright/test';
 const savedDrink = {
   id: 42, date: '2026-01-02', drink: 'Test Sour', theme: 'Fredag', note: 'Sparad drink',
@@ -11,6 +13,7 @@ test.beforeEach(async ({ page }) => {
     const request = route.request();
     const url = new URL(request.url());
     if (url.origin === 'http://localhost:8787') {
+      if (url.pathname === '/spirits') return route.fulfill({ json: spirits });
       if (url.pathname === '/admin/verify') return route.fulfill({ json: { success: true } });
       if (url.pathname === '/drinks' && request.method() === 'GET') return route.fulfill({ json: [savedDrink] });
       writes.push({ path: url.pathname, body: request.postDataJSON() });
@@ -56,7 +59,7 @@ test('required fields gate preview/save; local preview uploads nothing and retai
   await expect(preview).toBeDisabled();
 });
 test('existing media enables edit preview; saving resets action availability', async ({ page }) => {
-  await page.locator('#mode-select').selectOption('edit');
+  await page.getByRole('button', { name: 'Redigera en drink', exact: true }).click();
   await page.locator('#edit-search').fill('Test Sour');
   await page.locator('.edit-search-result').click();
   const save = page.locator('#edit-submit-btn');
@@ -76,4 +79,33 @@ test('existing media enables edit preview; saving resets action availability', a
   await expect(page.locator('#submit-btn')).toBeDisabled();
   await expect(preview).toBeDisabled();
   expect(writes).toEqual([{ path: '/drinks/42', body: { ...savedDrink, id: undefined, drink: 'Edited Sour' } }]);
+});
+
+test('admin navigation separates views and keeps drafts when visiting filters', async ({ page }) => {
+  const add = page.getByRole('button', { name: 'Lägg till drink', exact: true }).first();
+  const edit = page.getByRole('button', { name: 'Redigera en drink', exact: true });
+  const filters = page.getByRole('button', { name: 'Redigera filter', exact: true });
+  await expect(add).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#drink-form')).toBeVisible();
+  await expect(page.locator('#edit-picker-group')).toBeHidden();
+  await expect(page.locator('#admin-filters-view')).toBeHidden();
+  await page.locator('#f-drink').fill('Osparad drink');
+  await filters.click();
+  await expect(filters).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#admin-drinks-view')).toBeHidden();
+  await expect(page.locator('#admin-filters-view')).toBeVisible();
+  await add.click();
+  await expect(page.locator('#f-drink')).toHaveValue('Osparad drink');
+  await edit.click();
+  await expect(page.locator('#edit-picker-group')).toBeVisible();
+  await expect(page.locator('#drink-form')).toBeHidden();
+  await page.locator('#edit-search').fill('Test Sour');
+  await page.locator('.edit-search-result').click();
+  await expect(page.locator('#f-drink')).toHaveValue('Test Sour');
+  await filters.click();
+  await edit.click();
+  await expect(page.locator('#f-drink')).toHaveValue('Test Sour');
+  await expect(page.locator('#edit-submit-btn')).toBeVisible();
+  await expect(edit).toHaveAttribute('aria-pressed', 'true');
+  expect(writes).toEqual([]);
 });

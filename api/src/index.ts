@@ -22,6 +22,61 @@ export default {
       return providedKey === env.ADMIN_KEY;
     }
 
+    // GET /spirits — hämta spritsorter och sökord, publik
+    if (url.pathname === "/spirits" && request.method === "GET") {
+      const { results } = await env.DB.prepare(
+        "SELECT name, synonyms FROM spirits ORDER BY position"
+      ).all();
+      const spirits = results.map((row: { name: string; synonyms: string }) => ({
+        name: row.name,
+        synonyms: JSON.parse(row.synonyms),
+      }));
+      return Response.json(spirits, { headers: corsHeaders });
+    }
+
+    // PUT /spirits — spara hela listan, KRÄVER nyckel
+    if (url.pathname === "/spirits" && request.method === "PUT") {
+      if (!isAuthorized(request)) {
+        return Response.json({ error: "Unauthorized" }, {
+          status: 401,
+          headers: corsHeaders,
+        });
+      }
+
+      let body: unknown;
+      try {
+        body = await request.json();
+      } catch {
+        return Response.json({ error: "Ogiltig JSON" }, {
+          status: 400,
+          headers: corsHeaders,
+        });
+      }
+
+      const catalog = validateSpirits(body);
+      if (!catalog) {
+        return Response.json({
+          error: "Ange unika spritsorter (max 50), namn (max 80 tecken) och minst ett sökord per sort (max 100 sökord à 100 tecken).",
+        }, { status: 400, headers: corsHeaders });
+      }
+
+      // Alla ändringar görs tillsammans. Vid fel behålls den gamla listan.
+      await env.DB.batch([
+        env.DB.prepare("DELETE FROM spirits"),
+        ...catalog.map((item, index) => env.DB.prepare(
+          "INSERT INTO spirits (name, synonyms, position) VALUES (?, ?, ?)"
+        ).bind(item.name, JSON.stringify(item.synonyms), index)),
+      ]);
+      return Response.json(catalog, { headers: corsHeaders });
+    }
+
+    if (url.pathname === "/spirits") {
+      return new Response("Method not allowed", {
+        status: 405,
+        headers: { ...corsHeaders, Allow: "GET, PUT, OPTIONS" },
+      });
+    }
+
     // GET /drinks — hämta alla, publik, ingen nyckel krävs
     if (url.pathname === "/drinks" && request.method === "GET") {
       const { results } = await env.DB.prepare(
@@ -372,4 +427,28 @@ function rowToDrink(row: any) {
     steps: row.steps || "",
     taste: row.taste || "",
   };
+}
+
+type Spirit = { name: string; synonyms: string[] };
+
+// Validate the complete draft before replacing anything in the database.
+function validateSpirits(value: unknown): Spirit[] | null {
+  if (!Array.isArray(value) || value.length > 50) return null;
+  const names = new Set<string>();
+  const catalog: Spirit[] = [];
+  for (const item of value) {
+    if (!item || typeof item.name !== "string" || !Array.isArray(item.synonyms)) return null;
+    const name = item.name.trim();
+    if (!name || name.length > 80 || names.has(name.toLowerCase()) || item.synonyms.length > 100) return null;
+    names.add(name.toLowerCase());
+    const synonyms: string[] = [];
+    for (const word of item.synonyms) {
+      if (typeof word !== "string" || !word.trim() || word.trim().length > 100) return null;
+      const normalized = word.trim().toLowerCase();
+      if (!synonyms.includes(normalized)) synonyms.push(normalized);
+    }
+    if (!synonyms.length) return null;
+    catalog.push({ name, synonyms });
+  }
+  return catalog;
 }
