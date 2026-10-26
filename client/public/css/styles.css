@@ -2361,3 +2361,47 @@ textarea.admin-recipe-value {
   .admin-navigation { gap: .35rem; }
   .admin-nav-button { padding: .65rem .3rem; font-size: 1rem; }
 }
+
+/* Recipe headings are separate from ingredients and numbered steps. */
+.admin-recipe-row-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+.admin-recipe-type {
+  width: auto;
+  max-width: 55%;
+  min-height: 40px;
+  padding: .35rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+.admin-recipe-heading-row {
+  padding: .75rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background: var(--surface-hover);
+}
+.admin-recipe-heading-row .admin-recipe-value { font-weight: 700; }
+.admin-recipe-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.modal .recipe-subsection {
+  padding: .85rem 1rem;
+  border: 1px solid rgba(110, 68, 35, .14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .4);
+}
+.modal .recipe-subsection + .recipe-subsection { margin-top: .8rem; }
+.modal .recipe-subheading {
+  margin: 0 0 .5rem;
+  color: var(--accent);
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}

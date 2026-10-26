@@ -90,16 +90,43 @@ function makeRecipeSection(title, items, ordered) {
     heading.className = "recipe-heading";
     heading.textContent = title;
     section.appendChild(heading);
-    const list = document.createElement(ordered ? "ol" : "ul");
-    list.className = ordered ? "recipe-steps" : "recipe-ingredients";
-    // Preserve list semantics in Safari when removing the default markers.
-    list.setAttribute("role", "list");
+    const groups = [];
+    let current = { title: "", items: [] };
     items.forEach((text) => {
-        const item = document.createElement("li");
-        item.textContent = text;
-        list.appendChild(item);
+        const heading = text.match(/^#\s+(.+)$/s);
+        if (heading) {
+            if (current.title || current.items.length) groups.push(current);
+            current = { title: heading[1], items: [] };
+        } else {
+            current.items.push(text);
+        }
     });
-    section.appendChild(list);
+    if (current.title || current.items.length) groups.push(current);
+    const hasHeadings = groups.some((group) => group.title);
+    groups.forEach((group) => {
+        const target = hasHeadings ? document.createElement("div") : section;
+        if (hasHeadings) {
+            target.className = "recipe-subsection";
+            section.appendChild(target);
+        }
+        if (group.title) {
+            const subtitle = document.createElement("h4");
+            subtitle.className = "recipe-subheading";
+            subtitle.textContent = group.title;
+            target.appendChild(subtitle);
+        }
+        if (!group.items.length) return;
+        const list = document.createElement(ordered ? "ol" : "ul");
+        list.className = ordered ? "recipe-steps" : "recipe-ingredients";
+        // Preserve list semantics in Safari when removing the default markers.
+        list.setAttribute("role", "list");
+        group.items.forEach((text) => {
+            const item = document.createElement("li");
+            item.textContent = text;
+            list.appendChild(item);
+        });
+        target.appendChild(list);
+    });
     return section;
 }
 

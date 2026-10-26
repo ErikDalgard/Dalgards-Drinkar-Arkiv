@@ -109,3 +109,29 @@ test('admin navigation separates views and keeps drafts when visiting filters', 
   await expect(edit).toHaveAttribute('aria-pressed', 'true');
   expect(writes).toEqual([]);
 });
+
+test('recipe headings can be added, previewed and saved using the existing API fields', async ({ page }) => {
+  await page.getByRole('button', { name: 'Redigera en drink', exact: true }).click();
+  await page.locator('#edit-search').fill('Test Sour');
+  await page.locator('.edit-search-result').click();
+  for (const kind of ['ingredients', 'steps']) {
+    const first = page.locator(`#f-${kind} .admin-recipe-row`).first();
+    await first.locator('select').selectOption('heading');
+    await first.locator('.admin-recipe-value').fill('Drinken');
+    await page.locator(`#add-${kind}-heading`).click();
+    await page.locator(`#f-${kind} .admin-recipe-row`).last().locator('.admin-recipe-value').fill('Bärsyrup');
+    await page.locator(`#add-${kind}`).click();
+    await page.locator(`#f-${kind} .admin-recipe-row`).last().locator('.admin-recipe-value').fill(kind === 'ingredients' ? '150 g bär' : 'Koka vatten och socker');
+  }
+  await page.locator('#preview-btn').click();
+  await expect(page.locator('#recipe-groups h4')).toHaveText(['Drinken', 'Bärsyrup', 'Drinken', 'Bärsyrup']);
+  await expect(page.locator('#recipe-groups ul li')).toHaveText(['3 cl citronjuice', '150 g bär']);
+  await expect(page.locator('#recipe-groups ol li')).toHaveText(['Sila', 'Koka vatten och socker']);
+  expect(writes).toEqual([]);
+  await page.keyboard.press('Escape');
+  await page.locator('#edit-submit-btn').click();
+  await expect(page.locator('#f-drink')).toHaveValue('');
+  expect(writes).toHaveLength(1);
+  expect(writes[0].body.ingredients).toBe('# Drinken;3 cl citronjuice;# Bärsyrup;150 g bär');
+  expect(writes[0].body.steps).toBe('# Drinken;Sila;# Bärsyrup;Koka vatten och socker');
+});
