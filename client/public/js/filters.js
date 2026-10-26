@@ -309,6 +309,11 @@ export function createFilters(themes, onChange) {
         .addEventListener("change", () => {
         notifyChange();
     });
+    document.getElementById("empty-reset").addEventListener("click", () => {
+        document.getElementById("search").value = "";
+        resetFilters();
+        document.getElementById("search").focus({ preventScroll: true });
+    });
     document.getElementById("active-filter-clear").addEventListener("click", () => {
         resetFilters();
         document.getElementById("search").focus({ preventScroll: true });

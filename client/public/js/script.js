@@ -18,9 +18,9 @@ async function init() {
     }
     catch (err) {
         console.error(err);
-        const empty = document.getElementById("empty");
-        empty.textContent = "Kunde inte ladda urkällan. Försök igen om en stund!";
-        empty.style.display = "block";
+        document.body.classList.add("archive-unavailable");
+        document.getElementById("load-error").hidden = false;
+        document.getElementById("load-error-title").focus({ preventScroll: true });
         return;
     }
     const themes = [...new Set(allVideos.map((v) => v.theme))].filter(Boolean).sort();
@@ -112,4 +112,7 @@ function renderPagination(totalPages) {
     el.appendChild(next);
     el.appendChild(last);
 }
+document.getElementById("load-retry").addEventListener("click", () => {
+    window.location.reload();
+});
 init();

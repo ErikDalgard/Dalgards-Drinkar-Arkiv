@@ -22,6 +22,17 @@
     <span class="logo-sub">Urkällan</span>
   </h1>
 </header>
+<section class="load-error" id="load-error" aria-labelledby="load-error-title" hidden>
+  <div class="load-error-content">
+    <img src="public/assets/glass.png" alt="" class="load-error-glass">
+    <h2 id="load-error-title" tabindex="-1">Urkällan vilar lite just nu</h2>
+    <p>Vi verkar ha fått lite tekniska problem. Prova igen om en stund!</p>
+    <button type="button" id="load-retry">Försök igen</button>
+    <p class="load-error-contact">Kvarstår problemet? Hör av dig till
+      <a href="https://www.instagram.com/dalgardsdrinkar/" target="_blank" rel="noopener">Dalgardssupporten</a>.
+    </p>
+  </div>
+</section>
 <div class="controls">
   <div class="search-wrapper">
     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -98,7 +109,10 @@
   <a class="drink-link-home" id="drink-link-home" href="./">Tillbaka</a>
 </section>
 <div class="grid" id="grid"></div>
-<p class="empty" id="empty" style="display:none;">Inga videos matchar sökningen.</p>
+<section class="empty" id="empty" aria-labelledby="empty-title" style="display:none;">
+  <h2 id="empty-title">Inget resultat hittades i urkällan!</h2>
+  <button type="button" id="empty-reset">Rensa sökning och filter</button>
+</section>
 <div class="pagination" id="pagination"></div>
 
 <div class="theme-modal-backdrop" id="theme-modal-backdrop">
