@@ -22,7 +22,14 @@
         "API_BASE_URL": "http://127.0.0.1:8787",
         "MEDIA_BASE_URL": "https://pub-83faa7a86a754e4cb75268aefbb4d7c9.r2.dev/",
         "SITE_URL": "http://127.0.0.1:8788/"
-      }
+      },
+      "services": []
     }
-  }
+  },
+  "services": [
+    {
+      "binding": "API",
+      "service": "dalgardsdrinkar-api"
+    }
+  ]
 }

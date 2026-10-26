@@ -26,6 +26,25 @@ describe('server-side share metadata', () => {
     expect(response.headers.get('ETag')).toBeNull();
     expect(response.headers.get('Cache-Control')).toBe('no-store');
   });
+  it('uses the internal API service binding in production, not public fetch', async () => {
+    let requestedPath = '';
+    const response = await frontend.fetch(new Request('https://site.example.test/?drink=42'), {
+      ...config,
+      API: { fetch: async (request: Request) => {
+        requestedPath = new URL(request.url).pathname;
+        return Response.json(drink);
+      } },
+    });
+    expect(requestedPath).toBe('/drinks/42');
+    expect(await response.text()).toContain('property="og:title" content="Whiskey Sour"');
+  });
+  it('does not label a routing failure as a missing drink', async () => {
+    fetchMock.get(config.API_BASE_URL).intercept({ path: '/drinks/42' })
+      .reply(404, 'Not found', { headers: { 'Content-Type': 'text/plain' } });
+    const response = await get();
+    expect(response.status).toBe(200);
+    expect(await response.text()).toContain('property="og:title" content="Dalgards Drinkar – Urkällan"');
+  });
   it('escapes drink names and notes', async () => {
     lookup(200, { ...drink, drink: 'Gin "special" <script>alert(1)</script>', note: 'A & B "quoted"' });
     const body = await (await get()).text();

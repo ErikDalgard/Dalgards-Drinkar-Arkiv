@@ -20,11 +20,18 @@ export default {
     let notFound = !/^\d+$/.test(id);
     if (!notFound) {
       try {
-        const response = await fetch(`${env.API_BASE_URL}/drinks/${encodeURIComponent(id)}`, {
+        const apiRequest = new Request(`${env.API_BASE_URL}/drinks/${encodeURIComponent(id)}`, {
           signal: AbortSignal.timeout(4000),
         });
-        if (response.status === 404) notFound = true;
-        else if (response.ok) {
+        // Production Workers communicate internally; local dev uses the local API URL.
+        const response = env.API ? await env.API.fetch(apiRequest) : await fetch(apiRequest);
+        if (response.status === 404) {
+          // Only an explicit API error proves the drink is missing, not a routing 404.
+          if (response.headers.get('Content-Type')?.includes('application/json')) {
+            const error = await response.json();
+            notFound = error.error === 'Drink not found';
+          }
+        } else if (response.ok) {
           const data = await response.json();
           if (String(data.id) === id && typeof data.drink === 'string') drink = data;
         }
