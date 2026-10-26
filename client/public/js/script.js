@@ -29,7 +29,7 @@ async function init() {
         currentPage = 1;
         render();
     });
-    drinkDialog = createDrinkDialog(filters.filterByTheme, () => drinkNavigation.close());
+    drinkDialog = createDrinkDialog(filters.filterByTheme, () => drinkNavigation.close(), filters.filterBySpirit);
     drinkNavigation = createDrinkNavigation(allVideos, drinkDialog);
     render();
     drinkNavigation.restore();

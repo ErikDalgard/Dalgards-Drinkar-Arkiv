@@ -2108,3 +2108,32 @@ textarea.admin-recipe-value {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
+
+.recipe-spirit-links {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.recipe-spirit-links[hidden] {
+  display: none;
+}
+.recipe-spirit-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.recipe-spirit-button {
+  min-height: 44px;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background: hsl(var(--spirit-hue), 45%, 88%);
+  color: hsl(var(--spirit-hue), 45%, 30%);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.recipe-spirit-button:hover {
+  background: hsl(var(--spirit-hue), 45%, 82%);
+}

@@ -1,3 +1,6 @@
+import { getDrinkSpirits } from "./spirits.js";
+import { hashHue } from "./utils.js";
+
 const TASTE_LABELS = [
     "Sötma",
     "Syra",
@@ -98,4 +101,29 @@ function makeRecipeSection(title, items, ordered) {
     });
     section.appendChild(list);
     return section;
+}
+
+export function renderSpiritLinks(ingredients, onSpiritSelect) {
+    const container = document.getElementById("recipe-spirit-links");
+    container.replaceChildren();
+    const spirits = getDrinkSpirits(ingredients);
+    container.hidden = spirits.length === 0;
+    if (!spirits.length) return;
+    const heading = document.createElement("h3");
+    heading.className = "recipe-heading";
+    heading.textContent = "Fler drinkar med:";
+    container.appendChild(heading);
+    const buttons = document.createElement("div");
+    buttons.className = "recipe-spirit-buttons";
+    spirits.forEach((spirit) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "recipe-spirit-button";
+        button.textContent = spirit;
+        button.style.setProperty("--spirit-hue", hashHue(spirit));
+        button.setAttribute("aria-label", `Visa alla drinkar med ${spirit}`);
+        button.addEventListener("click", () => onSpiritSelect(spirit));
+        buttons.appendChild(button);
+    });
+    container.appendChild(buttons);
 }

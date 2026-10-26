@@ -1,7 +1,7 @@
 import { themeHue } from "./themes.js";
 import { formatDrinkDate } from "./utils.js";
-import { renderRecipeGroups, renderTasteProfile } from "./recipes.js";
-export function createDrinkDialog(onThemeSelect, onClose = () => {}) {
+import { renderRecipeGroups, renderTasteProfile, renderSpiritLinks } from "./recipes.js";
+export function createDrinkDialog(onThemeSelect, onClose = () => {}, onSpiritSelect = () => {}) {
     let modalTrigger = null;
     let previousBodyOverflow = "";
     function openModal(v) {
@@ -32,6 +32,10 @@ export function createDrinkDialog(onThemeSelect, onClose = () => {}) {
         document.getElementById("recipe-block").style.display = hasRecipe ? "block" : "none";
         renderRecipeGroups(v.ingredients, v.steps, v.drink);
         renderTasteProfile(v.taste);
+        renderSpiritLinks(v.ingredients, (spirit) => {
+            closeModal();
+            onSpiritSelect(spirit);
+        });
         document
             .getElementById("modal-backdrop")
             .classList.add("open");
