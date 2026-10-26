@@ -39,7 +39,7 @@
       <circle cx="11" cy="11" r="8"></circle>
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
-    <input id="search" type="text" placeholder="Sök efter en drink…">
+    <input id="search" type="text" placeholder="Sök efter en drink…" aria-label="Sök efter en drink" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestion-list" autocomplete="off">
   </div>
 
   <button id="filter-toggle" class="filter-toggle" type="button">
@@ -48,6 +48,13 @@
     </svg>
     <span id="filter-toggle-text">Visa filter</span>
   </button>
+  <div id="search-suggestions" class="search-suggestions" hidden>
+    <div class="search-suggestions-header">
+      <span id="search-suggestions-summary">Drinkförslag</span>
+      <button type="button" id="search-suggestions-close" aria-label="Stäng sökförslag">×</button>
+    </div>
+    <div id="search-suggestion-list" class="search-suggestion-list" role="listbox" aria-label="Drinkförslag"></div>
+  </div>
 </div>
 <div class="filter-panel" id="filter-panel">
     <div class="filter-group">

@@ -2137,3 +2137,114 @@ textarea.admin-recipe-value {
 .recipe-spirit-button:hover {
   background: hsl(var(--spirit-hue), 45%, 82%);
 }
+
+/* Anchor suggestions to the controls so they can span the full row on mobile. */
+.controls {
+  position: relative;
+}
+.search-suggestions[hidden] {
+  display: none;
+}
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 1.5rem;
+  right: calc(1.5rem + 9rem + 0.75rem);
+  z-index: 30;
+  padding: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 10px 25px rgba(58, 42, 28, 0.22);
+}
+.search-suggestions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-left: 0.65rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+#search-suggestions-close {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font: 1.6rem/1 sans-serif;
+  cursor: pointer;
+}
+#search-suggestions-close:hover {
+  background: var(--surface-hover);
+}
+#search-suggestions-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.search-suggestion-list {
+  max-height: min(288px, 45dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.search-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 64px;
+  padding: 0.55rem 0.65rem;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.search-suggestion + .search-suggestion {
+  border-top: 1px solid var(--border);
+}
+.search-suggestion:hover,
+.search-suggestion[aria-selected="true"] {
+  background: var(--surface-hover);
+}
+.search-suggestion img {
+  width: 44px;
+  height: 52px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.search-suggestion-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.search-suggestion-name,
+.search-suggestion-detail {
+  display: block;
+}
+.search-suggestion-name {
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.search-suggestion-detail {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+@media (max-width: 650px) {
+  .search-suggestions {
+    right: 1.5rem;
+  }
+  .search-suggestion {
+    gap: 0.5rem;
+    padding-inline: 0.4rem;
+  }
+  .search-suggestion-name {
+    font-size: 1.1rem;
+  }
+}
