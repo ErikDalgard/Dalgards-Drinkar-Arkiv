@@ -2248,3 +2248,30 @@ textarea.admin-recipe-value {
     font-size: 1.1rem;
   }
 }
+
+.admin-required-hint {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+#drink-form :is(#submit-btn, #edit-submit-btn, #preview-btn):disabled {
+  background: #e6ddd0;
+  border-color: #d2c5b2;
+  color: #756b5c;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+.preview-kicker {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin: 0 2rem 0.65rem 0;
+}
+.admin-preview #recipe-spirit-links {
+  display: none;
+}
+.admin-preview #modal-theme:disabled {
+  cursor: default;
+  opacity: 1;
+}

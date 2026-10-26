@@ -104,17 +104,19 @@
       <input type="hidden" id="f-photo-url">
       <input type="hidden" id="f-id">
 
-      <button type="submit" class="filter-toggle" id="submit-btn">
+      <button type="submit" class="filter-toggle" id="submit-btn" disabled>
         Lägg till drink
       </button>
 
-      <button type="submit" class="filter-toggle" id="edit-submit-btn" style="display:none;">
+      <button type="submit" class="filter-toggle" id="edit-submit-btn" disabled style="display:none;">
         Spara ändringar
       </button>
 
       <button type="button" class="filter-clear" id="delete-btn" style="display:none;">
         Ta bort denna drink
       </button>
+      <button type="button" class="filter-toggle" id="preview-btn" disabled>Förhandsgranska</button>
+
     </form>
 
     <div id="status-msg" class="upload-status">
@@ -124,8 +126,34 @@
   </div>
 </div>
 
+<dialog class="modal-backdrop admin-preview" id="modal-backdrop" aria-labelledby="modal-drink">
+  <div class="modal">
+    <button type="button" class="modal-close" id="modal-close" aria-label="Stäng förhandsgranskning">×</button>
+    <div class="modal-scroll">
+      <div class="modal-media"><video id="modal-video" controls playsinline preload="metadata"></video></div>
+      <div class="modal-info">
+        <p class="preview-kicker">Förhandsgranskning · Inte sparad</p>
+        <h2 id="modal-drink"></h2>
+        <div class="tag-row">
+          <button type="button" class="theme-tag" id="modal-theme" disabled></button>
+          <span class="date" id="modal-date"></span>
+        </div>
+        <p class="note" id="modal-note"></p>
+        <div class="recipe-block" id="recipe-block" style="display:none;">
+          <div id="recipe-groups"></div>
+        </div>
+        <div class="taste-profile" id="taste-profile" style="display:none;">
+          <p class="recipe-heading">Smakprofil</p>
+          <div class="taste-rows" id="taste-rows"></div>
+        </div>
+        <section id="recipe-spirit-links" class="recipe-spirit-links" aria-label="Fler drinkar med samma spritsort" hidden></section>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <script src="public/js/config.js"></script>
 <script src="public/js/admin-recipe-fields.js"></script>
-<script src="public/js/admin.js"></script>
+<script type="module" src="public/js/admin.js"></script>
 </body>
 </html>

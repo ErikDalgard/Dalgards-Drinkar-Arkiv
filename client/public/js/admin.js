@@ -1,3 +1,5 @@
+import { createAdminPreview } from "./admin-preview.js";
+
 // ============================================
 // Configuration & State
 // ============================================
@@ -7,9 +9,53 @@
 let adminKey = "";
 let allDrinks = [];
 let toastTimeout = null;
+let isSaving = false;
 
 const ingredientFields = createRecipeFields("ingredients", "Ingrediens", false);
 const stepFields = createRecipeFields("steps", "Steg", true);
+const preview = createAdminPreview();
+
+function collectDrink() {
+  return {
+    date: document.getElementById("f-date").value.trim(),
+    drink: document.getElementById("f-drink").value.trim(),
+    theme: document.getElementById("f-theme").value.trim() || "Övrigt",
+    note: document.getElementById("f-note").value,
+    ingredients: ingredientFields.getValue(),
+    steps: stepFields.getValue(),
+    taste: document.getElementById("f-taste").value,
+    url: document.getElementById("f-video-url").value,
+    photo: document.getElementById("f-photo-url").value,
+  };
+}
+function updateFormActions() {
+  const missing = validateForm();
+  const disabled = isSaving || missing.length > 0;
+  ["submit-btn", "edit-submit-btn", "preview-btn"].forEach((id) => {
+    document.getElementById(id).disabled = disabled;
+  });
+  const hint = document.getElementById("admin-required-hint");
+  if (hint) {
+    hint.textContent = missing.length
+      ? `Fyll i: ${missing.join(", ")} för att förhandsgranska eller spara.`
+      : "Förhandsgranska gärna innan du sparar. Ingenting laddas upp förrän du sparar.";
+  }
+}
+document.getElementById("drink-form").addEventListener("input", updateFormActions);
+document.getElementById("drink-form").addEventListener("change", updateFormActions);
+document.getElementById("preview-btn").addEventListener("click", () => {
+  if (isSaving || validateForm().length) return;
+  try {
+    preview.open(collectDrink(), {
+      video: document.getElementById("f-video-file").files[0],
+      photo: document.getElementById("f-photo-file").files[0],
+    });
+  } catch (err) {
+    showToast("Kunde inte öppna förhandsgranskningen. Försök igen.", "error");
+  }
+});
+updateFormActions();
+
 
 
 // ============================================
@@ -211,6 +257,7 @@ function clearStatus() {
 // ============================================
 
 function clearForm() {
+  preview.close();
   ingredientFields.setValue("");
   stepFields.setValue("");
   [
@@ -234,9 +281,11 @@ function clearForm() {
 
   document.getElementById("f-photo-filename").textContent =
     "Ingen fil vald";
+  updateFormActions();
 }
 
 function fillForm(d) {
+  preview.close();
   document.getElementById("f-id").value = d.id;
   document.getElementById("f-date").value = d.date;
   document.getElementById("f-drink").value = d.drink;
@@ -290,6 +339,7 @@ if (d.photo) {
 
   // Visa formuläret
   document.getElementById("drink-form").style.display = "grid";
+  updateFormActions();
 }
 
 function validateForm() {
@@ -474,6 +524,7 @@ async function uploadFile(file,type) {
 
 document.getElementById("drink-form").addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (isSaving) return;
   console.log("=== FORM SUBMIT STARTED ===");
 
   const missing = validateForm();
@@ -488,8 +539,8 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
   const editSubmitBtn = document.getElementById("edit-submit-btn");
 
   try {
-    submitBtn.disabled = true;
-    editSubmitBtn.disabled = true;
+    isSaving = true;
+    updateFormActions();
     const videoFile =
       document.getElementById("f-video-file").files[0];
 
@@ -523,20 +574,7 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
       setStatus("Bild uppladdad ✓");
     }
 
-    const theme =
-      document.getElementById("f-theme").value.trim() || "Övrigt";
-
-    const payload = {
-      date: document.getElementById("f-date").value,
-      drink: document.getElementById("f-drink").value,
-      theme: theme,
-      note: document.getElementById("f-note").value,
-      ingredients: ingredientFields.getValue(),
-      steps: stepFields.getValue(),
-      taste: document.getElementById("f-taste").value,
-      url: videoUrl,
-      photo: photoUrl,
-    };
+    const payload = { ...collectDrink(), url: videoUrl, photo: photoUrl };
 
     const id = document.getElementById("f-id").value;
     const isEdit = !!id;
@@ -592,8 +630,8 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
         "error");
   }
   finally {
-    submitBtn.disabled = false;
-    editSubmitBtn.disabled = false;
+    isSaving = false;
+    updateFormActions();
   }
 });
 
