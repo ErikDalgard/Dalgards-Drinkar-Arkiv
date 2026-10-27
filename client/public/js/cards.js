@@ -13,7 +13,6 @@ export function makeCard(v, { onOpen, onThemeSelect }) {
       <div class="card-meta">
         <time class="date"></time>
       </div>
-      <p class="note">${escapeHtml(v.note)}</p>
     </div>`;
     if (v.photo) {
         const image = document.createElement("img");

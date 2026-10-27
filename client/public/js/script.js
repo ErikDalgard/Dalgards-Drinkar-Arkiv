@@ -59,7 +59,7 @@ function render() {
         }));
     });
     document.getElementById("count").textContent =
-        `${filtered.length} av ${allVideos.length} videos`;
+        `${filtered.length} av ${allVideos.length} drinkar`;
     document.getElementById("empty").style.display =
         filtered.length ? "none" : "block";
     renderPagination(totalPages);

@@ -1376,13 +1376,6 @@ header p {
   color: var(--text-muted);
   font-size: 1rem;
 }
-.card .note {
-  margin-top: 0.65rem;
-  -webkit-line-clamp: 2;
-}
-.card .note:empty {
-  display: none;
-}
 
 /* Native dialog provides keyboard focus containment and an inert background. */
 dialog.modal-backdrop {
@@ -2578,10 +2571,10 @@ textarea.admin-recipe-value {
     gap: .8rem .65rem;
   }
   .grid .card { min-width: 0; }
+  .card-media { aspect-ratio: 6 / 5; }
   .card-body { padding: .7rem .65rem .8rem; }
   .card-drink { font-size: 1.125rem; margin-bottom: .4rem; }
   .card .date { font-size: .875rem; line-height: 1.35; }
-  .card .note { margin-top: .4rem; font-size: .875rem; }
   .card-theme {
     top: .4rem;
     right: .4rem;
