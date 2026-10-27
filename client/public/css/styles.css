@@ -1021,16 +1021,11 @@ header p {
   background-color: #c89a67;
   color: black;
 }
-#submit-btn {
+#submit-btn, #edit-submit-btn, #spirits-save {
   background-color: #45d545ad;
   color: black;
 }
-
-#edit-submit-btn{
-  background-color: #45d545ad;
-  color: black;
-}
-#delete-btn {
+#delete-btn, #spirits-discard {
   background-color: #d54545b0;
   color: black;
 }
@@ -1107,7 +1102,8 @@ header p {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
-  max-height: 280px;
+  max-height: min(360px, 45dvh);
+  padding: .3rem;
   overflow-y: auto;
   box-shadow: 0 10px 30px rgba(30,20,12,0.25);
 }
@@ -1115,23 +1111,15 @@ header p {
   display: block;
 }
 .edit-search-result {
-  padding: 0.6rem 0.9rem;
-  cursor: pointer;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  border-bottom: 1px solid var(--border);
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
 }
-.edit-search-result:last-child {
-  border-bottom: none;
-}
-.edit-search-result:hover {
-  background: var(--bg);
-}
-.edit-search-result .result-date {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-left: 0.5rem;
-}
+.edit-search-result:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.edit-search-empty { padding: .75rem; color: var(--text-muted); }
 .toast {
   position: fixed;
   top: 1.5rem;
@@ -2283,7 +2271,39 @@ textarea.admin-recipe-value {
 }
 .admin-spirit-row textarea { resize: vertical; }
 .admin-spirit-row .admin-recipe-remove { align-self: flex-start; margin-top: .3rem; }
-.admin-spirits-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.admin-spirits-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-top: 1rem;
+  padding: .85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.admin-spirits-buttons { display: flex; flex-wrap: wrap; flex: 1; justify-content: flex-end; gap: .75rem; }
+.admin-spirits-buttons > button { min-height: 44px; height: auto; padding: .7rem 1rem; white-space: normal; }
+.admin-unsaved-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .4rem .65rem;
+  border: 1px solid #dec18a;
+  border-radius: 20px;
+  background: #fff0cc;
+  color: #684411;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.admin-unsaved-badge::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: #9d6514; }
+.admin-unsaved-badge[hidden], #spirits-status[hidden] { display: none; }
+#spirits-status.error { color: #873d2d; }
+#spirits-save:disabled, #spirits-discard:disabled { background: #e6ddd0; border-color: #d2c5b2; color: #756b5c; }
+@media (max-width: 640px) {
+  .admin-spirits-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); flex-basis: 100%; }
+}
 .admin-spirits button:disabled { opacity: .5; cursor: not-allowed; }
 @media (max-width: 640px) {
   .admin-spirits-rows { grid-template-columns: 1fr; }

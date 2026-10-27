@@ -115,7 +115,9 @@ test('filter drafts survive view switches, and only saving or discarding clears 
   expect(await blocked(page)).toBe(false);
   await name.fill('Ginsorter');
   await page.locator('#spirits-save').click();
-  await expect(page.locator('#spirits-status')).toContainText('har sparats');
+  await expect(page.locator('#toast')).toContainText('Spritsorterna har sparats');
+  await expect(page.locator('#spirits-status')).toBeHidden();
+  await expect(page.locator('#spirits-unsaved')).toBeHidden();
   expect(await blocked(page)).toBe(false);
   await name.fill('Behåll vid fel');
   failWrites = true;

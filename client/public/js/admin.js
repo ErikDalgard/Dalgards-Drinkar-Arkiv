@@ -1,3 +1,4 @@
+import { populateSearchSuggestion } from "./search-suggestions.js";
 import { createUnsavedChanges } from "./admin-unsaved.js";
 import { createTasteFields } from "./admin-taste-fields.js";
 import { createSpiritEditor } from "./admin-spirits.js";
@@ -206,20 +207,17 @@ editSearch.addEventListener("input", () => {
 
   if (matches.length === 0) {
     editResults.innerHTML =
-      '<div class="edit-search-result">Inga träffar</div>';
+      '<div class="edit-search-empty">Inga träffar</div>';
 
     editResults.classList.add("open");
     return;
   }
 
   matches.forEach((d) => {
-    const item = document.createElement("div");
-
-    item.className = "edit-search-result";
-    item.innerHTML = `
-      ${escapeHtml(d.drink)}
-      <span class="result-date">${d.date}</span>
-    `;
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = "edit-search-result search-suggestion";
+    populateSearchSuggestion(item, d);
 
     item.addEventListener("click", () => {
       if (isSaving || !unsavedChanges.confirmDiscard(drinkForm)) return;
