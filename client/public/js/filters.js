@@ -6,7 +6,15 @@ export function createFilters(themes, onChange, videos = []) {
     let selectedTheme = "";
     const selectedSpirits = new Set();
     const selectedTastes = new Set();
+    function syncFilterToggle() {
+        const open = document.getElementById("filter-panel").classList.contains("open");
+        const toggle = document.getElementById("filter-toggle");
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.classList.toggle("active", open);
+        document.getElementById("filter-toggle-text").textContent = open ? "Dölj filter" : "Visa filter";
+    }
     function notifyChange() {
+        syncFilterToggle();
         updateTasteControls();
         updateSpiritLabel();
         updateSpiritChipStyles();
@@ -364,16 +372,10 @@ export function createFilters(themes, onChange, videos = []) {
         .getElementById("filter-toggle")
         .addEventListener("click", () => {
         const filterPanel = document.getElementById("filter-panel");
-        const filterText = document.getElementById("filter-toggle-text");
         if (!filterPanel)
             return;
         filterPanel.classList.toggle("open");
-        const isOpen = filterPanel.classList.contains("open");
-        if (filterText) {
-            filterText.textContent = isOpen
-                ? "Dölj filter"
-                : "Visa filter";
-        }
+        syncFilterToggle();
     });
     document
         .getElementById("date-from")

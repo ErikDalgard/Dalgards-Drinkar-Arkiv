@@ -493,29 +493,6 @@ header p {
     margin-top: 0.2rem;
   }
 }
-.sort-select {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.125rem;
-  line-height: 1.4;
-  font-weight: 600;
-  min-height: 44px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-  border-radius: 8px;
-  padding: 0.5rem 0.8rem;
-  cursor: pointer;
-  max-width: 100%;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-.sort-select:hover {
-  background: var(--surface-hover);
-  border-color: var(--accent);
-}
-.sort-select:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
-}
 .taste-profile {
   margin: 0.6rem 0 0;
   padding-top: 0.6rem;
@@ -1686,8 +1663,7 @@ dialog.modal-backdrop::backdrop {
   min-width: 0;
 }
 .controls input#search,
-.controls #filter-toggle,
-.menu .sort-select {
+.controls #filter-toggle {
   min-width: 0;
   width: 100%;
   min-height: 48px;
@@ -1720,9 +1696,6 @@ dialog.modal-backdrop::backdrop {
   grid-template-columns: minmax(0, 1fr) 9rem;
   gap: 0.75rem;
 }
-.menu .sort-select {
-  padding-inline: 0.75rem;
-}
 .menu .count {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.125rem;
@@ -1735,8 +1708,7 @@ dialog.modal-backdrop::backdrop {
     gap: 0.65rem;
   }
   .controls input#search,
-  .controls #filter-toggle,
-  .menu .sort-select {
+  .controls #filter-toggle {
     font-size: 1.0625rem;
   }
   .controls #filter-toggle {
@@ -1745,17 +1717,11 @@ dialog.modal-backdrop::backdrop {
   .menu .count {
     font-size: 1.0625rem;
   }
-  .menu .sort-select {
-    margin-left: auto;
-  }
 }
 @media (max-width: 360px) {
   .controls,
   .menu {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .menu .sort-select {
-    margin-left: 0;
   }
 }
 
@@ -2152,18 +2118,15 @@ textarea.admin-recipe-value {
   background: hsl(var(--spirit-hue), 45%, 82%);
 }
 
-/* Anchor suggestions to the controls so they can span the full row on mobile. */
-.controls {
-  position: relative;
-}
+/* Keep suggestions directly beneath the search field at every screen size. */
 .search-suggestions[hidden] {
   display: none;
 }
 .search-suggestions {
   position: absolute;
   top: calc(100% + 6px);
-  left: 1.5rem;
-  right: calc(1.5rem + 9rem + 0.75rem);
+  left: 0;
+  right: 0;
   z-index: 30;
   padding: 0.3rem;
   border: 1px solid var(--border);
@@ -2251,9 +2214,6 @@ textarea.admin-recipe-value {
   line-height: 1.3;
 }
 @media (max-width: 650px) {
-  .search-suggestions {
-    right: 1.5rem;
-  }
   .search-suggestion {
     gap: 0.5rem;
     padding-inline: 0.4rem;
@@ -2552,4 +2512,82 @@ textarea.admin-recipe-value {
   .admin-taste-row { display: grid; grid-template-columns: 6rem minmax(0, 1fr); align-items: center; }
   .admin-taste-row legend { float: left; width: 6rem; margin: 0; }
   .admin-taste-choices { grid-column: 2; }
+}
+
+/* A text-and-icon sort control, with a native dropdown for keyboard and touch. */
+.menu { grid-template-columns: minmax(0, 1fr) auto; }
+.sort-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: .65rem;
+  min-height: 48px;
+  color: var(--text);
+  cursor: pointer;
+}
+.sort-icon { width: 1.3em; height: 1.5em; flex-shrink: 0; }
+.sort-control:hover { color: var(--accent); }
+.sort-control:focus-within { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 3px; }
+#sort-order {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Shared typography for the result count and sort action. */
+.menu .count, .sort-control {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+@media (max-width: 650px) {
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .35rem;
+  }
+  .controls input#search {
+    min-height: 56px;
+    font-size: 1.25rem;
+    padding-left: 3rem;
+  }
+  .controls .search-icon { left: 1rem; width: 22px; height: 22px; }
+  .controls #filter-toggle {
+    justify-self: start;
+    width: auto;
+    min-height: 44px;
+    padding: .25rem 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 1.125rem;
+  }
+  .controls #filter-toggle:hover { background: transparent; color: var(--accent); }
+  .menu { margin-top: .25rem; }
+}
+
+/* Two readable cards per row on phones. */
+@media (max-width: 650px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem .65rem;
+  }
+  .grid .card { min-width: 0; }
+  .card-body { padding: .7rem .65rem .8rem; }
+  .card-drink { font-size: 1.125rem; margin-bottom: .4rem; }
+  .card .date { font-size: .875rem; line-height: 1.35; }
+  .card .note { margin-top: .4rem; font-size: .875rem; }
+  .card-theme {
+    top: .4rem;
+    right: .4rem;
+    max-width: calc(100% - .8rem);
+    padding: .3rem .45rem;
+    font-size: .875rem;
+  }
+  .card-play { width: 32px; height: 32px; right: .5rem; bottom: .5rem; }
 }

@@ -1,3 +1,4 @@
+import { compareDrinks } from "./utils.js";
 import { buildThemeColorMap } from "./themes.js";
 import { createFilters } from "./filters.js";
 import { makeCard } from "./cards.js";
@@ -45,10 +46,9 @@ function render() {
     currentPage = Math.max(1, Math.min(currentPage, totalPages));
     const start = (currentPage - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
-    const sortOrder = document.getElementById("sort-order").value;
-    filtered.sort((a, b) => sortOrder === "asc"
-        ? a.date.localeCompare(b.date)
-        : b.date.localeCompare(a.date));
+    const sortSelect = document.getElementById("sort-order");
+    sortSelect.title = `Sortering: ${sortSelect.selectedOptions[0].textContent}`;
+    filtered.sort((a, b) => compareDrinks(a, b, sortSelect.value));
     const pageItems = filtered.slice(start, end);
     const grid = document.getElementById("grid");
     grid.innerHTML = "";

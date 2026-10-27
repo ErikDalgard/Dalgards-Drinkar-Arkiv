@@ -47,21 +47,22 @@
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
     <input id="search" type="text" placeholder="Sök efter en drink…" aria-label="Sök efter en drink" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestion-list" autocomplete="off">
+    <div id="search-suggestions" class="search-suggestions" hidden>
+      <div class="search-suggestions-header">
+        <span id="search-suggestions-summary">Drinkförslag</span>
+        <button type="button" id="search-suggestions-close" aria-label="Stäng sökförslag">×</button>
+      </div>
+      <div id="search-suggestion-list" class="search-suggestion-list" role="listbox" aria-label="Drinkförslag"></div>
+    </div>
   </div>
 
-  <button id="filter-toggle" class="filter-toggle" type="button">
-    <svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <button id="filter-toggle" class="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-panel">
+    <svg class="filter-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
     </svg>
     <span id="filter-toggle-text">Visa filter</span>
   </button>
-  <div id="search-suggestions" class="search-suggestions" hidden>
-    <div class="search-suggestions-header">
-      <span id="search-suggestions-summary">Drinkförslag</span>
-      <button type="button" id="search-suggestions-close" aria-label="Stäng sökförslag">×</button>
-    </div>
-    <div id="search-suggestion-list" class="search-suggestion-list" role="listbox" aria-label="Drinkförslag"></div>
-  </div>
+
 </div>
 <div class="filter-panel" id="filter-panel">
     <div class="filter-group filter-theme-group">
@@ -126,10 +127,19 @@
 </div>
 <div class="menu">
   <p class="count" id="count"></p>
-  <select class="sort-select" id="sort-order">
-      <option value="desc">Nyast först</option>
+  <label class="sort-control">
+    <span aria-hidden="true">Sortera</span>
+    <svg class="sort-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <path d="M5 3v5m0 4v9M12 3v10m0 4v4M19 3v3m0 4v11"/>
+      <circle cx="5" cy="10" r="2"/><circle cx="12" cy="15" r="2"/><circle cx="19" cy="8" r="2"/>
+    </svg>
+    <select id="sort-order" aria-label="Sortera drinkar">
+      <option value="desc" selected>Nyast först</option>
       <option value="asc">Äldst först</option>
+      <option value="name-asc">Namn A–Ö</option>
+      <option value="name-desc">Namn Ö–A</option>
     </select>
+  </label>
 </div>
 <section class="drink-link-notice" id="drink-link-notice" aria-labelledby="drink-not-found-title" hidden>
   <h2 id="drink-not-found-title" tabindex="-1">Drinken finns ej i Urkällan...</h2>
