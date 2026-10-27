@@ -18,3 +18,13 @@ export function formatDrinkDate(value) {
         day: "numeric", month: "long", year: "numeric",
     });
 }
+
+const drinkNameCollator = new Intl.Collator("sv", { sensitivity: "base", numeric: true });
+export function compareDrinks(a, b, order) {
+    if (order === "name-asc" || order === "name-desc") {
+        const byName = drinkNameCollator.compare(a.drink, b.drink);
+        // Repeated drink names keep the newest recipe first.
+        return (order === "name-desc" ? -byName : byName) || b.date.localeCompare(a.date);
+    }
+    return order === "asc" ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
+}
