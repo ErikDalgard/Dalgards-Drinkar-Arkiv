@@ -1,6 +1,6 @@
 import { loadSpirits, setSpirits } from "./spirits.js";
 
-export function createSpiritEditor(getKey, showToast) {
+export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) {
   const form = document.getElementById("spirits-form");
   const fields = document.getElementById("spirits-fields");
   const rows = document.getElementById("spirits-rows");
@@ -10,6 +10,7 @@ export function createSpiritEditor(getKey, showToast) {
   const retry = document.getElementById("spirits-retry");
   let saved = [];
   let busy = false;
+  let saving = false;
   let loaded = false;
   let nextId = 0;
 
@@ -58,6 +59,7 @@ export function createSpiritEditor(getKey, showToast) {
     rows.replaceChildren();
     saved.forEach(addRow);
     save.disabled = discard.disabled = true;
+    onStateChange(true);
   }
   async function load() {
     if (busy) return;
@@ -98,6 +100,8 @@ export function createSpiritEditor(getKey, showToast) {
       synonyms: row.querySelector(".spirit-words").value.split(/\r?\n/).map((word) => word.trim()).filter(Boolean),
     }));
     busy = true;
+    saving = true;
+    onStateChange();
     fields.disabled = true;
     status.textContent = "Sparar…";
     try {
@@ -117,8 +121,10 @@ export function createSpiritEditor(getKey, showToast) {
       status.textContent = error.message || "Kunde inte spara. Försök igen.";
     } finally {
       busy = false;
+      saving = false;
       fields.disabled = false;
+      onStateChange();
     }
   });
-  return { load };
+  return { load, isSaving: () => saving };
 }

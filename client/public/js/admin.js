@@ -1,3 +1,4 @@
+import { createUnsavedChanges } from "./admin-unsaved.js";
 import { createTasteFields } from "./admin-taste-fields.js";
 import { createSpiritEditor } from "./admin-spirits.js";
 import { createAdminPreview } from "./admin-preview.js";
@@ -17,7 +18,13 @@ const ingredientFields = createRecipeFields("ingredients", "Ingrediens", false);
 const stepFields = createRecipeFields("steps", "Steg", true);
 const tasteFields = createTasteFields();
 const preview = createAdminPreview();
-const spiritEditor = createSpiritEditor(() => adminKey, showToast);
+const drinkForm = document.getElementById("drink-form");
+const spiritsForm = document.getElementById("spirits-form");
+const spiritEditor = createSpiritEditor(() => adminKey, showToast, (clean = false) => {
+  if (clean) unsavedChanges.markClean(spiritsForm);
+  else unsavedChanges.refresh();
+});
+const unsavedChanges = createUnsavedChanges([drinkForm, spiritsForm], () => isSaving || spiritEditor.isSaving());
 
 function collectDrink() {
   return {
@@ -33,6 +40,7 @@ function collectDrink() {
   };
 }
 function updateFormActions() {
+  unsavedChanges.refresh();
   const missing = validateForm();
   const disabled = isSaving || missing.length > 0;
   document.querySelectorAll("[data-admin-mode]").forEach((button) => {
@@ -142,6 +150,9 @@ function selectAdminMode(mode) {
   document.getElementById("edit-picker-group").style.display = isEdit ? "block" : "none";
 
   if (isEdit) {
+    clearForm();
+    editSearch.value = "";
+    editResults.classList.remove("open");
     // Show the form once a drink has been selected.
     form.style.display = "none";
     document.getElementById("submit-btn").style.display = "none";
@@ -160,7 +171,10 @@ function selectAdminMode(mode) {
 
 document.querySelectorAll("[data-admin-mode]").forEach((button) => {
   button.addEventListener("click", () => {
-    if (!isSaving) selectAdminMode(button.dataset.adminMode);
+    if (isSaving) return;
+    const mode = button.dataset.adminMode;
+    if (mode !== "filters" && mode !== drinkMode && !unsavedChanges.confirmDiscard(drinkForm)) return;
+    selectAdminMode(mode);
   });
 });
 
@@ -208,6 +222,7 @@ editSearch.addEventListener("input", () => {
     `;
 
     item.addEventListener("click", () => {
+      if (isSaving || !unsavedChanges.confirmDiscard(drinkForm)) return;
       editSearch.value = `${d.date} — ${d.drink}`;
       editResults.classList.remove("open");
 
@@ -298,6 +313,7 @@ function clearForm() {
 
   document.getElementById("f-photo-filename").textContent =
     "Ingen fil vald";
+  unsavedChanges.markClean(drinkForm);
   updateFormActions();
 }
 
@@ -356,6 +372,7 @@ if (d.photo) {
 
   // Visa formuläret
   document.getElementById("drink-form").style.display = "grid";
+  unsavedChanges.markClean(drinkForm);
   updateFormActions();
 }
 

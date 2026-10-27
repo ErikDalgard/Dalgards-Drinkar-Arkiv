@@ -96,6 +96,7 @@ test('admin navigation separates views and keeps drafts when visiting filters', 
   await expect(page.locator('#admin-filters-view')).toBeVisible();
   await add.click();
   await expect(page.locator('#f-drink')).toHaveValue('Osparad drink');
+  page.once('dialog', dialog => dialog.accept());
   await edit.click();
   await expect(page.locator('#edit-picker-group')).toBeVisible();
   await expect(page.locator('#drink-form')).toBeHidden();
