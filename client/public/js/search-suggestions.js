@@ -58,23 +58,7 @@ export function createSearchSuggestions(onSelect) {
             option.className = "search-suggestion";
             option.setAttribute("role", "option");
             option.setAttribute("aria-selected", "false");
-            if (drink.photo) {
-                const image = document.createElement("img");
-                image.src = `${R2_BASE_URL}${drink.photo}`;
-                image.alt = "";
-                image.loading = "lazy";
-                option.appendChild(image);
-            }
-            const text = document.createElement("div");
-            text.className = "search-suggestion-text";
-            const name = document.createElement("span");
-            name.className = "search-suggestion-name";
-            name.textContent = drink.drink;
-            const detail = document.createElement("span");
-            detail.className = "search-suggestion-detail";
-            detail.textContent = [formatDrinkDate(drink.date), drink.theme].filter(Boolean).join(" · ");
-            text.append(name, detail);
-            option.appendChild(text);
+            populateSearchSuggestion(option, drink);
             // Keep focus in the combobox until the modal opens.
             option.addEventListener("pointerdown", (event) => event.preventDefault());
             option.addEventListener("click", () => choose(index));
@@ -114,4 +98,25 @@ export function createSearchSuggestions(onSelect) {
         if (!wrapper.contains(event.target) && !popup.contains(event.target)) close();
     });
     return { update(drinks) { candidates = drinks; render(); } };
+}
+
+// Public and admin search share thumbnail, name, date and theme presentation.
+export function populateSearchSuggestion(option, drink) {
+    if (drink.photo) {
+        const image = document.createElement("img");
+        image.src = `${R2_BASE_URL}${drink.photo}`;
+        image.alt = "";
+        image.loading = "lazy";
+        option.appendChild(image);
+    }
+    const text = document.createElement("div");
+    text.className = "search-suggestion-text";
+    const name = document.createElement("span");
+    name.className = "search-suggestion-name";
+    name.textContent = drink.drink;
+    const detail = document.createElement("span");
+    detail.className = "search-suggestion-detail";
+    detail.textContent = [formatDrinkDate(drink.date), drink.theme].filter(Boolean).join(" · ");
+    text.append(name, detail);
+    option.appendChild(text);
 }

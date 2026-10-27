@@ -139,12 +139,15 @@
           <div id="spirits-rows" class="admin-spirits-rows"></div>
           <button type="button" id="spirits-add" class="admin-recipe-add">+ Lägg till spritsort</button>
           <div class="admin-spirits-actions">
-            <button type="submit" id="spirits-save" class="filter-toggle" disabled>Spara spritsorter</button>
-            <button type="button" id="spirits-discard" class="filter-clear" disabled>Ångra ändringar</button>
+            <span id="spirits-unsaved" class="admin-unsaved-badge" role="status" aria-live="polite" hidden>Osparade ändringar</span>
+            <div class="admin-spirits-buttons">
+              <button type="submit" id="spirits-save" class="filter-toggle" disabled>Spara spritsorter</button>
+              <button type="button" id="spirits-discard" class="filter-clear" disabled>Ångra ändringar</button>
+            </div>
           </div>
         </fieldset>
       </form>
-      <p id="spirits-status" role="status" aria-live="polite"></p>
+      <p id="spirits-status" role="status" aria-live="polite" hidden></p>
       <button type="button" id="spirits-retry" class="filter-toggle" hidden>Försök igen</button>
     </section>
 

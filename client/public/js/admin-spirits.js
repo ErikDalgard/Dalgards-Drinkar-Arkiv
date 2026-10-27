@@ -5,6 +5,7 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
   const fields = document.getElementById("spirits-fields");
   const rows = document.getElementById("spirits-rows");
   const status = document.getElementById("spirits-status");
+  const badge = document.getElementById("spirits-unsaved");
   const save = document.getElementById("spirits-save");
   const discard = document.getElementById("spirits-discard");
   const retry = document.getElementById("spirits-retry");
@@ -13,10 +14,24 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
   let saving = false;
   let loaded = false;
   let nextId = 0;
+  let savedSnapshot = "";
 
+  function snapshot() {
+    return JSON.stringify(Array.from(rows.children, (row) => [
+      row.querySelector(".spirit-name").value,
+      row.querySelector(".spirit-words").value,
+    ]));
+  }
+  function setStatus(message, error = false) {
+    status.textContent = message;
+    status.hidden = !message;
+    status.classList.toggle("error", error);
+  }
   function changed() {
-    save.disabled = discard.disabled = busy || !loaded;
-    status.textContent = "Osparade ändringar";
+    const dirty = loaded && snapshot() !== savedSnapshot;
+    save.disabled = discard.disabled = busy || !loaded || !dirty;
+    badge.hidden = !dirty;
+    setStatus("");
   }
   function addRow(item = { name: "", synonyms: [] }) {
     const id = ++nextId;
@@ -58,6 +73,9 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
   function render() {
     rows.replaceChildren();
     saved.forEach(addRow);
+    savedSnapshot = snapshot();
+    badge.hidden = true;
+    setStatus("");
     save.disabled = discard.disabled = true;
     onStateChange(true);
   }
@@ -71,7 +89,7 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
       loaded = true;
       render();
     } catch {
-      status.textContent = "Kunde inte ladda spritsorterna. Försök igen.";
+      setStatus("Kunde inte ladda spritsorterna. Försök igen.", true);
       retry.hidden = false;
     } finally {
       busy = false;
@@ -81,7 +99,7 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
   form.addEventListener("input", changed);
   document.getElementById("spirits-add").addEventListener("click", () => {
     if (rows.children.length >= 50) {
-      status.textContent = "Du kan ha högst 50 spritsorter.";
+      setStatus("Du kan ha högst 50 spritsorter.", true);
       return;
     }
     addRow().focus();
@@ -89,7 +107,6 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
   });
   discard.addEventListener("click", () => {
     render();
-    status.textContent = "Ändringarna har ångrats.";
   });
   retry.addEventListener("click", load);
   form.addEventListener("submit", async (event) => {
@@ -103,7 +120,7 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
     saving = true;
     onStateChange();
     fields.disabled = true;
-    status.textContent = "Sparar…";
+    setStatus("Sparar…");
     try {
       const response = await fetch(`${API_BASE}/spirits`, {
         method: "PUT",
@@ -115,10 +132,9 @@ export function createSpiritEditor(getKey, showToast, onStateChange = () => {}) 
       setSpirits(data);
       saved = data;
       render();
-      status.textContent = "Spritsorterna har sparats.";
       showToast("Spritsorterna har sparats!", "success");
     } catch (error) {
-      status.textContent = error.message || "Kunde inte spara. Försök igen.";
+      setStatus(error.message || "Kunde inte spara. Försök igen.", true);
     } finally {
       busy = false;
       saving = false;
