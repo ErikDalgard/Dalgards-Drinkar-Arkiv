@@ -25,6 +25,9 @@ test('search, dates, exclusive spirit links and clear-filter behavior', () => {
     assert.equal(search.value, '');
     assert.equal(document.getElementById('date-to').value, '');
     assert.deepEqual(filters.apply(drinks), [drinks[0]]);
+    assert.equal(document.getElementById('filter-panel').classList.contains('open'), false);
+    assert.equal(document.getElementById('filter-toggle').getAttribute('aria-expanded'), 'false');
+    assert.equal(document.activeElement, document.querySelector('#active-filter-list button'));
     search.value = 'vodka';
     document.getElementById('active-filter-clear').click();
     assert.equal(search.value, 'vodka');
@@ -33,6 +36,10 @@ test('search, dates, exclusive spirit links and clear-filter behavior', () => {
     assert.equal(search.value, '');
     assert.deepEqual(filters.apply(drinks), drinks);
     assert.equal(document.getElementById('active-filters').hidden, true);
+    filters.filterByTheme('Sommar');
+    assert.deepEqual(filters.apply(drinks), [drinks[0]]);
+    assert.equal(document.getElementById('filter-panel').classList.contains('open'), false);
+    assert.equal(document.getElementById('filter-toggle-text').textContent, 'Visa filter');
   } finally {
     dom.window.close(); delete globalThis.document; delete globalThis.window;
   }

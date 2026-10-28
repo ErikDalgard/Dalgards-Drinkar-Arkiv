@@ -224,14 +224,6 @@ export function createFilters(themes, onChange, videos = []) {
     }
     function filterByTheme(theme) {
         selectTheme(theme);
-        document.getElementById("filter-toggle-text").textContent = "Dölj filter";
-        document
-            .getElementById("filter-panel")
-            .classList.add("open");
-        document
-            .getElementById("filter-toggle")
-            .classList.add("active");
-        notifyChange();
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -246,11 +238,8 @@ export function createFilters(themes, onChange, videos = []) {
         ["search", "date-from", "date-to"].forEach((id) => {
             document.getElementById(id).value = "";
         });
-        document.getElementById("filter-panel").classList.add("open");
-        document.getElementById("filter-toggle").classList.add("active");
-        document.getElementById("filter-toggle-text").textContent = "Dölj filter";
         notifyChange();
-        document.getElementById("spirit-picker-toggle").focus({ preventScroll: true });
+        document.querySelector("#active-filter-list button")?.focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
     // Taste picker uses only complete, valid profiles; missing data is not zero.
