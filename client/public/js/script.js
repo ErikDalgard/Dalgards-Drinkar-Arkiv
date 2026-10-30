@@ -1,5 +1,6 @@
 import { compareDrinks } from "./utils.js";
 import { buildThemeColorMap } from "./themes.js";
+import { createFilterLinks } from "./filter-links.js";
 import { createFilters } from "./filters.js";
 import { makeCard } from "./cards.js";
 import { createDrinkDialog } from "./dialogs.js";
@@ -10,6 +11,7 @@ let allVideos = [];
 let currentPage = 1;
 const PAGE_SIZE = 24;
 let filters;
+let filterLinks;
 let drinkDialog;
 let drinkNavigation;
 let searchSuggestions;
@@ -31,12 +33,18 @@ async function init() {
     buildThemeColorMap(themes);
     filters = createFilters(themes, () => {
         currentPage = 1;
+        filterLinks?.update();
         render();
     }, allVideos);
-    drinkDialog = createDrinkDialog(filters.filterByTheme, () => drinkNavigation.close(), filters.filterBySpirit);
+    drinkDialog = createDrinkDialog(
+        (theme) => drinkNavigation.whenClosed(() => filters.filterByTheme(theme)),
+        () => drinkNavigation.close(),
+        (spirit) => drinkNavigation.whenClosed(() => filters.filterBySpirit(spirit)),
+    );
     drinkNavigation = createDrinkNavigation(allVideos, drinkDialog);
     searchSuggestions = createSearchSuggestions(drinkNavigation.open);
-    render();
+    filterLinks = createFilterLinks(filters);
+    filterLinks.restore();
     drinkNavigation.restore();
 }
 function render() {

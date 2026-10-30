@@ -32,7 +32,7 @@ test('selects the correct duplicate name by date and opens its recipe and URL', 
   await expect(page.locator('#modal-drink')).toHaveText('Dry Martini');
   await expect(page.locator('#modal-note')).toHaveText('Den äldre versionen');
   await expect(page.locator('#recipe-block')).toContainText('6 cl gin');
-  await expect(page).toHaveURL(/\?drink=101$/);
+  await expect(page).toHaveURL((url) => url.searchParams.get("drink") === "101");
   await expect(page.locator('#search-suggestions')).toBeHidden();
   await page.goBack();
   await expect(page.getByRole('dialog')).not.toBeVisible();
@@ -44,7 +44,7 @@ test('opens the correct suggestion with ArrowDown and Enter', async ({ page }) =
   await search.press('ArrowDown');
   await search.press('Enter');
   await expect(page.locator('#modal-note')).toHaveText('Den nyare versionen');
-  await expect(page).toHaveURL(/\?drink=202$/);
+  await expect(page).toHaveURL((url) => url.searchParams.get("drink") === "202");
   await page.getByRole('button', { name: 'Stäng drink', exact: true }).click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
 });
@@ -61,4 +61,15 @@ test('caps scrollable suggestions and closes them without clearing search', asyn
   await expect(page.locator('#search-suggestions')).toBeVisible();
   await page.getByRole('combobox', { name: 'Sök efter en drink' }).press('Escape');
   await expect(page.locator('#search-suggestions')).toBeHidden();
+});
+
+
+test('closing a modal keeps the current archive page', async ({ page }) => {
+  await page.getByRole('button', { name: 'Nästa sida', exact: true }).click();
+  await expect(page.locator('#pagination')).toContainText('Sida 2 av 2');
+  await page.locator('#grid .card-open').first().click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.goBack();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  await expect(page.locator('#pagination')).toContainText('Sida 2 av 2');
 });

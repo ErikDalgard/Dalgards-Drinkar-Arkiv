@@ -1,8 +1,9 @@
-// The URL selects a drink; filtering and list position remain in the running page.
+// Drink entries preserve the current filter parameters and list position.
 export function createDrinkNavigation(drinks, dialog) {
     const entryToken = `${Date.now()}-${Math.random()}`;
     let currentId = null;
     let returningToList = false;
+    let afterClose = null;
     const notice = document.getElementById("drink-link-notice");
     const copyStatus = document.getElementById("copy-link-status");
     const fallback = document.getElementById("drink-link-fallback");
@@ -76,6 +77,19 @@ export function createDrinkNavigation(drinks, dialog) {
         }
     }
     window.addEventListener("popstate", restore);
+    // Related theme/spirit links apply after Back has returned to the list entry.
+    function whenClosed(callback) {
+        if (returningToList) afterClose = callback;
+        else callback();
+    }
+    window.addEventListener("popstate", () => {
+        if (afterClose) {
+            const callback = afterClose;
+            afterClose = null;
+            // Let filter URL restoration finish before applying the new selection.
+            setTimeout(callback, 0);
+        }
+    });
     document.getElementById("copy-drink-link").addEventListener("click", async () => {
         if (currentId === null) return;
         const id = currentId;
@@ -92,5 +106,5 @@ export function createDrinkNavigation(drinks, dialog) {
             fallback.select();
         }
     });
-    return { open, close, restore };
+    return { open, close, restore, whenClosed };
 }

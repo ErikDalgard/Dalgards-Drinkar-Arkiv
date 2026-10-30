@@ -405,6 +405,30 @@ export function createFilters(themes, onChange, videos = []) {
             behavior: "smooth",
         });
     });
+
+    function getState() {
+        return {
+            theme: selectedTheme,
+            spirits: [...selectedSpirits],
+            tastes: [...selectedTastes],
+            search: document.getElementById("search").value,
+            dateFrom: document.getElementById("date-from").value,
+            dateTo: document.getElementById("date-to").value,
+            sort: document.getElementById("sort-order").value,
+        };
+    }
+    function setState(state) {
+        selectedTheme = themes.includes(state.theme) ? state.theme : "";
+        selectedSpirits.clear();
+        (state.spirits || []).filter((spirit) => SPIRITS.includes(spirit)).forEach((spirit) => selectedSpirits.add(spirit));
+        selectedTastes.clear();
+        (state.tastes || []).filter((id) => TASTE_FILTERS.some((filter) => filter.id === id)).forEach((id) => selectedTastes.add(id));
+        document.getElementById("search").value = state.search || "";
+        document.getElementById("date-from").value = state.dateFrom || "";
+        document.getElementById("date-to").value = state.dateTo || "";
+        document.getElementById("sort-order").value = state.sort || "desc";
+        notifyChange();
+    }
     function apply(videos) {
         const q = document.getElementById("search").value.toLowerCase();
         const theme = selectedTheme;
@@ -426,5 +450,5 @@ export function createFilters(themes, onChange, videos = []) {
     buildSpiritChips();
     updateSpiritChipStyles();
     renderActiveFilters();
-    return { apply, filterByTheme, filterBySpirit };
+    return { apply, filterByTheme, filterBySpirit, getState, setState };
 }
