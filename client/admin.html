@@ -152,8 +152,11 @@
     </section>
 
     <div id="status-msg" class="upload-status">
-      <span class="spinner"></span>
-      <span id="status-text"></span>
+      <div id="status-progress" class="status-progress" role="progressbar" aria-label="Uppladdning" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+        <span class="status-progress-fill"></span>
+        <img class="status-glass" src="public/assets/glass.png" alt="" aria-hidden="true">
+      </div>
+      <span id="status-text" role="status" aria-live="polite"></span>
     </div>
   </div>
 </div>
