@@ -13,6 +13,7 @@ import { createAdminPreview } from "./admin-preview.js";
 let adminKey = "";
 let allDrinks = [];
 let toastTimeout = null;
+let statusTimeout = null;
 let isSaving = false;
 
 const ingredientFields = createRecipeFields("ingredients", "Ingrediens", false);
@@ -265,20 +266,40 @@ function showToast(message, type = "success") {
   }, 3000);
 }
 
-function setStatus(message) {
+function setStatus(message, progress = null) {
+  clearTimeout(statusTimeout);
+  statusTimeout = null;
   const statusEl = document.getElementById("status-msg");
   const statusText = document.getElementById("status-text");
+  const statusProgress = document.getElementById("status-progress");
 
   statusText.textContent = message;
   statusEl.style.display = "flex";
+
+  if (progress === null) {
+    statusProgress.hidden = true;
+    statusProgress.removeAttribute("aria-valuenow");
+    return;
+  }
+
+  const value = Math.max(0, Math.min(100, progress));
+  statusProgress.hidden = false;
+  statusProgress.style.setProperty("--progress", `${value}%`);
+  statusProgress.setAttribute("aria-valuenow", String(value));
 }
 
 function clearStatus() {
+  clearTimeout(statusTimeout);
+  statusTimeout = null;
   const statusEl = document.getElementById("status-msg");
   const statusText = document.getElementById("status-text");
+  const statusProgress = document.getElementById("status-progress");
 
   statusText.textContent = "";
   statusEl.style.display = "none";
+  statusProgress.hidden = true;
+  statusProgress.style.setProperty("--progress", "0%");
+  statusProgress.setAttribute("aria-valuenow", "0");
 }
 
 
@@ -442,18 +463,35 @@ document.getElementById("f-photo-file").addEventListener("change", (e) => {
 // File Upload
 // ============================================
 
-async function uploadFile(file,type) {
+async function uploadFile(file,type,onProgress=()=>{},onStage=()=>{}) {
   const date=document.getElementById("f-date").value;
 
   // Bilder använder vanlig upload
   if (type!=="Video") {
-    const res=await fetch(`${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`,{
-      method:"POST",
-      headers:{"X-Admin-Key":adminKey,"Content-Type":file.type||"application/octet-stream"},
-      body:file
+    const data=await new Promise((resolve,reject)=>{
+      const request=new XMLHttpRequest();
+      request.open("POST",`${API_BASE}/upload?filename=${encodeURIComponent(file.name)}&date=${encodeURIComponent(date)}`);
+      request.setRequestHeader("X-Admin-Key",adminKey);
+      request.setRequestHeader("Content-Type",file.type||"application/octet-stream");
+      request.upload.onprogress=(event)=>{
+        if(event.lengthComputable) onProgress(event.loaded);
+      };
+      request.onload=()=>{
+        if(request.status<200||request.status>=300) {
+          reject(new Error(`${type}-uppladdning misslyckades (${request.status}): ${request.responseText}`));
+          return;
+        }
+        try {
+          onProgress(file.size);
+          resolve(JSON.parse(request.responseText));
+        } catch {
+          reject(new Error(`${type}-uppladdningen returnerade ett ogiltigt svar.`));
+        }
+      };
+      request.onerror=()=>reject(new Error(`Nätverksfel vid uppladdning av ${type.toLowerCase()}.`));
+      request.onabort=()=>reject(new Error(`${type}-uppladdningen avbröts.`));
+      request.send(file);
     });
-    if(!res.ok) throw new Error(`${type}-uppladdning misslyckades (${res.status}): ${await res.text()}`);
-    const data=await res.json();
     if(!data.url) throw new Error(`${type}-uppladdningen returnerade ingen URL.`);
     return data.url;
   }
@@ -487,24 +525,36 @@ async function uploadFile(file,type) {
     for(let i=0;i<totalChunks;i++) {
       const partNumber=i+1;
       const chunk=file.slice(i*CHUNK_SIZE,Math.min((i+1)*CHUNK_SIZE,file.size));
-      const progress=Math.round(partNumber/totalChunks*100);
-      setStatus(`Laddar upp video... ${progress}%`);
       let uploaded=null;
       let lastError=null;
       for(let attempt=1;attempt<=3;attempt++) {
         try {
           console.log("Uploading part",{partNumber,totalChunks,attempt});
-          const res=await fetch(`${API_BASE}/upload/part?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}&partNumber=${partNumber}`,{
-            method:"PUT",
-            headers:{
-              "X-Admin-Key":adminKey,
-              "Content-Type":"application/octet-stream"
-            },
-            body:chunk
+          uploaded=await new Promise((resolve,reject)=>{
+            const request=new XMLHttpRequest();
+            request.open("PUT",`${API_BASE}/upload/part?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}&partNumber=${partNumber}`);
+            request.setRequestHeader("X-Admin-Key",adminKey);
+            request.setRequestHeader("Content-Type","application/octet-stream");
+            request.upload.onprogress=(event)=>{
+              if(event.lengthComputable) {
+                onProgress(i*CHUNK_SIZE+event.loaded);
+              }
+            };
+            request.onload=()=>{
+              if(request.status<200||request.status>=300) {
+                reject(new Error(`${request.status}: ${request.responseText}`));
+                return;
+              }
+              try {
+                resolve(JSON.parse(request.responseText));
+              } catch(err) {
+                reject(new Error("Servern returnerade ett ogiltigt svar för videodelen."));
+              }
+            };
+            request.onerror=()=>reject(new Error("Nätverksfel vid uppladdning av videodel."));
+            request.onabort=()=>reject(new Error("Uppladdningen avbröts."));
+            request.send(chunk);
           });
-
-          if(!res.ok) throw new Error(`${res.status}: ${await res.text()}`);
-          uploaded=await res.json();
           break;
         } catch(err) {
           lastError=err;
@@ -515,9 +565,10 @@ async function uploadFile(file,type) {
 
       if(!uploaded) throw new Error(`Del ${partNumber}/${totalChunks} misslyckades: ${lastError?.message||"okänt fel"}`);
       parts.push(uploaded);
+      onProgress(Math.min(file.size,parts.length*CHUNK_SIZE));
     }
 
-    setStatus("Slutför videouppladdningen...");
+    onStage("Slutför videouppladdningen...");
     const completeRes=await fetch(`${API_BASE}/upload/complete?key=${encodeURIComponent(key)}&uploadId=${encodeURIComponent(uploadId)}`,{
       method:"POST",
       headers:{
@@ -585,6 +636,28 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
 
     let photoUrl =
       document.getElementById("f-photo-url").value;
+    const totalUploadBytes=(videoFile?.size||0)+(photoFile?.size||0);
+    const uploadedBytes={Video:0,Bild:0};
+    let overallProgress=2;
+    const updateOverallStatus=(message,progress)=>{
+      overallProgress=Math.max(overallProgress,progress);
+      setStatus(message,overallProgress);
+    };
+    updateOverallStatus("Förbereder uppladdningen...",2);
+
+    const reportUploadProgress=(type,bytes)=>{
+      uploadedBytes[type]=Math.max(uploadedBytes[type],bytes);
+      const ratio=totalUploadBytes
+        ? (uploadedBytes.Video+uploadedBytes.Bild)/totalUploadBytes
+        : 1;
+      const label=type==="Video"?"Laddar upp video...":"Laddar upp bild...";
+      const file=type==="Video"?videoFile:photoFile;
+      const fileProgress=file?.size
+        ? Math.min(100,Math.round(bytes/file.size*100))
+        : 100;
+      updateOverallStatus(`${label} ${fileProgress}%`,5+Math.round(ratio*80));
+    };
+
 
       console.log("VIDEO FILE SELECTED:", {
         name: videoFile?.name,
@@ -595,16 +668,26 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
 
     if (videoFile) {
       console.log("ABOUT TO CALL uploadFile() on video file.");
-      setStatus("Laddar upp video...");
-      videoUrl = await uploadFile(videoFile, "Video");
-      setStatus("Video uppladdad ✓");
+      updateOverallStatus("Laddar upp video...",5);
+      videoUrl = await uploadFile(
+        videoFile,
+        "Video",
+        (bytes)=>reportUploadProgress("Video",bytes),
+        (message)=>updateOverallStatus(message,88)
+      );
     }
 
     if (photoFile) {
       console.log("ABOUT TO CALL uploadFile() on photo file.");
-      setStatus("Laddar upp bild...");
-      photoUrl = await uploadFile(photoFile, "Bild");
-      setStatus("Bild uppladdad ✓");
+      updateOverallStatus(
+        "Laddar upp bild...",
+        totalUploadBytes?5+Math.round((uploadedBytes.Video/totalUploadBytes)*80):85
+      );
+      photoUrl = await uploadFile(
+        photoFile,
+        "Bild",
+        (bytes)=>reportUploadProgress("Bild",bytes)
+      );
     }
 
     const payload = { ...collectDrink(), url: videoUrl, photo: photoUrl };
@@ -612,7 +695,7 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
     const id = document.getElementById("f-id").value;
     const isEdit = !!id;
 
-    setStatus("Sparar drinken...");
+    updateOverallStatus("Sparar drinken...",95);
     const res = await fetch(
       `${API_BASE}/drinks${isEdit ? "/" + id : ""}`,
       {
@@ -631,7 +714,7 @@ document.getElementById("drink-form").addEventListener("submit", async (e) => {
 
     showToast(isEdit ? "Ändrad!" : "Tillagd!", "success");
 
-    clearStatus();
+    statusTimeout=setTimeout(clearStatus,1500);
 
     clearForm();
     if (isEdit) {
