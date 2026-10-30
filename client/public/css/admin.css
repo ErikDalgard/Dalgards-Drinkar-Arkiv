@@ -1,0 +1,872 @@
+/* Admin styles. Loaded by styles.css. */
+
+/* Form layout and action buttons */
+
+.footer-admin-link {
+  font-family: "Cormorant Garamond",serif;
+  font-size: 1.15rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--text-on-bg-muted);
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease,color 0.15s ease;
+}
+
+.footer-admin-link:hover {
+  border-color: var(--text-on-bg);
+  color: var(--text-on-bg);
+}
+
+#drink-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 1.3rem 1.5rem;
+}
+
+#drink-form .filter-group.full-width {
+  grid-column: 1/-1;
+}
+
+.form-actions {
+  grid-column: 1/-1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.form-actions>button {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 44px;
+  height: auto;
+  padding: 0.7rem 1rem;
+}
+
+#drink-form .filter-group label,
+#admin-panel .filter-group label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+#drink-form .filter-group input[type="text"],
+#drink-form .filter-group input[type="file"] {
+  width: 100%;
+  font-family: "Cormorant Garamond",serif;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+
+#drink-form .filter-group input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+#submit-btn,
+#edit-submit-btn,
+#spirits-save {
+  background-color: #45d545ad;
+  color: black;
+}
+
+#delete-btn,
+#spirits-discard {
+  background-color: #d54545b0;
+  color: black;
+}
+
+.required-label::after {
+  content: " *";
+  color: #a34848;
+}
+
+#drink-form :is(#submit-btn,#edit-submit-btn,#preview-btn):disabled {
+  background: #e6ddd0;
+  border-color: #d2c5b2;
+  color: #756b5c;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+#spirits-save:disabled,
+#spirits-discard:disabled {
+  background: #e6ddd0;
+  border-color: #d2c5b2;
+  color: #756b5c;
+}
+
+@media (max-width:600px) {
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-actions>button {
+    flex: none;
+    width: 100%;
+  }
+
+  #drink-form {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* Login and page layout */
+
+.admin-wrap {
+  max-width: min(450px,90%);
+  margin: 2.5rem auto 4rem;
+  padding: 2rem 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: max-width 0.2s ease;
+}
+
+.admin-wrap.logged-in {
+  max-width: 900px;
+}
+
+#admin-drinks-view>.filter-group {
+  margin-bottom: 1.2rem;
+}
+
+#key-save {
+  background-color: #c89a67;
+  color: black;
+}
+
+#key-section {
+  margin: 0 auto;
+  max-width: min(400px,90%);
+}
+
+#admin-drinks-view[hidden],
+#admin-filters-view[hidden] {
+  display: none;
+}
+
+@media (max-width:600px) {
+  .admin-wrap {
+    width: 90%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 24px 16px;
+  }
+
+  #admin-panel {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+
+/* Media fields */
+
+.file-input-hidden {
+  display: none;
+}
+
+.file-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+}
+
+.file-button {
+  font-family: "Cormorant Garamond",serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: #c89a67;
+  border: 1px solid var(--border);
+  color: white;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease;
+}
+
+.file-button:hover {
+  border-color: var(--accent);
+}
+
+.file-name {
+  font-family: "Cormorant Garamond",serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* Drink search */
+
+.edit-search-wrap input {
+  width: 100%;
+  font-family: "Cormorant Garamond",serif;
+  font-size: 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+}
+
+.edit-search-results {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  max-height: min(360px,45dvh);
+  padding: .3rem;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(30,20,12,0.25);
+}
+
+.edit-search-results.open {
+  display: block;
+}
+
+.edit-search-result {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+}
+
+.edit-search-result:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.edit-search-empty {
+  padding: .75rem;
+  color: var(--text-muted);
+}
+
+.edit-search-wrap {
+  position: relative;
+}
+
+.edit-search-wrap .search-icon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+.edit-search-wrap #edit-search {
+  padding-left: 60px;
+}
+
+
+/* Upload progress and feedback */
+
+.toast {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  z-index: 100;
+  font-family: "Cormorant Garamond",serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease,transform 0.2s ease;
+  box-sizing: border-box;
+  max-width: 500px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+  background: #2f5c3f;
+  color: #eafaf0;
+  border: 1px solid #4a8a63;
+}
+
+.toast.error {
+  background: #6b2626;
+  color: #fce8e8;
+  border: 1px solid #a34848;
+}
+
+.upload-status {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@media (max-width:600px) {
+  .toast {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+    transform: translateY(-20px);
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+  }
+}
+
+
+/* Ingredient, step and heading editors */
+
+#drink-form .admin-recipe-fields {
+  grid-column: 1/-1;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f4eadb;
+}
+
+.admin-recipe-fields legend {
+  padding: 0 0.4rem;
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.admin-recipe-rows {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-recipe-row {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 0.35rem 0.6rem;
+  align-items: start;
+}
+
+.admin-recipe-row label {
+  grid-column: 1/-1;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.admin-recipe-value {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+textarea.admin-recipe-value {
+  resize: vertical;
+}
+
+.admin-recipe-add {
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.admin-recipe-remove {
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #873d2d;
+}
+
+.admin-recipe-add:hover,
+.admin-recipe-remove:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+
+.admin-recipe-fields :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.admin-spirit-row .admin-recipe-remove {
+  align-self: flex-start;
+  margin-top: .3rem;
+}
+
+.admin-recipe-row-header {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.admin-recipe-type {
+  width: auto;
+  max-width: 55%;
+  min-height: 40px;
+  padding: .35rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.admin-recipe-heading-row {
+  padding: .75rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  background: var(--surface-hover);
+}
+
+.admin-recipe-heading-row .admin-recipe-value {
+  font-weight: 700;
+}
+
+.admin-recipe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+@media (max-width:400px) {
+  .admin-recipe-row {
+    grid-template-columns: minmax(0,1fr);
+  }
+
+  .admin-recipe-remove {
+    justify-self: end;
+  }
+}
+
+
+/* Local drink preview */
+
+.preview-kicker {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin: 0 2rem 0.65rem 0;
+}
+
+.admin-preview #recipe-spirit-links {
+  display: none;
+}
+
+.admin-preview #modal-theme:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+
+/* Spirit catalog editor */
+
+.admin-spirits {
+  padding: 1.25rem;
+  border: 1px solid var(--border, #d5b78f);
+  border-radius: 12px;
+  background: #fff8ef;
+  color: #3d2b1f;
+}
+
+.admin-spirits h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.admin-spirits p {
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.admin-spirits fieldset {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-spirits-rows {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.admin-spirit-row {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 1rem;
+  background: #f4e8d8;
+  border: 1px solid #d5b78f;
+  border-radius: 10px;
+}
+
+.admin-spirit-row label {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.admin-spirit-row input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: .7rem;
+  border: 1px solid #bfa17e;
+  border-radius: 6px;
+  background: #fffcf7;
+  color: #3d2b1f;
+  font: inherit;
+  font-size: 1.15rem;
+}
+
+.admin-spirit-row textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: .7rem;
+  border: 1px solid #bfa17e;
+  border-radius: 6px;
+  background: #fffcf7;
+  color: #3d2b1f;
+  font: inherit;
+  font-size: 1.15rem;
+  resize: vertical;
+}
+
+.admin-spirits-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-top: 1rem;
+  padding: .85rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.admin-spirits-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  justify-content: flex-end;
+  gap: .75rem;
+}
+
+.admin-spirits-buttons>button {
+  min-height: 44px;
+  height: auto;
+  padding: .7rem 1rem;
+  white-space: normal;
+}
+
+.admin-unsaved-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .4rem .65rem;
+  border: 1px solid #dec18a;
+  border-radius: 20px;
+  background: #fff0cc;
+  color: #684411;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.admin-unsaved-badge::before {
+  content: "";
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: #9d6514;
+}
+
+.admin-unsaved-badge[hidden],
+#spirits-status[hidden] {
+  display: none;
+}
+
+#spirits-status.error {
+  color: #873d2d;
+}
+
+.admin-spirits button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.admin-spirits .filter-toggle,
+.admin-spirits .filter-clear {
+  min-height: 44px;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+@media (max-width:640px) {
+  .admin-spirits-buttons {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    flex-basis: 100%;
+  }
+
+  .admin-spirits-rows {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Admin view navigation */
+
+.admin-navigation {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: .6rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-nav-button {
+  min-height: 48px;
+  padding: .75rem .6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.admin-nav-button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+  font-weight: 700;
+}
+
+.admin-nav-button:hover:not(:disabled):not([aria-pressed="true"]) {
+  background: var(--surface-hover);
+}
+
+.admin-nav-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.admin-nav-button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+@media (max-width:400px) {
+  .admin-navigation {
+    gap: .35rem;
+  }
+
+  .admin-nav-button {
+    padding: .65rem .3rem;
+    font-size: 1rem;
+  }
+}
+
+
+/* Taste profile editor */
+
+#drink-form .admin-taste-fields {
+  grid-column: 1/-1;
+  min-width: 0;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f0f1e8;
+}
+
+.admin-taste-fields>legend {
+  padding: 0 .4rem;
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+#admin-taste-hint {
+  margin: 0 0 1rem;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.admin-taste-rows {
+  display: grid;
+  gap: .9rem;
+  margin-bottom: 1rem;
+}
+
+.admin-taste-row {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.admin-taste-row legend {
+  margin-bottom: .4rem;
+  padding: 0;
+  color: var(--text);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.admin-taste-choices {
+  display: grid;
+  grid-template-columns: repeat(6,minmax(0,1fr));
+  gap: .35rem;
+}
+
+.admin-taste-choice {
+  position: relative;
+  cursor: pointer;
+}
+
+.admin-taste-choice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.admin-taste-choice span {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.admin-taste-choice:hover span {
+  background: var(--surface-hover);
+}
+
+.admin-taste-choice input:checked+span {
+  background: var(--leaf);
+  border-color: var(--leaf);
+  color: #fff;
+  font-weight: 700;
+}
+
+.admin-taste-choice input:focus-visible+span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#admin-taste-clear:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+@media (min-width:650px) {
+  .admin-taste-row {
+    display: grid;
+    grid-template-columns: 6rem minmax(0,1fr);
+    align-items: center;
+  }
+
+  .admin-taste-row legend {
+    float: left;
+    width: 6rem;
+    margin: 0;
+  }
+
+  .admin-taste-choices {
+    grid-column: 2;
+  }
+}
+
+/* Animation: spin */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
