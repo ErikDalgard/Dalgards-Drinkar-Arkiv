@@ -2,7 +2,7 @@
 
 My parents run a Instagram account where they post a cocktail each Friday. This is a project to collect and display all of those recipes, photos, and videos in one place.
 
-**Live site:** [dalgardsdrinkar.dalgard-erik.workers.dev](https://dalgardsdrinkar.dalgard-erik.workers.dev/)
+**Live site:** [www.dalgardsdrinkar.com](https://www.dalgardsdrinkar.com/)
 
 ---
 

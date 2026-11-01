@@ -14,7 +14,7 @@
   "vars": {
     "API_BASE_URL": "https://dalgardsdrinkar-api.dalgard-erik.workers.dev",
     "MEDIA_BASE_URL": "https://pub-bc043636a580470b9ca005f040b69b9c.r2.dev/",
-    "SITE_URL": "https://dalgardsdrinkar.dalgard-erik.workers.dev/"
+    "SITE_URL": "https://www.dalgardsdrinkar.com/"
   },
   "env": {
     "local": {
