@@ -35,12 +35,15 @@ header {
   top: 0;
   z-index: 20;
   text-align: center;
-  background: var(--bg);
+  background: rgba(200,154,103,0.72);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 16px rgba(58,42,28,0.12);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px) saturate(125%);
 }
 
 .brand-header {
-  padding: 2rem 1.5rem 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.35);
+  padding: 1.15rem 1.5rem 0.75rem;
 }
 
 header h1 {
@@ -98,7 +101,6 @@ header h1:hover {
 
 .intro-wrap {
   padding: 0.9rem 1.5rem 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.35);
 }
 
 .intro-copy p {
