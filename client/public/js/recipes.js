@@ -72,7 +72,7 @@ export function renderRecipeGroups(ingredientsRaw, stepsRaw, drinkNameRaw) {
             container.appendChild(makeRecipeSection("Ingredienser", ingredients, false));
         }
         if (steps.length) {
-            container.appendChild(makeRecipeSection("Gör såhär", steps, true));
+            container.appendChild(makeRecipeSection("Gör så här", steps, true));
         }
     }
 }
