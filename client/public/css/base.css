@@ -98,7 +98,7 @@ header h1:hover {
 .intro-wrap {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0.9rem 1.5rem 1rem;
+  padding: 0.9rem 1.5rem;
 }
 
 .intro-copy p {
@@ -122,7 +122,7 @@ header h1:hover {
 
   .intro-wrap {
     max-width: 100%;
-    padding: 0.45rem 1rem 0.75rem;
+    padding: 1.2rem 1rem;
   }
 
   .intro-copy {
