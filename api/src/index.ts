@@ -1,9 +1,5 @@
 export default {
   async fetch(request: Request, env: any) {
-      console.log("WORKER VERSION UPLOAD TEST", {
-          method: request.method,
-          path: new URL(request.url).pathname
-        });
     const url = new URL(request.url);
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
